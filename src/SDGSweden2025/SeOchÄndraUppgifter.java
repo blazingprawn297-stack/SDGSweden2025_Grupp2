@@ -259,3 +259,4 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
 //hALLÅ ALLA:::
 //Test 1
 //Test 2
+//test 3 Ekrem
