@@ -258,3 +258,4 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
 // Hejdå!
 //hALLÅ ALLA:::
 //Test 1
+//Test 2
