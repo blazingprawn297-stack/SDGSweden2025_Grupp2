@@ -23,9 +23,13 @@ public class SDGSweden {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
-    // Hejdå
+        try{
+            idb = new InfDB("SDGSweden", "3306", "dbAdmin2024", "dbAdmin2024PW");
+            new Inloggningsfönster(idb).setVisible(true);
+        } catch (InfException ex){
+            System.out.println(ex.getMessage());
+            }
+   
+        }
 }
 
