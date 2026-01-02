@@ -253,11 +253,3 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     private javax.swing.JTextField tfTelefon;
     // End of variables declaration//GEN-END:variables
 }
-
-//Hej
-// Hejdå!
-//hALLÅ ALLA:::
-//Test 1
-//Test 2
-//test 3 Ekrem
-// Test 4 Jamal
