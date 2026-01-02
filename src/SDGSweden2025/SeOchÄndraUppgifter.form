@@ -72,14 +72,18 @@
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfTelefon" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfTelefon" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="tfAdress" min="-2" pref="71" max="-2" attributes="0"/>
-                          <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="350" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="RadPersonalID" min="-2" max="-2" attributes="0"/>
@@ -176,6 +180,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfAdress">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="RadEfternamn">
       <Properties>
