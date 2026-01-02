@@ -89,6 +89,8 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
 
         RadFornamn.setText("Förnamn:");
 
+        tfAdress.setEditable(false);
+
         RadEfternamn.setText("Efternamn:");
 
         RadAdress.setText("Adress:");
@@ -126,13 +128,15 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
                             .addComponent(RadEpost))
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblFornamn)
-                            .addComponent(lblEpost)
-                            .addComponent(lblEfternamn))
-                        .addGap(350, 350, 350)
-                        .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblFornamn)
+                                    .addComponent(lblEpost)
+                                    .addComponent(lblEfternamn))
+                                .addGap(393, 393, 393)
+                                .addComponent(jLabel6))
+                            .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(RadPersonalID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
