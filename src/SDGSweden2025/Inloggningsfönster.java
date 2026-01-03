@@ -6,6 +6,7 @@ package SDGSweden2025;
 
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import java.util.HashMap;
 /**
  *
  * @author Bilda
@@ -112,24 +113,45 @@ public class Inloggningsfönster extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void KnappLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappLoggaInActionPerformed
-      
-        String ePost = tfEpost.getText();
-        String losen = tfLosenord.getText();
-        
-        try{
-            String sqlFraga = "SELECT losenord FROM anstalld WHERE epost = '" + ePost + "'";
-            System.out.println(sqlFraga);
-            String dbLosen = idb.fetchSingle(sqlFraga);
-            if(losen.equals(dbLosen)){
-                new Meny(idb, ePost).setVisible(true);
-                this.setVisible(false);
-            }   
-            else{
-                lblFelmeddelande.setVisible(true);
-            }
-        } catch (InfException ex){
-            System.out.println(ex.getMessage());
+
+    String ePost = tfEpost.getText();
+    String losen = tfLosenord.getText();
+
+    try {
+        // 1️⃣ Hämta lösenord + aid
+        String sql = "SELECT aid, losenord FROM anstalld WHERE epost = '" + ePost + "'";
+        java.util.HashMap<String, String> rad = idb.fetchRow(sql);
+
+        if (rad == null) {
+            lblFelmeddelande.setVisible(true);
+            return;
         }
+
+        String dbLosen = rad.get("losenord");
+        String aid = rad.get("aid");
+
+        if (!losen.equals(dbLosen)) {
+            lblFelmeddelande.setVisible(true);
+            return;
+        }
+
+        // 2️⃣ Hämta behörighetsnivå via aid
+        String sqlBeh =
+            "SELECT behorighetsniva FROM admin WHERE aid = " + aid;
+
+        String behorighetsniva = idb.fetchSingle(sqlBeh);
+
+        // 1 = admin, 2 = handläggare
+        boolean isAdmin = "1".equals(behorighetsniva);
+
+        // 3️⃣ Öppna meny och skicka med behörighet
+        new Meny(idb, ePost, isAdmin).setVisible(true);
+        this.setVisible(false);
+
+    } catch (InfException ex) {
+        System.out.println(ex.getMessage());
+    }
+
     }//GEN-LAST:event_KnappLoggaInActionPerformed
 
     private void tfLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosenordActionPerformed

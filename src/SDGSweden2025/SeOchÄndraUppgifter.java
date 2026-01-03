@@ -13,18 +13,24 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     
     private InfDB idb;
     private String epost;
-    
+    private boolean isAdmin;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SeOchÄndraUppgifter.class.getName());
+    
 
     /**
      * Creates new form SeOchÄndraUppgifter
      */
-    public SeOchÄndraUppgifter(InfDB idb, String epost) {
+    public SeOchÄndraUppgifter(InfDB idb, String epost, boolean isAdmin) {
     this.idb = idb;
     this.epost = epost;
+    this.isAdmin = isAdmin;
     initComponents();
     loadUserData();
     KnappSparaAndring.addActionListener(this::KnappSparaAndringActionPerformed);
+    }
+
+    SeOchÄndraUppgifter(InfDB idb, String inloggadAnvandare) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -194,7 +200,7 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     private void KnappGåTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappGåTillbakaActionPerformed
         this.setVisible(false);
         this.dispose();
-        new Meny(idb, epost).setVisible(true);
+        new Meny(idb, epost, isAdmin);
     }//GEN-LAST:event_KnappGåTillbakaActionPerformed
 
     private void KnappSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSparaAndringActionPerformed

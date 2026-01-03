@@ -14,19 +14,23 @@ public class Meny extends javax.swing.JFrame {
     
     private InfDB idb;
     private String inloggadAnvandare;
-    
+    private boolean isAdmin;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Meny.class.getName());
 
     /**
      * Creates new form Meny
      */
-    public Meny(InfDB idb, String inloggadAnvandare) {
-        this.idb = idb;
-        this.inloggadAnvandare = inloggadAnvandare;
-        initComponents();
-        lblInloggadAnvandare.setText(inloggadAnvandare);
-        
-    }
+    public Meny(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
+       this.idb = idb;
+    this.inloggadAnvandare = inloggadAnvandare;
+    this.isAdmin = isAdmin;
+
+    initComponents();
+    lblInloggadAnvandare.setText(inloggadAnvandare);
+
+    // 🔐 HÄR styr du knappen
+    KnappHanteraAvdelning.setVisible(isAdmin);
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,6 +46,7 @@ public class Meny extends javax.swing.JFrame {
         KnappAndraUppgifter = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         lblLoggaUt = new javax.swing.JButton();
+        KnappHanteraAvdelning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +62,9 @@ public class Meny extends javax.swing.JFrame {
         lblLoggaUt.setText("Logga ut");
         lblLoggaUt.addActionListener(this::lblLoggaUtActionPerformed);
 
+        KnappHanteraAvdelning.setText("Se avdelning");
+        KnappHanteraAvdelning.addActionListener(this::KnappHanteraAvdelningActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,17 +73,18 @@ public class Meny extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                         .addComponent(lblLoggaUt)
-                        .addGap(30, 30, 30))))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,7 +98,9 @@ public class Meny extends javax.swing.JFrame {
                 .addComponent(KnappAndraUppgifter)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(KnappHanteraAvdelning)
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,7 +108,7 @@ public class Meny extends javax.swing.JFrame {
 
     private void KnappAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappAndraUppgifterActionPerformed
      this.setVisible(false);
-     new SeOchÄndraUppgifter(idb, inloggadAnvandare).setVisible(true);
+     new SeOchÄndraUppgifter(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_KnappAndraUppgifterActionPerformed
 
     private void lblLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoggaUtActionPerformed
@@ -105,6 +116,13 @@ public class Meny extends javax.swing.JFrame {
        this.dispose();
        new Inloggningsfönster(idb).setVisible(true);
     }//GEN-LAST:event_lblLoggaUtActionPerformed
+
+    private void KnappHanteraAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraAvdelningActionPerformed
+     if (!isAdmin) {
+    javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+    return;
+     }
+    }//GEN-LAST:event_KnappHanteraAvdelningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,6 +156,7 @@ public class Meny extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
+    private javax.swing.JButton KnappHanteraAvdelning;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblInloggadAnvandare;

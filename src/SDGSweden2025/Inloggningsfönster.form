@@ -42,10 +42,8 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="lblFelmeddelande" pref="192" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="tfEpost" pref="192" max="32767" attributes="0"/>
-                                      <Component id="tfLosenord" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="tfEpost" pref="192" max="32767" attributes="0"/>
+                                  <Component id="tfLosenord" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
