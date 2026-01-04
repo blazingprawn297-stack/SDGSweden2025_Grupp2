@@ -89,13 +89,16 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
 
         RadFornamn.setText("Förnamn:");
 
-        tfAdress.setEditable(false);
+        tfAdress.setEnabled(false);
+        tfAdress.addActionListener(this::tfAdressActionPerformed);
 
         RadEfternamn.setText("Efternamn:");
 
         RadAdress.setText("Adress:");
 
         RadTelefon.setText("Telefon:");
+
+        tfTelefon.setEnabled(false);
 
         RadEpost.setText("E-post:");
 
@@ -200,6 +203,10 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     private void KnappSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSparaAndringActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KnappSparaAndringActionPerformed
+
+    private void tfAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAdressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAdressActionPerformed
 
     private void loadUserData() {
     try {
