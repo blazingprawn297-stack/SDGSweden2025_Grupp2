@@ -48,6 +48,7 @@ public class Meny extends javax.swing.JFrame {
         lblLoggaUt = new javax.swing.JButton();
         KnappHanteraAvdelning = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        KnappSePersonalPaAvdelning = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,19 +56,23 @@ public class Meny extends javax.swing.JFrame {
 
         jLabel1.setText("Inloggad:");
 
-        KnappAndraUppgifter.setText("Se och ändra uppgifter");
+        KnappAndraUppgifter.setText("Se och Ändra Uppgifter");
         KnappAndraUppgifter.addActionListener(this::KnappAndraUppgifterActionPerformed);
 
         jButton2.setText("Mina Projekt");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         lblLoggaUt.setText("Logga ut");
         lblLoggaUt.addActionListener(this::lblLoggaUtActionPerformed);
 
-        KnappHanteraAvdelning.setText("Se avdelning");
+        KnappHanteraAvdelning.setText("Se Avdelning");
         KnappHanteraAvdelning.addActionListener(this::KnappHanteraAvdelningActionPerformed);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Huvudmeny");
+
+        KnappSePersonalPaAvdelning.setText("Personal (Avdelning)");
+        KnappSePersonalPaAvdelning.addActionListener(this::KnappSePersonalPaAvdelningActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,7 +82,7 @@ public class Meny extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 189, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addGap(130, 130, 130)
                         .addComponent(lblLoggaUt))
@@ -87,10 +92,11 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(KnappSePersonalPaAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                         .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -111,7 +117,9 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(KnappAndraUppgifter))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(KnappSePersonalPaAvdelning)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         pack();
@@ -134,6 +142,16 @@ public class Meny extends javax.swing.JFrame {
     return;
      }
     }//GEN-LAST:event_KnappHanteraAvdelningActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void KnappSePersonalPaAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSePersonalPaAvdelningActionPerformed
+        // TODO add your handling code here:
+            this.setVisible(false);
+            new SePersonal(idb, inloggadAnvandare, isAdmin).setVisible(true);
+    }//GEN-LAST:event_KnappSePersonalPaAvdelningActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,6 +186,7 @@ public class Meny extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
     private javax.swing.JButton KnappHanteraAvdelning;
+    private javax.swing.JButton KnappSePersonalPaAvdelning;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

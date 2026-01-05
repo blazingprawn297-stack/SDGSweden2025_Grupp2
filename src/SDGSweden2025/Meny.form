@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="189" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                       <Component id="lblLoggaUt" min="-2" max="-2" attributes="0"/>
@@ -39,11 +39,12 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jButton2" max="32767" attributes="0"/>
-                          <Component id="KnappAndraUppgifter" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="KnappSePersonalPaAvdelning" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappAndraUppgifter" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="194" max="32767" attributes="0"/>
                       <Component id="KnappHanteraAvdelning" min="-2" pref="151" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -71,7 +72,9 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="204" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappSePersonalPaAvdelning" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="175" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -89,7 +92,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="KnappAndraUppgifter">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se och &#xe4;ndra uppgifter"/>
+        <Property name="text" type="java.lang.String" value="Se och &#xc4;ndra Uppgifter"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappAndraUppgifterActionPerformed"/>
@@ -99,6 +102,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mina Projekt"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="lblLoggaUt">
       <Properties>
@@ -110,7 +116,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="KnappHanteraAvdelning">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se avdelning"/>
+        <Property name="text" type="java.lang.String" value="Se Avdelning"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHanteraAvdelningActionPerformed"/>
@@ -123,6 +129,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Huvudmeny"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappSePersonalPaAvdelning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Personal (Avdelning)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappSePersonalPaAvdelningActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
