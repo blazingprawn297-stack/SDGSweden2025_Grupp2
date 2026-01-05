@@ -6,6 +6,9 @@ package SDGSweden2025;
 
 import oru.inf.InfDB;
 import oru.inf.InfException;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 /**
  *
  * @author Bilda
@@ -48,6 +51,7 @@ public class Meny extends javax.swing.JFrame {
         lblLoggaUt = new javax.swing.JButton();
         KnappHanteraAvdelning = new javax.swing.JButton();
         KnappHanteraPartner = new javax.swing.JButton();
+        KnappHanteraLand = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +73,9 @@ public class Meny extends javax.swing.JFrame {
         KnappHanteraPartner.setText("Hantera partner");
         KnappHanteraPartner.addActionListener(this::KnappHanteraPartnerActionPerformed);
 
+        KnappHanteraLand.setText("Hantera Land");
+        KnappHanteraLand.addActionListener(this::KnappHanteraLandActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,6 +92,7 @@ public class Meny extends javax.swing.JFrame {
                         .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(KnappHanteraLand, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraPartner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -107,7 +115,9 @@ public class Meny extends javax.swing.JFrame {
                 .addComponent(KnappHanteraAvdelning)
                 .addGap(18, 18, 18)
                 .addComponent(KnappHanteraPartner)
-                .addContainerGap(179, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(KnappHanteraLand)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,6 +167,23 @@ public class Meny extends javax.swing.JFrame {
             
     }//GEN-LAST:event_KnappHanteraPartnerActionPerformed
 
+    private void KnappHanteraLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraLandActionPerformed
+if (!isAdmin) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+        return;
+    }
+
+    this.dispose();
+
+    javax.swing.JFrame f = new javax.swing.JFrame("Se land");
+    f.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    f.setContentPane(new HanteraLand(inloggadAnvandare, isAdmin, idb)); // RÄTT ORDNING
+    f.pack();
+    f.setLocationRelativeTo(null);
+    f.setVisible(true);
+
+    }//GEN-LAST:event_KnappHanteraLandActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -190,6 +217,7 @@ public class Meny extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
     private javax.swing.JButton KnappHanteraAvdelning;
+    private javax.swing.JButton KnappHanteraLand;
     private javax.swing.JButton KnappHanteraPartner;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
