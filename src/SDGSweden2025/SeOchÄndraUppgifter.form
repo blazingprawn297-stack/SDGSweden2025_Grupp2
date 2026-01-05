@@ -73,24 +73,22 @@
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="tfTelefon" pref="198" max="32767" attributes="0"/>
-                                  <Component id="lblEfternamn" max="32767" attributes="0"/>
-                                  <Component id="lblFornamn" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="tfTelefon" min="-2" pref="71" max="-2" attributes="0"/>
+                                  <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="266" pref="266" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="393" max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="lblEpost" alignment="0" max="32767" attributes="0"/>
-                              <Component id="tfAdress" alignment="0" pref="198" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="tfAdress" min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="RadPersonalID" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblID" min="-2" pref="198" max="-2" attributes="0"/>
+                      <Component id="lblID" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -131,31 +129,25 @@
                       <Component id="KnappSparaAndring" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
-                          <Component id="RadEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RadEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="RadAdress" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfAdress" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="32767" attributes="0"/>
-                              <Component id="tfTelefon" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="RadTelefon" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RadTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -189,11 +181,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="tfAdress">
       <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="editable" type="boolean" value="false"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAdressActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="RadEfternamn">
       <Properties>
@@ -211,9 +200,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTelefon">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="RadEpost">
       <Properties>

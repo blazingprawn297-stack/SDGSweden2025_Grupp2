@@ -27,28 +27,23 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                      <Component id="lblLoggaUt" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblInloggadAnvandare" min="-2" pref="153" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="lblInloggadAnvandare" min="-2" pref="191" max="-2" attributes="0"/>
+                      <EmptySpace pref="151" max="32767" attributes="0"/>
+                      <Component id="lblLoggaUt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="KnappSePersonalPaAvdelning" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHanteraPartner" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHanteraAvdelning" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappAndraUppgifter" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="194" max="32767" attributes="0"/>
-                      <Component id="KnappHanteraAvdelning" min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,24 +52,19 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblLoggaUt" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblInloggadAnvandare" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLoggaUt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="KnappHanteraAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="KnappAndraUppgifter" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="KnappAndraUppgifter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappSePersonalPaAvdelning" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="175" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="KnappHanteraAvdelning" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="KnappHanteraPartner" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="179" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,7 +82,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="KnappAndraUppgifter">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se och &#xc4;ndra Uppgifter"/>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Uppgifter"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappAndraUppgifterActionPerformed"/>
@@ -102,9 +92,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Mina Projekt"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="lblLoggaUt">
       <Properties>
@@ -116,26 +103,18 @@
     </Component>
     <Component class="javax.swing.JButton" name="KnappHanteraAvdelning">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Se Avdelning"/>
+        <Property name="text" type="java.lang.String" value="Se avdelning"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHanteraAvdelningActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JButton" name="KnappHanteraPartner">
       <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Huvudmeny"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="KnappSePersonalPaAvdelning">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Personal (Avdelning)"/>
+        <Property name="text" type="java.lang.String" value="Hantera partner"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappSePersonalPaAvdelningActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHanteraPartnerActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

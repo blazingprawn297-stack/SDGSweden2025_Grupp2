@@ -28,7 +28,7 @@ public class Meny extends javax.swing.JFrame {
     initComponents();
     lblInloggadAnvandare.setText(inloggadAnvandare);
 
-    // 🔐 HÄR styr du knappen
+    
     KnappHanteraAvdelning.setVisible(isAdmin);
 }
 
@@ -47,8 +47,7 @@ public class Meny extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         lblLoggaUt = new javax.swing.JButton();
         KnappHanteraAvdelning = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        KnappSePersonalPaAvdelning = new javax.swing.JButton();
+        KnappHanteraPartner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,23 +55,19 @@ public class Meny extends javax.swing.JFrame {
 
         jLabel1.setText("Inloggad:");
 
-        KnappAndraUppgifter.setText("Se och Ändra Uppgifter");
+        KnappAndraUppgifter.setText("Ändra Uppgifter");
         KnappAndraUppgifter.addActionListener(this::KnappAndraUppgifterActionPerformed);
 
         jButton2.setText("Mina Projekt");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         lblLoggaUt.setText("Logga ut");
         lblLoggaUt.addActionListener(this::lblLoggaUtActionPerformed);
 
-        KnappHanteraAvdelning.setText("Se Avdelning");
+        KnappHanteraAvdelning.setText("Se avdelning");
         KnappHanteraAvdelning.addActionListener(this::KnappHanteraAvdelningActionPerformed);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Huvudmeny");
-
-        KnappSePersonalPaAvdelning.setText("Personal (Avdelning)");
-        KnappSePersonalPaAvdelning.addActionListener(this::KnappSePersonalPaAvdelningActionPerformed);
+        KnappHanteraPartner.setText("Hantera partner");
+        KnappHanteraPartner.addActionListener(this::KnappHanteraPartnerActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,44 +77,37 @@ public class Meny extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(130, 130, 130)
-                        .addComponent(lblLoggaUt))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addComponent(lblLoggaUt)
+                        .addGap(30, 30, 30))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(KnappSePersonalPaAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappHanteraPartner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
-                        .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lblLoggaUt))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblInloggadAnvandare)
-                    .addComponent(jLabel1))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KnappHanteraAvdelning)
-                    .addComponent(KnappAndraUppgifter))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1)
+                    .addComponent(lblLoggaUt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(KnappAndraUppgifter)
+                .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(KnappSePersonalPaAvdelning)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(KnappHanteraAvdelning)
+                .addGap(18, 18, 18)
+                .addComponent(KnappHanteraPartner)
+                .addContainerGap(179, Short.MAX_VALUE))
         );
 
         pack();
@@ -141,17 +129,33 @@ public class Meny extends javax.swing.JFrame {
     javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
     return;
      }
+    
+        this.dispose();
+     new hanteraAvdelning(idb, inloggadAnvandare, isAdmin).setVisible(true);
+    
+     
+  
+     
     }//GEN-LAST:event_KnappHanteraAvdelningActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void KnappSePersonalPaAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSePersonalPaAvdelningActionPerformed
-        // TODO add your handling code here:
-            this.setVisible(false);
-            new SePersonal(idb, inloggadAnvandare, isAdmin).setVisible(true);
-    }//GEN-LAST:event_KnappSePersonalPaAvdelningActionPerformed
+    private void KnappHanteraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraPartnerActionPerformed
+    
+            // TODO add your handling code here:
+            
+             if (!isAdmin) {
+        javax.swing.JOptionPane.showMessageDialog(this,
+            "Du saknar behörighet att hantera partners.");
+        return;
+    }
+             
+             this.dispose();
+          new hanteraPartner(idb,inloggadAnvandare,isAdmin).setVisible(true);
+          
+       
+           
+            
+            
+    }//GEN-LAST:event_KnappHanteraPartnerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,10 +190,9 @@ public class Meny extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
     private javax.swing.JButton KnappHanteraAvdelning;
-    private javax.swing.JButton KnappSePersonalPaAvdelning;
+    private javax.swing.JButton KnappHanteraPartner;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblInloggadAnvandare;
     private javax.swing.JButton lblLoggaUt;
     // End of variables declaration//GEN-END:variables

@@ -138,7 +138,7 @@ public class Inloggningsfönster extends javax.swing.JFrame {
         // hämtar behörighetsnivå via aid (kan vara null)
         String sqlBeh = "SELECT behorighetsniva FROM admin WHERE aid = " + aid;
         String behorighetsniva = idb.fetchSingle(sqlBeh);
-        
+
         boolean isAdmin = false;
         if (behorighetsniva != null) {
             isAdmin = behorighetsniva.equals("1") || behorighetsniva.equals("2");
