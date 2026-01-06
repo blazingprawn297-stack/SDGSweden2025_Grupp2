@@ -35,7 +35,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="KnappAndraUppgifter" min="-2" pref="153" max="-2" attributes="0"/>
-                          <Component id="jButton2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappMinaProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappSePersonal" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
@@ -78,7 +78,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="KnappAndraUppgifter" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="KnappMinaProjekt" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="KnappHanteraPartner" min="-2" max="-2" attributes="0"/>
@@ -115,7 +115,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappAndraUppgifterActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="KnappMinaProjekt">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mina Projekt"/>
       </Properties>
