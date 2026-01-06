@@ -207,3 +207,5 @@ private void loadMinaProjekt() {
     private javax.swing.JTable tblMinaProjekt;
     // End of variables declaration//GEN-END:variables
 }
+
+//control
