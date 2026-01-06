@@ -30,8 +30,8 @@ public class Meny extends javax.swing.JFrame {
 
     initComponents();
     lblInloggadAnvandare.setText(inloggadAnvandare);
-
-    
+    KnappHanteraLand.setVisible(isAdmin);
+    KnappHanteraPartner.setVisible(isAdmin);
     KnappHanteraAvdelning.setVisible(isAdmin);
     
     KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
@@ -68,6 +68,7 @@ public class Meny extends javax.swing.JFrame {
         KnappAndraUppgifter.addActionListener(this::KnappAndraUppgifterActionPerformed);
 
         KnappMinaProjekt.setText("Mina Projekt");
+        KnappMinaProjekt.addActionListener(this::KnappMinaProjektActionPerformed);
 
         lblLoggaUt.setText("Logga ut");
         lblLoggaUt.addActionListener(this::lblLoggaUtActionPerformed);
@@ -209,6 +210,10 @@ if (!isAdmin) {
     f.setVisible(true);
 
     }//GEN-LAST:event_KnappHanteraLandActionPerformed
+
+    private void KnappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappMinaProjektActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KnappMinaProjektActionPerformed
    
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
     this.setVisible(false);
