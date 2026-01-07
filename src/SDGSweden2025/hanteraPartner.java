@@ -19,7 +19,7 @@ public class hanteraPartner extends javax.swing.JFrame {
   private String inloggadAnvandare;
   private boolean isAdmin; 
   private InfDB idb;
-    
+  private boolean ignorePartnerComboEvent = false;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(hanteraPartner.class.getName());
 
     
@@ -71,6 +71,8 @@ public class hanteraPartner extends javax.swing.JFrame {
         Partners = new javax.swing.JComboBox<>();
         btnSpara = new javax.swing.JButton();
         btnÄndraUppgifter = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,15 +119,16 @@ public class hanteraPartner extends javax.swing.JFrame {
         btnÄndraUppgifter.setText("Ändra uppgifter");
         btnÄndraUppgifter.addActionListener(this::btnÄndraUppgifterActionPerformed);
 
+        jButton1.setText("Ta bort");
+        jButton1.addActionListener(this::jButton1ActionPerformed);
+
+        jButton2.setText("Lägg till");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnÄndraUppgifter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(btnSpara))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,32 +139,45 @@ public class hanteraPartner extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Namn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PartnerID, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(115, 115, 115)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnÄndraUppgifter, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(btnSpara))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Bransch)
-                                    .addComponent(Telefon)
-                                    .addComponent(Adress))
-                                .addGap(127, 127, 127)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(KontaktPerson)
-                                    .addComponent(KontaktEpost))
-                                .addGap(92, 92, 92)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(206, 206, 206))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Bransch)
+                                            .addComponent(Telefon)
+                                            .addComponent(Adress))
+                                        .addGap(127, 127, 127)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(51, 51, 51)
+                                                .addComponent(jButton1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                                .addComponent(jButton2))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(Namn, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(PartnerID, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(115, 115, 115)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(KontaktPerson)
+                                            .addComponent(KontaktEpost))
+                                        .addGap(92, 92, 92)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(34, 34, 34)))
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
@@ -173,39 +189,47 @@ public class hanteraPartner extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Partners, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(GåTillbakaKnapp, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PartnerID)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Namn))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KontaktPerson)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KontaktEpost)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Telefon)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Adress)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Bransch)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSpara)
-                    .addComponent(btnÄndraUppgifter))
-                .addGap(14, 14, 14))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PartnerID)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Namn))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(KontaktPerson)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(KontaktEpost)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Telefon)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Adress)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Bransch)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSpara)
+                            .addComponent(btnÄndraUppgifter))
+                        .addContainerGap())))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextField1, jTextField2, jTextField3, jTextField4, jTextField5, jTextField6, jTextField7});
@@ -215,8 +239,13 @@ public class hanteraPartner extends javax.swing.JFrame {
 
     private void PartnersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartnersActionPerformed
         // TODO add your handling code here:
-        
-         try {
+      if (addingNewPartner || ignorePartnerComboEvent) {
+        return;
+    }
+
+    setFieldsEditable(false);
+
+    try {
         String vald = (String) Partners.getSelectedItem();
         if (vald == null) return;
 
@@ -237,7 +266,7 @@ public class hanteraPartner extends javax.swing.JFrame {
         jTextField7.setText(data.get("branch"));
 
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner");
+        JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner: " + e.getMessage());
     }
         
         
@@ -255,46 +284,75 @@ public class hanteraPartner extends javax.swing.JFrame {
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         // TODO add your handling code here:
         
-         if (!isAdmin) {
+                                  
+    if (!isAdmin) {
         JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
         return;
     }
 
     try {
-        String pid = jTextField1.getText();
-        String namn = jTextField2.getText();
-        String kontaktperson = jTextField3.getText();
-        String kontaktepost = jTextField4.getText();
-        String telefon = jTextField5.getText();
-        String adress = jTextField6.getText();
-        String branch = jTextField7.getText();
+        String pid = jTextField1.getText().trim();
 
-        String sql =
-            "UPDATE partner SET " +
-            "namn = '" + namn + "', " +
-            "kontaktperson = '" + kontaktperson + "', " +
-            "kontaktepost = '" + kontaktepost + "', " +
-            "telefon = '" + telefon + "', " +
-            "adress = '" + adress + "', " +
-            "branch = '" + branch + "' " +
-            "WHERE pid = " + pid;
+        if (!pid.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "PartnerID är ogiltigt: " + pid);
+            return;
+        }
 
-        idb.update(sql);
+        String namn = esc(jTextField2.getText());
+        String kontaktperson = esc(jTextField3.getText());
+        String kontaktepost = esc(jTextField4.getText());
+        String telefon = esc(jTextField5.getText());
+        String adress = esc(jTextField6.getText());
+        String branch = esc(jTextField7.getText());
 
-        JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
-        
+        if (namn.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Namn måste fyllas i.");
+            return;
+        }
+
+        if (addingNewPartner) {
+            String sql =
+                "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch) VALUES (" +
+                pid + ", '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '" + telefon + "', '" + adress + "', '" + branch + "')";
+
+            JOptionPane.showMessageDialog(this, sql); // debug
+
+            // VIKTIGT: INSERT ska köras med insert() om din InfDB har den metoden
+            idb.insert(sql);
+
+            JOptionPane.showMessageDialog(this, "Ny partner tillagd!");
+            addingNewPartner = false;
+
+        } else {
+            String sql =
+                "UPDATE partner SET " +
+                "namn = '" + namn + "', " +
+                "kontaktperson = '" + kontaktperson + "', " +
+                "kontaktepost = '" + kontaktepost + "', " +
+                "telefon = '" + telefon + "', " +
+                "adress = '" + adress + "', " +
+                "branch = '" + branch + "' " +
+                "WHERE pid = " + pid;
+
+            JOptionPane.showMessageDialog(this, sql); // debug
+            idb.update(sql);
+
+            JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
+        }
+
         setFieldsEditable(false);
+        loadPartnerData();
+        selectPartnerInCombo(pid);
 
     } catch (Exception e) {
         JOptionPane.showMessageDialog(this, "Fel vid sparande: " + e.getMessage());
     }
         
-        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnÄndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraUppgifterActionPerformed
         // TODO add your handling code here:
-        
+         addingNewPartner = false;
         setFieldsEditable(true);
         
     }//GEN-LAST:event_btnÄndraUppgifterActionPerformed
@@ -310,6 +368,82 @@ public class hanteraPartner extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     if (!isAdmin) {
+        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+        return;
+    }
+
+    try {
+        String pid = jTextField1.getText().trim();
+        if (pid.isEmpty() || !pid.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Ingen giltig partner är vald.");
+            return;
+        }
+
+        int svar = JOptionPane.showConfirmDialog(
+            this,
+            "Är du säker på att du vill ta bort partner med PID " + pid + "?",
+            "Bekräfta borttagning",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (svar != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        String sql = "DELETE FROM partner WHERE pid = " + pid;
+        JOptionPane.showMessageDialog(this, sql); // debug, kan tas bort sen
+
+        // VIKTIGT: DELETE ska köras med delete()
+        idb.delete(sql);
+
+        JOptionPane.showMessageDialog(this, "Partner borttagen!");
+
+        addingNewPartner = false;
+        setFieldsEditable(false);
+
+        loadPartnerData();
+        clearFields();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Fel vid borttagning: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    if (!isAdmin) {
+        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+        return;
+    }
+
+    try {
+        addingNewPartner = true;
+
+        // Undvik att ActionPerformed triggas när vi ändrar comboboxen via kod
+        ignorePartnerComboEvent = true;
+        Partners.setSelectedItem(null);
+        ignorePartnerComboEvent = false;
+
+        clearFields();
+
+        // Hämta nytt pid
+        String maxPidStr = idb.fetchSingle("SELECT MAX(pid) FROM partner");
+        int nextPid = 1;
+        if (maxPidStr != null && !maxPidStr.equalsIgnoreCase("null") && !maxPidStr.isBlank()) {
+            nextPid = Integer.parseInt(maxPidStr) + 1;
+        }
+
+        jTextField1.setText(String.valueOf(nextPid));
+
+        setFieldsEditable(true);
+        jTextField2.requestFocus();
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Fel vid Lägg till: " + e.getMessage());
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,6 +482,8 @@ public class hanteraPartner extends javax.swing.JFrame {
     private javax.swing.JLabel Telefon;
     private javax.swing.JButton btnSpara;
     private javax.swing.JButton btnÄndraUppgifter;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -387,5 +523,31 @@ public class hanteraPartner extends javax.swing.JFrame {
 
     }
     
-        
+       private boolean addingNewPartner = false;
+
+// En enkel escape för att inte krascha SQL om man skriver t.ex. O'Neill
+private String esc(String s) {
+    if (s == null) return "";
+    return s.replace("'", "''").trim();
+}
+
+private void clearFields() {
+    jTextField1.setText("");
+    jTextField2.setText("");
+    jTextField3.setText("");
+    jTextField4.setText("");
+    jTextField5.setText("");
+    jTextField6.setText("");
+    jTextField7.setText("");
+}
+
+private void selectPartnerInCombo(String pid) {
+    for (int i = 0; i < Partners.getItemCount(); i++) {
+        String item = Partners.getItemAt(i);
+        if (item != null && item.startsWith(pid + " - ")) {
+            Partners.setSelectedIndex(i);
+            break;
+        }
+    }
+} 
 }
