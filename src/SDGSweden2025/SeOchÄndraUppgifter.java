@@ -46,7 +46,6 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
         jFrame2 = new javax.swing.JFrame();
         lblSeMinaUppgifter = new javax.swing.JLabel();
         KnappSparaAndring = new javax.swing.JButton();
-        KnappGåTillbaka = new javax.swing.JButton();
         RadFornamn = new javax.swing.JLabel();
         tfAdress = new javax.swing.JTextField();
         RadEfternamn = new javax.swing.JLabel();
@@ -60,6 +59,9 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
         lblEfternamn = new javax.swing.JLabel();
         lblID = new javax.swing.JLabel();
         RadPersonalID = new javax.swing.JLabel();
+        KnappGåTillbaka = new javax.swing.JButton();
+        RadAnstDatum = new javax.swing.JLabel();
+        lblAnstDatum = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -90,18 +92,19 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
         KnappSparaAndring.setText("Spara");
         KnappSparaAndring.addActionListener(this::KnappSparaAndringActionPerformed);
 
-        KnappGåTillbaka.setText("");
-        KnappGåTillbaka.addActionListener(this::KnappGåTillbakaActionPerformed);
-
         RadFornamn.setText("Förnamn:");
 
         tfAdress.setEditable(false);
+        tfAdress.addActionListener(this::tfAdressActionPerformed);
 
         RadEfternamn.setText("Efternamn:");
 
         RadAdress.setText("Adress:");
 
         RadTelefon.setText("Telefon:");
+
+        tfTelefon.setEditable(false);
+        tfTelefon.addActionListener(this::tfTelefonActionPerformed);
 
         RadEpost.setText("E-post:");
 
@@ -115,102 +118,146 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
 
         RadPersonalID.setText("Personal-ID:");
 
+        KnappGåTillbaka.setText("");
+        KnappGåTillbaka.addActionListener(this::KnappGåTillbakaActionPerformed);
+
+        RadAnstDatum.setText("Anst.Datum:");
+
+        lblAnstDatum.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(lblSeMinaUppgifter))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RadFornamn)
-                            .addComponent(RadEfternamn)
-                            .addComponent(RadAdress)
-                            .addComponent(RadTelefon)
-                            .addComponent(RadEpost))
-                        .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblFornamn)
-                                    .addComponent(lblEpost)
-                                    .addComponent(lblEfternamn))
-                                .addGap(393, 393, 393)
-                                .addComponent(jLabel6))
-                            .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(RadFornamn)
+                                    .addComponent(RadEfternamn))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(19, 299, Short.MAX_VALUE)
+                                        .addComponent(jLabel6))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblEfternamn)
+                                            .addComponent(lblFornamn)
+                                            .addComponent(lblEpost))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(152, 152, 152)
+                                        .addComponent(lblSeMinaUppgifter))
+                                    .addComponent(RadEpost))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RadTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RadAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(99, 105, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(KnappSparaAndring))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(RadPersonalID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblID)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(19, 19, 19))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(RadPersonalID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblID)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(KnappSparaAndring))
-                .addGap(14, 14, 14))
+                        .addComponent(RadAnstDatum)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblAnstDatum)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblSeMinaUppgifter)
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(KnappGåTillbaka)
-                    .addComponent(lblID)
-                    .addComponent(RadPersonalID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RadFornamn)
-                    .addComponent(lblFornamn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RadEfternamn)
-                    .addComponent(lblEfternamn))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel6)
+                        .addGap(27, 27, 27)
+                        .addComponent(KnappGåTillbaka)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(KnappSparaAndring))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel6)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblSeMinaUppgifter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblID)
+                            .addComponent(RadPersonalID))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RadFornamn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblFornamn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(RadEfternamn)
+                            .addComponent(lblEfternamn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(RadEpost)
                             .addComponent(lblEpost))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RadAdress)
-                            .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RadTelefon)
-                            .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)))
-                .addGap(37, 37, 37))
+                            .addComponent(RadAnstDatum)
+                            .addComponent(lblAnstDatum))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RadAdress)
+                    .addComponent(tfAdress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RadTelefon))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(KnappSparaAndring)
+                .addGap(15, 15, 15))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void KnappGåTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappGåTillbakaActionPerformed
-        this.setVisible(false);
-        this.dispose();
-        new Meny(idb, epost, isAdmin);
-    }//GEN-LAST:event_KnappGåTillbakaActionPerformed
-
     private void KnappSparaAndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSparaAndringActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KnappSparaAndringActionPerformed
 
+    private void KnappGåTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappGåTillbakaActionPerformed
+        this.setVisible(false);
+        this.dispose();
+        new Meny(idb, epost, isAdmin).setVisible(true);;
+    }//GEN-LAST:event_KnappGåTillbakaActionPerformed
+
+    private void tfTelefonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfTelefonActionPerformed
+
+    private void tfAdressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAdressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfAdressActionPerformed
+
     private void loadUserData() {
     try {
-        String query = "SELECT aid, fornamn, efternamn, adress, telefon, epost " +
-                       "FROM anstalld WHERE epost = '" + epost + "'";
+        String query = "SELECT aid, fornamn, efternamn, adress, telefon, epost, anstallningsdatum " +
+               "FROM anstalld WHERE epost = '" + epost + "'";
+
         var data = idb.fetchRow(query);
         System.out.println("E-post som skickas: " + epost);
         System.out.println("Data från DB: " + data);
@@ -221,6 +268,7 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
             lblEpost.setText(data.get("epost") != null ? data.get("epost") : "");
             tfAdress.setText(data.get("adress") != null ? data.get("adress") : "");
             tfTelefon.setText(data.get("telefon") != null ? data.get("telefon") : "");
+            lblAnstDatum.setText(data.get("anstallningsdatum") != null ? data.get("anstallningsdatum") : "");
 
             // Make editable fields editable
             tfAdress.setEditable(true);
@@ -242,6 +290,7 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     private javax.swing.JButton KnappGåTillbaka;
     private javax.swing.JButton KnappSparaAndring;
     private javax.swing.JLabel RadAdress;
+    private javax.swing.JLabel RadAnstDatum;
     private javax.swing.JLabel RadEfternamn;
     private javax.swing.JLabel RadEpost;
     private javax.swing.JLabel RadFornamn;
@@ -250,6 +299,7 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblAnstDatum;
     private javax.swing.JLabel lblEfternamn;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblFornamn;

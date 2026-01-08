@@ -33,6 +33,8 @@ public class Meny extends javax.swing.JFrame {
     KnappHanteraLand.setVisible(isAdmin);
     KnappHanteraPartner.setVisible(isAdmin);
     KnappHanteraAvdelning.setVisible(isAdmin);
+    KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
+
     
     KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
 
@@ -57,6 +59,7 @@ public class Meny extends javax.swing.JFrame {
         KnappHanteraLand = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         KnappSePersonal = new javax.swing.JButton();
+        KnappHallbarhetsmal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,12 +88,23 @@ public class Meny extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Huvudmeny");
 
-        KnappSePersonal.setText("Se Personal");
+        KnappSePersonal.setText("Personal och Handläggare");
+
+        KnappHallbarhetsmal.setText("Hållbarhetsmål");
+        KnappHallbarhetsmal.addActionListener(this::KnappHallbarhetsmalActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(202, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblLoggaUt))
+                    .addComponent(jLabel2))
+                .addGap(206, 206, 206))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,24 +114,17 @@ public class Meny extends javax.swing.JFrame {
                         .addComponent(lblInloggadAnvandare, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(KnappMinaProjekt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(KnappSePersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(KnappHallbarhetsmal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappMinaProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappSePersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(KnappHanteraPartner, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                            .addComponent(KnappHanteraLand, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(KnappHanteraPartner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                            .addComponent(KnappHanteraLand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(202, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lblLoggaUt))
-                    .addComponent(jLabel2))
-                .addGap(206, 206, 206))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +151,9 @@ public class Meny extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(KnappHanteraAvdelning)
                     .addComponent(KnappSePersonal))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(KnappHallbarhetsmal)
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,10 +180,18 @@ public class Meny extends javax.swing.JFrame {
      new hanteraAvdelning(idb, inloggadAnvandare, isAdmin).setVisible(true);
     
      
-  
+ 
+
      
     }//GEN-LAST:event_KnappHanteraAvdelningActionPerformed
 
+    
+     private void KnappSePersonalActionPerformed(java.awt.event.ActionEvent evt) {
+    this.setVisible(false);
+    new SePersonal(idb, inloggadAnvandare, isAdmin).setVisible(true);
+     }
+     
+     
     private void KnappHanteraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraPartnerActionPerformed
     
             // TODO add your handling code here:
@@ -214,6 +231,10 @@ if (!isAdmin) {
     private void KnappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappMinaProjektActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_KnappMinaProjektActionPerformed
+
+    private void KnappHallbarhetsmalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHallbarhetsmalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KnappHallbarhetsmalActionPerformed
    
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
     this.setVisible(false);
@@ -251,6 +272,7 @@ if (!isAdmin) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
+    private javax.swing.JButton KnappHallbarhetsmal;
     private javax.swing.JButton KnappHanteraAvdelning;
     private javax.swing.JButton KnappHanteraLand;
     private javax.swing.JButton KnappHanteraPartner;

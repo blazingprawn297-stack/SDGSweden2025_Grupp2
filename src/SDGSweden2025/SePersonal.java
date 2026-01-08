@@ -4,7 +4,14 @@
  */
 package SDGSweden2025;
 
+
 import oru.inf.InfDB;
+import oru.inf.InfException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author Bilda
@@ -14,18 +21,16 @@ public class SePersonal extends javax.swing.JFrame {
     private String epost;
     private String avdelningId;
     private boolean isAdmin;
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SeOchÄndraUppgifter.class.getName());
 
-    
-    /**
-     * Creates new form SePersonal
-     */
     public SePersonal(InfDB idb, String epost, boolean isAdmin) {
-       this.idb = idb;
-       this.epost = epost;
-       this.isAdmin = isAdmin;
-       initComponents();
-    }
+        this.idb = idb;
+        this.epost = epost;
+        this.isAdmin = isAdmin;
+        initComponents();
+        fyllListaPersonal();
+        fyllHandlaggareTabell(""); 
+    } 
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,12 +44,19 @@ public class SePersonal extends javax.swing.JFrame {
         KnappGåTillbaka = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ListaPersonal = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListaHandlaggare = new javax.swing.JTable();
+        tfSokHandlaggare = new javax.swing.JTextField();
+        KnappSokHandlaggare = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         KnappGåTillbaka.setText("");
         KnappGåTillbaka.addActionListener(this::KnappGåTillbakaActionPerformed);
 
+        ListaPersonal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ListaPersonal.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -52,27 +64,83 @@ public class SePersonal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(ListaPersonal);
 
+        ListaHandlaggare.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Namn", "E-post", "AID", "Ansvarighetsområde", "Mentor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(ListaHandlaggare);
+
+        tfSokHandlaggare.addActionListener(this::tfSokHandlaggareActionPerformed);
+
+        KnappSokHandlaggare.setText("Sök");
+        KnappSokHandlaggare.addActionListener(this::KnappSokHandlaggareActionPerformed);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Lista över alla personal:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Handläggare:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(KnappSokHandlaggare)))
+                        .addGap(0, 106, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addGap(232, 232, 232)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(KnappGåTillbaka)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(KnappGåTillbaka)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(KnappSokHandlaggare))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -83,6 +151,82 @@ public class SePersonal extends javax.swing.JFrame {
         this.dispose();
         new Meny(idb, epost, isAdmin).setVisible(true);;
     }//GEN-LAST:event_KnappGåTillbakaActionPerformed
+
+    private void tfSokHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSokHandlaggareActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSokHandlaggareActionPerformed
+
+    private void KnappSokHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSokHandlaggareActionPerformed
+    String sokText = tfSokHandlaggare.getText().trim();
+    fyllHandlaggareTabell(sokText);
+    }//GEN-LAST:event_KnappSokHandlaggareActionPerformed
+
+    private void fyllListaPersonal() {
+    try {
+        String sqlAvdelning =
+            "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
+        avdelningId = idb.fetchSingle(sqlAvdelning);
+           String sqlPersonal =
+        "SELECT fornamn, efternamn, epost " +
+        "FROM anstalld WHERE avdelning = " + avdelningId;
+
+        ArrayList<HashMap<String, String>> personal = idb.fetchRows(sqlPersonal);
+
+DefaultListModel<String> modell = new DefaultListModel<>();
+
+if (personal != null) {                 // <-- check for null
+    for (HashMap<String, String> rad : personal) {
+        String radText =
+            rad.get("fornamn") + " " +
+            rad.get("efternamn") + " (" +
+            rad.get("epost") + ")";
+        modell.addElement(radText);
+    }
+}
+
+ListaPersonal.setModel(modell);
+    } catch (InfException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
+    }
+}
+    private void fyllHandlaggareTabell(String sokText) {
+    try {
+        String sql =
+            "SELECT h.aid as aid, a1.epost, h.ansvarighetsomrade, " +
+            "CONCAT(a2.fornamn, ' ', a2.efternamn) AS mentor_namn, " +
+            "CONCAT(a1.fornamn, ' ', a1.efternamn) AS handlaggare_namn " +
+            "FROM handlaggare h " +
+            "JOIN anstalld a1 ON h.aid = a1.aid " +
+            "LEFT JOIN handlaggare m ON h.mentor = m.aid " +
+            "LEFT JOIN anstalld a2 ON m.aid = a2.aid";  
+       
+       if (!sokText.isEmpty()) {
+         sql += " WHERE a1.fornamn LIKE '%" + sokText + "%' " +
+           "OR a1.efternamn LIKE '%" + sokText + "%' " +
+           "OR a1.epost LIKE '%" + sokText + "%'";
+}
+
+
+        ArrayList<HashMap<String, String>> rader = idb.fetchRows(sql);
+        DefaultTableModel model = (DefaultTableModel) ListaHandlaggare.getModel();
+        model.setRowCount(0);
+
+if (rader != null) {
+            for (HashMap<String, String> rad : rader) {
+                model.addRow(new Object[]{
+                    rad.get("handlaggare_namn"),
+                    rad.get("epost"),
+                    rad.get("aid"),
+                    rad.get("ansvarighetsomrade"),
+                    rad.get("mentor_namn")
+                });
+            }
+        }
+
+    } catch (InfException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+    }
+}
 
     /**
      * @param args the command line arguments
@@ -101,7 +245,8 @@ public class SePersonal extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            ex.printStackTrace();
+
         }
         //</editor-fold>
 
@@ -112,7 +257,13 @@ public class SePersonal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappGåTillbaka;
+    private javax.swing.JButton KnappSokHandlaggare;
+    private javax.swing.JTable ListaHandlaggare;
     private javax.swing.JList<String> ListaPersonal;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField tfSokHandlaggare;
     // End of variables declaration//GEN-END:variables
 }
