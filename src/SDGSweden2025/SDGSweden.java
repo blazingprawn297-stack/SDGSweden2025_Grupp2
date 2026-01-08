@@ -17,19 +17,18 @@ import oru.inf.InfException;
  */
 public class SDGSweden {
 
-    
     private static InfDB idb;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        try{
+        try {
             idb = new InfDB("SDGSweden", "3306", "dbAdmin2024", "dbAdmin2024PW");
             new Inloggningsfönster(idb).setVisible(true);
-        } catch (InfException ex){
+        } catch (InfException ex) {
             System.out.println(ex.getMessage());
-            }
-   
         }
-}
 
+    }
+}

@@ -9,34 +9,32 @@ import oru.inf.InfDB;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author Ninee
  */
 public class hanteraPartner extends javax.swing.JFrame {
-    
-  private String inloggadAnvandare;
-  private boolean isAdmin; 
-  private InfDB idb;
-  private boolean ignorePartnerComboEvent = false;
+
+    private String inloggadAnvandare;
+    private boolean isAdmin;
+    private InfDB idb;
+    private boolean ignorePartnerComboEvent = false;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(hanteraPartner.class.getName());
 
-    
-    public hanteraPartner(InfDB idb, String inloggadAnvandare, boolean isAdmin){
-        
-    this.idb = idb;
-    this.inloggadAnvandare = inloggadAnvandare;
-    this.isAdmin = isAdmin;
-    
-     initComponents();
-     
-     loadPartnerData();
-     
-     setFieldsEditable(false);
-    
+    public hanteraPartner(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
+
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.isAdmin = isAdmin;
+
+        initComponents();
+
+        loadPartnerData();
+
+        setFieldsEditable(false);
+
     }
-    
+
     /**
      * Creates new form hanteraPartner
      */
@@ -237,122 +235,125 @@ public class hanteraPartner extends javax.swing.JFrame {
 
     private void PartnersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartnersActionPerformed
         // TODO add your handling code here:
-      if (addingNewPartner || ignorePartnerComboEvent) {
-        return;
-    }
+        if (addingNewPartner || ignorePartnerComboEvent) {
+            return;
+        }
 
-    setFieldsEditable(false);
+        setFieldsEditable(false);
 
-    try {
-        String vald = (String) Partners.getSelectedItem();
-        if (vald == null) return;
+        try {
+            String vald = (String) Partners.getSelectedItem();
+            if (vald == null) {
+                return;
+            }
 
-        String pid = vald.split(" - ")[0];
+            String pid = vald.split(" - ")[0];
 
-        HashMap<String, String> data = idb.fetchRow(
-            "SELECT * FROM partner WHERE pid = " + pid
-        );
+            HashMap<String, String> data = idb.fetchRow(
+                    "SELECT * FROM partner WHERE pid = " + pid
+            );
 
-        if (data == null) return;
+            if (data == null) {
+                return;
+            }
 
-        jTextField1.setText(data.get("pid"));
-        jTextField2.setText(data.get("namn"));
-        jTextField3.setText(data.get("kontaktperson"));
-        jTextField4.setText(data.get("kontaktepost"));
-        jTextField5.setText(data.get("telefon"));
-        jTextField6.setText(data.get("adress"));
-        jTextField7.setText(data.get("branch"));
+            jTextField1.setText(data.get("pid"));
+            jTextField2.setText(data.get("namn"));
+            jTextField3.setText(data.get("kontaktperson"));
+            jTextField4.setText(data.get("kontaktepost"));
+            jTextField5.setText(data.get("telefon"));
+            jTextField6.setText(data.get("adress"));
+            jTextField7.setText(data.get("branch"));
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner: " + e.getMessage());
-    }
-        
-        
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av partner: " + e.getMessage());
+        }
+
+
     }//GEN-LAST:event_PartnersActionPerformed
 
     private void GåTillbakaKnappActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GåTillbakaKnappActionPerformed
         // TODO add your handling code here:
-        
-         this.setVisible(false);
+
+        this.setVisible(false);
         this.dispose();
-        
-         new Meny(idb,inloggadAnvandare,isAdmin).setVisible(true);
+
+        new Meny(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_GåTillbakaKnappActionPerformed
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         // TODO add your handling code here:
-        
-                                  
-    if (!isAdmin) {
-        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-        return;
-    }
 
-    try {
-        String pid = jTextField1.getText().trim();
-
-        if (!pid.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "PartnerID är ogiltigt: " + pid);
+        if (!isAdmin) {
+            JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
             return;
         }
 
-        String namn = esc(jTextField2.getText());
-        String kontaktperson = esc(jTextField3.getText());
-        String kontaktepost = esc(jTextField4.getText());
-        String telefon = esc(jTextField5.getText());
-        String adress = esc(jTextField6.getText());
-        String branch = esc(jTextField7.getText());
+        try {
+            String pid = jTextField1.getText().trim();
 
-        if (namn.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Namn måste fyllas i.");
-            return;
+            if (!pid.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "PartnerID är ogiltigt: " + pid);
+                return;
+            }
+
+            String namn = esc(jTextField2.getText());
+            String kontaktperson = esc(jTextField3.getText());
+            String kontaktepost = esc(jTextField4.getText());
+            String telefon = esc(jTextField5.getText());
+            String adress = esc(jTextField6.getText());
+            String branch = esc(jTextField7.getText());
+
+            if (namn.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Namn måste fyllas i.");
+                return;
+            }
+
+            if (addingNewPartner) {
+                String sql
+                        = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch) VALUES ("
+                        + pid + ", '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '" + telefon + "', '" + adress + "', '" + branch + "')";
+
+                JOptionPane.showMessageDialog(this, sql); // debug
+
+                // VIKTIGT: INSERT ska köras med insert() om din InfDB har den metoden
+                idb.insert(sql);
+
+                JOptionPane.showMessageDialog(this, "Ny partner tillagd!");
+                addingNewPartner = false;
+
+            } else {
+                String sql
+                        = "UPDATE partner SET "
+                        + "namn = '" + namn + "', "
+                        + "kontaktperson = '" + kontaktperson + "', "
+                        + "kontaktepost = '" + kontaktepost + "', "
+                        + "telefon = '" + telefon + "', "
+                        + "adress = '" + adress + "', "
+                        + "branch = '" + branch + "' "
+                        + "WHERE pid = " + pid;
+
+                JOptionPane.showMessageDialog(this, sql); // debug
+                idb.update(sql);
+
+                JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
+            }
+
+            setFieldsEditable(false);
+            loadPartnerData();
+            selectPartnerInCombo(pid);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fel vid sparande: " + e.getMessage());
         }
 
-        if (addingNewPartner) {
-            String sql =
-                "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch) VALUES (" +
-                pid + ", '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '" + telefon + "', '" + adress + "', '" + branch + "')";
-
-            JOptionPane.showMessageDialog(this, sql); // debug
-
-            // VIKTIGT: INSERT ska köras med insert() om din InfDB har den metoden
-            idb.insert(sql);
-
-            JOptionPane.showMessageDialog(this, "Ny partner tillagd!");
-            addingNewPartner = false;
-
-        } else {
-            String sql =
-                "UPDATE partner SET " +
-                "namn = '" + namn + "', " +
-                "kontaktperson = '" + kontaktperson + "', " +
-                "kontaktepost = '" + kontaktepost + "', " +
-                "telefon = '" + telefon + "', " +
-                "adress = '" + adress + "', " +
-                "branch = '" + branch + "' " +
-                "WHERE pid = " + pid;
-
-            JOptionPane.showMessageDialog(this, sql); // debug
-            idb.update(sql);
-
-            JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
-        }
-
-        setFieldsEditable(false);
-        loadPartnerData();
-        selectPartnerInCombo(pid);
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid sparande: " + e.getMessage());
-    }
-        
     }//GEN-LAST:event_btnSparaActionPerformed
 
     private void btnÄndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraUppgifterActionPerformed
         // TODO add your handling code here:
-         addingNewPartner = false;
+        addingNewPartner = false;
         setFieldsEditable(true);
-        
+
     }//GEN-LAST:event_btnÄndraUppgifterActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
@@ -368,79 +369,79 @@ public class hanteraPartner extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     if (!isAdmin) {
-        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-        return;
-    }
-
-    try {
-        String pid = jTextField1.getText().trim();
-        if (pid.isEmpty() || !pid.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this, "Ingen giltig partner är vald.");
+        if (!isAdmin) {
+            JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
             return;
         }
 
-        int svar = JOptionPane.showConfirmDialog(
-            this,
-            "Är du säker på att du vill ta bort partner med PID " + pid + "?",
-            "Bekräfta borttagning",
-            JOptionPane.YES_NO_OPTION
-        );
+        try {
+            String pid = jTextField1.getText().trim();
+            if (pid.isEmpty() || !pid.matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Ingen giltig partner är vald.");
+                return;
+            }
 
-        if (svar != JOptionPane.YES_OPTION) {
-            return;
+            int svar = JOptionPane.showConfirmDialog(
+                    this,
+                    "Är du säker på att du vill ta bort partner med PID " + pid + "?",
+                    "Bekräfta borttagning",
+                    JOptionPane.YES_NO_OPTION
+            );
+
+            if (svar != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            String sql = "DELETE FROM partner WHERE pid = " + pid;
+            JOptionPane.showMessageDialog(this, sql); // debug, kan tas bort sen
+
+            // VIKTIGT: DELETE ska köras med delete()
+            idb.delete(sql);
+
+            JOptionPane.showMessageDialog(this, "Partner borttagen!");
+
+            addingNewPartner = false;
+            setFieldsEditable(false);
+
+            loadPartnerData();
+            clearFields();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fel vid borttagning: " + e.getMessage());
         }
-
-        String sql = "DELETE FROM partner WHERE pid = " + pid;
-        JOptionPane.showMessageDialog(this, sql); // debug, kan tas bort sen
-
-        // VIKTIGT: DELETE ska köras med delete()
-        idb.delete(sql);
-
-        JOptionPane.showMessageDialog(this, "Partner borttagen!");
-
-        addingNewPartner = false;
-        setFieldsEditable(false);
-
-        loadPartnerData();
-        clearFields();
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid borttagning: " + e.getMessage());
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    if (!isAdmin) {
-        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-        return;
-    }
-
-    try {
-        addingNewPartner = true;
-
-        // Undvik att ActionPerformed triggas när vi ändrar comboboxen via kod
-        ignorePartnerComboEvent = true;
-        Partners.setSelectedItem(null);
-        ignorePartnerComboEvent = false;
-
-        clearFields();
-
-        // Hämta nytt pid
-        String maxPidStr = idb.fetchSingle("SELECT MAX(pid) FROM partner");
-        int nextPid = 1;
-        if (maxPidStr != null && !maxPidStr.equalsIgnoreCase("null") && !maxPidStr.isBlank()) {
-            nextPid = Integer.parseInt(maxPidStr) + 1;
+        if (!isAdmin) {
+            JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+            return;
         }
 
-        jTextField1.setText(String.valueOf(nextPid));
+        try {
+            addingNewPartner = true;
 
-        setFieldsEditable(true);
-        jTextField2.requestFocus();
+            // Undvik att ActionPerformed triggas när vi ändrar comboboxen via kod
+            ignorePartnerComboEvent = true;
+            Partners.setSelectedItem(null);
+            ignorePartnerComboEvent = false;
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Fel vid Lägg till: " + e.getMessage());
-    }
+            clearFields();
+
+            // Hämta nytt pid
+            String maxPidStr = idb.fetchSingle("SELECT MAX(pid) FROM partner");
+            int nextPid = 1;
+            if (maxPidStr != null && !maxPidStr.equalsIgnoreCase("null") && !maxPidStr.isBlank()) {
+                nextPid = Integer.parseInt(maxPidStr) + 1;
+            }
+
+            jTextField1.setText(String.valueOf(nextPid));
+
+            setFieldsEditable(true);
+            jTextField2.requestFocus();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Fel vid Lägg till: " + e.getMessage());
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -492,25 +493,25 @@ public class hanteraPartner extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadPartnerData() {
-        
-       try {
-       Partners.removeAllItems();
 
-        var lista = idb.fetchColumn(
-            "SELECT CONCAT(pid, ' - ', namn) FROM partner ORDER BY namn"
-        );
+        try {
+            Partners.removeAllItems();
 
-        for (String rad : lista) {
-            Partners.addItem(rad);
+            var lista = idb.fetchColumn(
+                    "SELECT CONCAT(pid, ' - ', namn) FROM partner ORDER BY namn"
+            );
+
+            for (String rad : lista) {
+                Partners.addItem(rad);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Kunde inte hämta partners");
         }
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Kunde inte hämta partners");
     }
-}  
-    
+
     private void setFieldsEditable(boolean editable) {
-        
+
         jTextField1.setEditable(false);
         jTextField2.setEditable(editable);
         jTextField3.setEditable(editable);
@@ -520,32 +521,34 @@ public class hanteraPartner extends javax.swing.JFrame {
         jTextField7.setEditable(editable);
 
     }
-    
-       private boolean addingNewPartner = false;
+
+    private boolean addingNewPartner = false;
 
 // En enkel escape för att inte krascha SQL om man skriver t.ex. O'Neill
-private String esc(String s) {
-    if (s == null) return "";
-    return s.replace("'", "''").trim();
-}
+    private String esc(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s.replace("'", "''").trim();
+    }
 
-private void clearFields() {
-    jTextField1.setText("");
-    jTextField2.setText("");
-    jTextField3.setText("");
-    jTextField4.setText("");
-    jTextField5.setText("");
-    jTextField6.setText("");
-    jTextField7.setText("");
-}
+    private void clearFields() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
+    }
 
-private void selectPartnerInCombo(String pid) {
-    for (int i = 0; i < Partners.getItemCount(); i++) {
-        String item = Partners.getItemAt(i);
-        if (item != null && item.startsWith(pid + " - ")) {
-            Partners.setSelectedIndex(i);
-            break;
+    private void selectPartnerInCombo(String pid) {
+        for (int i = 0; i < Partners.getItemCount(); i++) {
+            String item = Partners.getItemAt(i);
+            if (item != null && item.startsWith(pid + " - ")) {
+                Partners.setSelectedIndex(i);
+                break;
+            }
         }
     }
-} 
 }

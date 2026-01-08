@@ -11,38 +11,31 @@ import oru.inf.InfDB;
  * @author Ninee
  */
 public class hanteraAvdelning extends javax.swing.JFrame {
-    
-  private String inloggadAnvandare;
-  private boolean isAdmin; 
-  private InfDB idb;
-  private String avdid;
-  
-  
- 
- 
- 
- 
+
+    private String inloggadAnvandare;
+    private boolean isAdmin;
+    private InfDB idb;
+    private String avdid;
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(hanteraAvdelning.class.getName());
 
     /**
      * Creates new form hanteraAvdelning
      */
- 
-    public hanteraAvdelning(){
-        
-     initComponents();
+    public hanteraAvdelning() {
+
+        initComponents();
     }
-    
+
     public hanteraAvdelning(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
-    
-    this.idb = idb;
-    this.inloggadAnvandare = inloggadAnvandare;
-    this.isAdmin = isAdmin;
-    
-    
-    initComponents();
-    loadAvdelningData();
-    
+
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.isAdmin = isAdmin;
+
+        initComponents();
+        loadAvdelningData();
+
     }
 
     /**
@@ -224,51 +217,49 @@ public class hanteraAvdelning extends javax.swing.JFrame {
     private void ÄndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ÄndraUppgifterActionPerformed
         // TODO add your handling code here:
         if (!isAdmin) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Du saknar behörighet att ändra avdelningen.");
-        return;
-    }
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Du saknar behörighet att ändra avdelningen.");
+            return;
+        }
 
-    // Extra skydd: ska aldrig vara null
-    if (avdid == null) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Ingen avdelning är laddad.");
-        return;
-    }
+        // Extra skydd: ska aldrig vara null
+        if (avdid == null) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Ingen avdelning är laddad.");
+            return;
+        }
 
-    try {
-        String namn = tfAvdelningsNamn.getText();
-        String beskrivning = taBeskrivning.getText();
-        String adress = tfAdress.getText();
-        String epost = tfEpost.getText();
-        String telefon = tfTelefon.getText();
-        String stad = tfStad.getText();
-        String chef = tfChef.getText();
+        try {
+            String namn = tfAvdelningsNamn.getText();
+            String beskrivning = taBeskrivning.getText();
+            String adress = tfAdress.getText();
+            String epost = tfEpost.getText();
+            String telefon = tfTelefon.getText();
+            String stad = tfStad.getText();
+            String chef = tfChef.getText();
 
-        String sql =
-            "UPDATE avdelning SET " +
-            "namn = '" + namn + "', " +
-            "beskrivning = '" + beskrivning + "', " +
-            "adress = '" + adress + "', " +
-            "epost = '" + epost + "', " +
-            "telefon = '" + telefon + "', " +
-            "stad = '" + stad + "', " +
-            "chef = '" + chef + "' " +
-            "WHERE avdid = " + avdid;
+            String sql
+                    = "UPDATE avdelning SET "
+                    + "namn = '" + namn + "', "
+                    + "beskrivning = '" + beskrivning + "', "
+                    + "adress = '" + adress + "', "
+                    + "epost = '" + epost + "', "
+                    + "telefon = '" + telefon + "', "
+                    + "stad = '" + stad + "', "
+                    + "chef = '" + chef + "' "
+                    + "WHERE avdid = " + avdid;
 
-        idb.update(sql);
+            idb.update(sql);
 
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Avdelningen har sparats!");
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Avdelningen har sparats!");
 
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Fel vid sparande av avdelning:\n" + e.getMessage());
-    }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Fel vid sparande av avdelning:\n" + e.getMessage());
+        }
 
-        
-        
-        
+
     }//GEN-LAST:event_ÄndraUppgifterActionPerformed
 
     private void tfAvdelningsIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAvdelningsIDActionPerformed
@@ -285,11 +276,11 @@ public class hanteraAvdelning extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        
-         this.setVisible(false);
+
+        this.setVisible(false);
         this.dispose();
-       
-        new Meny(idb,inloggadAnvandare,isAdmin).setVisible(true);
+
+        new Meny(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
@@ -314,64 +305,54 @@ public class hanteraAvdelning extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       java.awt.EventQueue.invokeLater(() -> new hanteraAvdelning().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new hanteraAvdelning().setVisible(true));
     }
-    
-    
-    
-    
-    
-    
-    
-  private void loadAvdelningData() {
-    try {
-        // 1) Hämta aid (anställdID) via epost
-        String aid = idb.fetchSingle(
-            "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare.trim() + "'"
-        );
 
-        if (aid == null) {
+    private void loadAvdelningData() {
+        try {
+            // 1) Hämta aid (anställdID) via epost
+            String aid = idb.fetchSingle(
+                    "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare.trim() + "'"
+            );
+
+            if (aid == null) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Ingen anställd hittades med epost: " + inloggadAnvandare);
+                return;
+            }
+
+            // 2) Hämta avdelningen  där denna person är chef
+            var data = idb.fetchRow(
+                    "SELECT a.avdid, a.namn, a.beskrivning, a.adress, a.epost, a.telefon, a.stad, a.chef "
+                    + "FROM avdelning a "
+                    + "JOIN anstalld an ON an.avdelning = a.avdid "
+                    + "WHERE an.epost = '" + inloggadAnvandare.trim() + "'"
+            );
+
+            if (data == null) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Hittar ingen avdelning kopplad till denna admin.");
+                return;
+            }
+
+            avdid = data.get("avdid");
+
+            // 
+            tfAvdelningsID.setText(avdid);
+            tfAvdelningsNamn.setText(data.get("namn"));
+            taBeskrivning.setText(data.get("beskrivning"));
+            tfAdress.setText(data.get("adress"));
+            tfEpost.setText(data.get("epost"));
+            tfTelefon.setText(data.get("telefon"));
+            tfStad.setText(data.get("stad"));
+            tfChef.setText(data.get("chef"));
+
+        } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
-                "Ingen anställd hittades med epost: " + inloggadAnvandare);
-            return;
+                    "Fel vid laddning av avdelning: " + e.getMessage());
         }
 
-        // 2) Hämta avdelningen  där denna person är chef
-        var data = idb.fetchRow(
-           "SELECT a.avdid, a.namn, a.beskrivning, a.adress, a.epost, a.telefon, a.stad, a.chef " +
-            "FROM avdelning a " +
-            "JOIN anstalld an ON an.avdelning = a.avdid " +
-            "WHERE an.epost = '" + inloggadAnvandare.trim() + "'"
-        );
-
-        if (data == null) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Hittar ingen avdelning kopplad till denna admin.");
-            return;
-        }
-
-        avdid=data.get("avdid");
-        
-        // 
-        tfAvdelningsID.setText(avdid);
-        tfAvdelningsNamn.setText(data.get("namn"));
-        taBeskrivning.setText(data.get("beskrivning"));
-        tfAdress.setText(data.get("adress"));
-        tfEpost.setText(data.get("epost"));
-        tfTelefon.setText(data.get("telefon"));
-        tfStad.setText(data.get("stad"));
-        tfChef.setText(data.get("chef"));
-
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Fel vid laddning av avdelning: " + e.getMessage());
     }
-    
-   
-    
-    
-    
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -11,13 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
-
 public class MinaProjekt01 extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String epost;
     private boolean isAdmin;
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MinaProjekt01.class.getName());
 
     /**
@@ -30,19 +29,18 @@ public class MinaProjekt01 extends javax.swing.JFrame {
 
         initComponents();
         // Visa användarens e-postadress bredvid titeln
-        lbltitlle.setText("<html><span style='color:black;'>Mina Projekt</span> " +
-                      "<span style='color:gray;'>(" + epost + ")</span></html>");
-        
+        lbltitlle.setText("<html><span style='color:black;'>Mina Projekt</span> "
+                + "<span style='color:gray;'>(" + epost + ")</span></html>");
+
         // Sätter val för status-filter
         cmbStatusAvdelning.setModel(new javax.swing.DefaultComboBoxModel<>(
-        new String[] { "Alla", "Planerat", "Pågående", "Avslutat" }));
-        
+                new String[]{"Alla", "Planerat", "Pågående", "Avslutat"}));
 
         // Initiera tabeller med kolumnnamn
         initTable();
-        initAvdelningsTable();    
-        initPartnersTable();  
-        
+        initAvdelningsTable();
+        initPartnersTable();
+
         // Ladda data från databasen
         loadMinaProjekt();
         loadAvdelningsProjekt();
@@ -213,229 +211,230 @@ public class MinaProjekt01 extends javax.swing.JFrame {
 
         tblMinaProjekt.setModel(model);
     }
-    
+
     private void initAvdelningsTable() {
-    // Initierar tabell för avdelningens projekt med samma kolumner
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("Pid");
-    model.addColumn("Projektnamn");
-    model.addColumn("Beskrivning");
-    model.addColumn("Startdatum");
-    model.addColumn("Slutdatum");
-    model.addColumn("Kostnad");
-    model.addColumn("Status");
-    model.addColumn("Prioritet");
-    model.addColumn("Projektchef");
-    model.addColumn("Land");
+        // Initierar tabell för avdelningens projekt med samma kolumner
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Pid");
+        model.addColumn("Projektnamn");
+        model.addColumn("Beskrivning");
+        model.addColumn("Startdatum");
+        model.addColumn("Slutdatum");
+        model.addColumn("Kostnad");
+        model.addColumn("Status");
+        model.addColumn("Prioritet");
+        model.addColumn("Projektchef");
+        model.addColumn("Land");
 
-    tblAvdelningsProjekt.setModel(model);
-}
-    
+        tblAvdelningsProjekt.setModel(model);
+    }
+
     private void initPartnersTable() {
-    // Initierar tabell för partners till projekten
-    DefaultTableModel model = new DefaultTableModel();
-    model.addColumn("Pid");
-    model.addColumn("Projektnamn");
-    model.addColumn("Partner Namn");
-    model.addColumn("Kontaktperson");
-    model.addColumn("E-post");
-    model.addColumn("Telefon");
-    model.addColumn("Adress");
-    model.addColumn("Bransch");
-    model.addColumn("Stad");
+        // Initierar tabell för partners till projekten
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Pid");
+        model.addColumn("Projektnamn");
+        model.addColumn("Partner Namn");
+        model.addColumn("Kontaktperson");
+        model.addColumn("E-post");
+        model.addColumn("Telefon");
+        model.addColumn("Adress");
+        model.addColumn("Bransch");
+        model.addColumn("Stad");
 
-    tblPartnersUppgifter.setModel(model);
-}
-   
+        tblPartnersUppgifter.setModel(model);
+    }
+
 //Hämtar projekt som användaren är handläggare eller projektchef för  
-private void loadMinaProjekt() {
-    DefaultTableModel model = (DefaultTableModel) tblMinaProjekt.getModel();
-    model.setRowCount(0);
+    private void loadMinaProjekt() {
+        DefaultTableModel model = (DefaultTableModel) tblMinaProjekt.getModel();
+        model.setRowCount(0);
 
-    try {
-        // Hämta aid för inloggad användare
-        String aidSql =
-            "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
-        String aid = idb.fetchSingle(aidSql);
+        try {
+            // Hämta aid för inloggad användare
+            String aidSql
+                    = "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
+            String aid = idb.fetchSingle(aidSql);
 
-        // Hämta projekt där användaren är handläggare eller projektchef
-        String sql =
-            "SELECT DISTINCT " +
-            "p.pid, p.projektnamn, p.beskrivning, p.startdatum, p.slutdatum, " +
-            "p.kostnad, p.status, p.prioritet, p.projektchef, p.land " +
-            "FROM projekt p " +
-            "LEFT JOIN ans_proj ap ON p.pid = ap.pid " +
-            "WHERE ap.aid = " + aid + " " +
-            "OR p.projektchef = " + aid;
+            // Hämta projekt där användaren är handläggare eller projektchef
+            String sql
+                    = "SELECT DISTINCT "
+                    + "p.pid, p.projektnamn, p.beskrivning, p.startdatum, p.slutdatum, "
+                    + "p.kostnad, p.status, p.prioritet, p.projektchef, p.land "
+                    + "FROM projekt p "
+                    + "LEFT JOIN ans_proj ap ON p.pid = ap.pid "
+                    + "WHERE ap.aid = " + aid + " "
+                    + "OR p.projektchef = " + aid;
 
-        System.out.println("Executing MinaProjekt-SQL:\n" + sql);
+            System.out.println("Executing MinaProjekt-SQL:\n" + sql);
 
-        ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
+            ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
 
-        if (rows != null) {
-            for (HashMap<String, String> row : rows) {
-                // Lägg till varje projekt i tabellen
-                model.addRow(new Object[]{
-                    row.get("pid"),
-                    row.get("projektnamn"),
-                    row.get("beskrivning"),
-                    row.get("startdatum"),
-                    row.get("slutdatum"),
-                    row.get("kostnad"),
-                    row.get("status"),
-                    row.get("prioritet"),
-                    row.get("projektchef"),
-                    row.get("land")
-                });
+            if (rows != null) {
+                for (HashMap<String, String> row : rows) {
+                    // Lägg till varje projekt i tabellen
+                    model.addRow(new Object[]{
+                        row.get("pid"),
+                        row.get("projektnamn"),
+                        row.get("beskrivning"),
+                        row.get("startdatum"),
+                        row.get("slutdatum"),
+                        row.get("kostnad"),
+                        row.get("status"),
+                        row.get("prioritet"),
+                        row.get("projektchef"),
+                        row.get("land")
+                    });
+                }
             }
-        }
 
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Fel vid hämtning av projekt: " + e.getMessage()
-        );
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Fel vid hämtning av projekt: " + e.getMessage()
+            );
+        }
     }
-}
 //Hämtar projekt för användarens avdelning
-private void loadAvdelningsProjekt() {
-    DefaultTableModel model =
-        (DefaultTableModel) tblAvdelningsProjekt.getModel();
-    model.setRowCount(0);
 
-    try {
-        // Hämta avdelning för inloggad användare
-        String avdelningSql =
-            "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
-        String avdelning = idb.fetchSingle(avdelningSql);
+    private void loadAvdelningsProjekt() {
+        DefaultTableModel model
+                = (DefaultTableModel) tblAvdelningsProjekt.getModel();
+        model.setRowCount(0);
 
-        // Statusfilter från ComboBox
-        String valdStatus = cmbStatusAvdelning.getSelectedItem().toString();
+        try {
+            // Hämta avdelning för inloggad användare
+            String avdelningSql
+                    = "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
+            String avdelning = idb.fetchSingle(avdelningSql);
 
-        // Hämta projekt för avdelningen
-        String sql =
-            "SELECT DISTINCT " +
-            "p.pid, p.projektnamn, p.beskrivning, p.startdatum, p.slutdatum, " +
-            "p.kostnad, p.status, p.prioritet, p.projektchef, p.land " +
-            "FROM projekt p " +
-            "JOIN ans_proj ap ON p.pid = ap.pid " +
-            "JOIN anstalld a ON ap.aid = a.aid " +
-            "WHERE a.avdelning = " + avdelning + " ";
-        
-        System.out.println("Executing avdelnings-SQL:\n" + sql);
+            // Statusfilter från ComboBox
+            String valdStatus = cmbStatusAvdelning.getSelectedItem().toString();
 
-        // Lägg till statusfilter om det inte är "Alla"
-        if (!valdStatus.equals("Alla")) {
-            sql += "AND p.status = '" + valdStatus + "' ";
-        }
+            // Hämta projekt för avdelningen
+            String sql
+                    = "SELECT DISTINCT "
+                    + "p.pid, p.projektnamn, p.beskrivning, p.startdatum, p.slutdatum, "
+                    + "p.kostnad, p.status, p.prioritet, p.projektchef, p.land "
+                    + "FROM projekt p "
+                    + "JOIN ans_proj ap ON p.pid = ap.pid "
+                    + "JOIN anstalld a ON ap.aid = a.aid "
+                    + "WHERE a.avdelning = " + avdelning + " ";
 
-        var rows = idb.fetchRows(sql);
+            System.out.println("Executing avdelnings-SQL:\n" + sql);
 
-        if (rows != null) {
-            for (var row : rows) {
-                model.addRow(new Object[]{
-                    row.get("pid"),
-                    row.get("projektnamn"),
-                    row.get("beskrivning"),
-                    row.get("startdatum"),
-                    row.get("slutdatum"),
-                    row.get("kostnad"),
-                    row.get("status"),
-                    row.get("prioritet"),
-                    row.get("projektchef"),
-                    row.get("land")
-                });
+            // Lägg till statusfilter om det inte är "Alla"
+            if (!valdStatus.equals("Alla")) {
+                sql += "AND p.status = '" + valdStatus + "' ";
             }
-        }
 
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Fel vid hämtning av avdelningens projekt: " + e.getMessage()
-        );
+            var rows = idb.fetchRows(sql);
+
+            if (rows != null) {
+                for (var row : rows) {
+                    model.addRow(new Object[]{
+                        row.get("pid"),
+                        row.get("projektnamn"),
+                        row.get("beskrivning"),
+                        row.get("startdatum"),
+                        row.get("slutdatum"),
+                        row.get("kostnad"),
+                        row.get("status"),
+                        row.get("prioritet"),
+                        row.get("projektchef"),
+                        row.get("land")
+                    });
+                }
+            }
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Fel vid hämtning av avdelningens projekt: " + e.getMessage()
+            );
+        }
     }
-}
 
 //Hämtar partners för alla projekt som användaren är ansvarig för
     private void loadPartnersUppgifter() {
 
-    DefaultTableModel model =
-        (DefaultTableModel) tblPartnersUppgifter.getModel();
-    model.setRowCount(0); // Clear table
+        DefaultTableModel model
+                = (DefaultTableModel) tblPartnersUppgifter.getModel();
+        model.setRowCount(0); // Clear table
 
-    try {
-        // Hämta aid för inloggad användare
-        String aidSql =
-            "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
-        String aid = idb.fetchSingle(aidSql);
+        try {
+            // Hämta aid för inloggad användare
+            String aidSql
+                    = "SELECT aid FROM anstalld WHERE epost = '" + epost + "'";
+            String aid = idb.fetchSingle(aidSql);
 
-        // Hämta alla projekt där användaren är handläggare eller projektchef
-        String projektSql =
-            "SELECT DISTINCT p.pid, p.projektnamn " +
-            "FROM projekt p " +
-            "LEFT JOIN ans_proj ap ON p.pid = ap.pid " +
-            "WHERE ap.aid = " + aid + " " +
-            "OR p.projektchef = " + aid;
+            // Hämta alla projekt där användaren är handläggare eller projektchef
+            String projektSql
+                    = "SELECT DISTINCT p.pid, p.projektnamn "
+                    + "FROM projekt p "
+                    + "LEFT JOIN ans_proj ap ON p.pid = ap.pid "
+                    + "WHERE ap.aid = " + aid + " "
+                    + "OR p.projektchef = " + aid;
 
-        System.out.println("Executing partner-projekt SQL:\n" + projektSql);
+            System.out.println("Executing partner-projekt SQL:\n" + projektSql);
 
-        ArrayList<HashMap<String, String>> projektRows =
-            idb.fetchRows(projektSql);
+            ArrayList<HashMap<String, String>> projektRows
+                    = idb.fetchRows(projektSql);
 
-        if (projektRows != null) {
-            for (HashMap<String, String> projekt : projektRows) {
+            if (projektRows != null) {
+                for (HashMap<String, String> projekt : projektRows) {
 
-                String pid = projekt.get("pid");
-                String projektnamn = projekt.get("projektnamn");
+                    String pid = projekt.get("pid");
+                    String projektnamn = projekt.get("projektnamn");
 
-                // Hämta partners för projektet
-                String partnerSql =
-                    "SELECT " +
-                    "pa.namn, " +
-                    "pa.kontaktperson, " +
-                    "pa.kontaktepost, " +
-                    "pa.telefon, " +
-                    "pa.adress, " +
-                    "pa.branch, " +
-                    "stad_tab.stadnamn " +
-                    "FROM partner pa " +
-                    "JOIN projekt_partner pp ON pa.pid = pp.partner_pid " +
-                    "LEFT JOIN ( " +
-                    "    SELECT sid, namn AS stadnamn FROM stad " +
-                    ") stad_tab ON pa.stad = stad_tab.sid " +
-                    "WHERE pp.pid = " + pid;
+                    // Hämta partners för projektet
+                    String partnerSql
+                            = "SELECT "
+                            + "pa.namn, "
+                            + "pa.kontaktperson, "
+                            + "pa.kontaktepost, "
+                            + "pa.telefon, "
+                            + "pa.adress, "
+                            + "pa.branch, "
+                            + "stad_tab.stadnamn "
+                            + "FROM partner pa "
+                            + "JOIN projekt_partner pp ON pa.pid = pp.partner_pid "
+                            + "LEFT JOIN ( "
+                            + "    SELECT sid, namn AS stadnamn FROM stad "
+                            + ") stad_tab ON pa.stad = stad_tab.sid "
+                            + "WHERE pp.pid = " + pid;
 
-                ArrayList<HashMap<String, String>> partnerRows =
-                    idb.fetchRows(partnerSql);
+                    ArrayList<HashMap<String, String>> partnerRows
+                            = idb.fetchRows(partnerSql);
 
-                if (partnerRows != null) {
-                    for (HashMap<String, String> partner : partnerRows) {
-                        // Lägg till varje partner i tabellen
-                        model.addRow(new Object[]{
-                            pid,
-                            projektnamn,
-                            partner.get("namn"),
-                            partner.get("kontaktperson"),
-                            partner.get("kontaktepost"),
-                            partner.get("telefon"),
-                            partner.get("adress"),
-                            partner.get("branch"),
-                            partner.get("stadnamn")
-                        });
+                    if (partnerRows != null) {
+                        for (HashMap<String, String> partner : partnerRows) {
+                            // Lägg till varje partner i tabellen
+                            model.addRow(new Object[]{
+                                pid,
+                                projektnamn,
+                                partner.get("namn"),
+                                partner.get("kontaktperson"),
+                                partner.get("kontaktepost"),
+                                partner.get("telefon"),
+                                partner.get("adress"),
+                                partner.get("branch"),
+                                partner.get("stadnamn")
+                            });
+                        }
                     }
                 }
             }
+
+        } catch (InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Fel vid hämtning av partners: " + e.getMessage()
+            );
         }
-
-    } catch (InfException e) {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Fel vid hämtning av partners: " + e.getMessage()
-        );
     }
-}
 
- /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -476,4 +475,3 @@ private void loadAvdelningsProjekt() {
     private javax.swing.JTable tblPartnersUppgifter;
     // End of variables declaration//GEN-END:variables
 }
-

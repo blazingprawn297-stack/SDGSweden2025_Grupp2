@@ -7,14 +7,15 @@ package SDGSweden2025;
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.HashMap;
+
 /**
  *
  * @author Bilda
  */
 public class Inloggningsfönster extends javax.swing.JFrame {
-    
+
     private InfDB idb;
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Inloggningsfönster.class.getName());
 
     /**
@@ -114,45 +115,44 @@ public class Inloggningsfönster extends javax.swing.JFrame {
 
     private void KnappLoggaInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappLoggaInActionPerformed
 
-  String ePost = tfEpost.getText();
-    String losen = tfLosenord.getText();
+        String ePost = tfEpost.getText();
+        String losen = tfLosenord.getText();
 
-    try {
-        // hämta lösenord och aid
-        String sql = "SELECT aid, losenord FROM anstalld WHERE epost = '" + ePost + "'";
-        java.util.HashMap<String, String> rad = idb.fetchRow(sql);
+        try {
+            // hämta lösenord och aid
+            String sql = "SELECT aid, losenord FROM anstalld WHERE epost = '" + ePost + "'";
+            java.util.HashMap<String, String> rad = idb.fetchRow(sql);
 
-        if (rad == null) {
-            lblFelmeddelande.setVisible(true);
-            return;
+            if (rad == null) {
+                lblFelmeddelande.setVisible(true);
+                return;
+            }
+
+            String dbLosen = rad.get("losenord");
+            String aid = rad.get("aid");
+
+            if (!losen.equals(dbLosen)) {
+                lblFelmeddelande.setVisible(true);
+                return;
+            }
+
+            // hämtar behörighetsnivå via aid (kan vara null)
+            String sqlBeh = "SELECT behorighetsniva FROM admin WHERE aid = " + aid;
+            String behorighetsniva = idb.fetchSingle(sqlBeh);
+
+            boolean isAdmin = false;
+            if (behorighetsniva != null) {
+                isAdmin = behorighetsniva.equals("1") || behorighetsniva.equals("2");
+            }
+
+            // öppnar meny
+            new Meny(idb, ePost, isAdmin).setVisible(true);
+            this.setVisible(false);
+
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
         }
 
-        String dbLosen = rad.get("losenord");
-        String aid = rad.get("aid");
-
-        if (!losen.equals(dbLosen)) {
-            lblFelmeddelande.setVisible(true);
-            return;
-        }
-
-        // hämtar behörighetsnivå via aid (kan vara null)
-        String sqlBeh = "SELECT behorighetsniva FROM admin WHERE aid = " + aid;
-        String behorighetsniva = idb.fetchSingle(sqlBeh);
-        
-        boolean isAdmin = false;
-        if (behorighetsniva != null) {
-            isAdmin = behorighetsniva.equals("1") || behorighetsniva.equals("2");
-        }
-
-        // öppnar meny
-        new Meny(idb, ePost, isAdmin).setVisible(true);
-        this.setVisible(false);
-
-    } catch (InfException ex) {
-        System.out.println(ex.getMessage());
-    }
-
-    
 
     }//GEN-LAST:event_KnappLoggaInActionPerformed
 
@@ -182,12 +182,12 @@ public class Inloggningsfönster extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            public void run(){
-                 //new Inloggningsfönster().setVisible(true));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                //new Inloggningsfönster().setVisible(true));
             }
-        }); 
-               
+        });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

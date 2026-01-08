@@ -4,7 +4,6 @@ package SDGSweden2025;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -12,17 +11,18 @@ import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 /**
  *
  * @author chris
  */
 public class HanteraHandläggare extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String epost;
     private boolean isAdmin; // används bara för att skicka vidare, inte för behörighet här
     private int pid;
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(HanteraHandläggare.class.getName());
 
     /**
@@ -31,7 +31,7 @@ public class HanteraHandläggare extends javax.swing.JFrame {
     public HanteraHandläggare() {
         initComponents();
     }
-    
+
     public HanteraHandläggare(InfDB idb, String epost, boolean isAdmin, int pid) {
         this.idb = idb;
         this.epost = epost;
@@ -40,7 +40,6 @@ public class HanteraHandläggare extends javax.swing.JFrame {
 
         initComponents();
         setLocationRelativeTo(null);
-     
 
         // Behörighetskontroll: endast projektchef får öppna/hantera
         if (!arProjektchefForPid()) {
@@ -52,31 +51,35 @@ public class HanteraHandläggare extends javax.swing.JFrame {
         loadAllaHandlaggare();
         loadHandlaggareIProjekt();
     }
-    
+
     private boolean arProjektchefForPid() {
         try {
             String aid = idb.fetchSingle("SELECT aid FROM anstalld WHERE epost = '" + epost + "'");
-            if (aid == null) return false;
+            if (aid == null) {
+                return false;
+            }
 
             String chefAid = idb.fetchSingle("SELECT projektchef FROM projekt WHERE pid = " + pid);
-            if (chefAid == null) return false;
+            if (chefAid == null) {
+                return false;
+            }
 
             return aid.trim().equals(chefAid.trim());
         } catch (Exception e) {
             return false;
         }
     }
-    
+
     private void loadAllaHandlaggare() {
         try {
             cmbAllaHandlaggare.removeAllItems();
             cmbAllaHandlaggare.addItem("Välj handläggare");
 
-            String sql =
-                    "SELECT a.aid, a.fornamn, a.efternamn, a.epost " +
-                    "FROM anstalld a " +
-                    "JOIN handlaggare h ON a.aid = h.aid " +
-                    "ORDER BY a.fornamn, a.efternamn";
+            String sql
+                    = "SELECT a.aid, a.fornamn, a.efternamn, a.epost "
+                    + "FROM anstalld a "
+                    + "JOIN handlaggare h ON a.aid = h.aid "
+                    + "ORDER BY a.fornamn, a.efternamn";
 
             ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
 
@@ -93,17 +96,17 @@ public class HanteraHandläggare extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Kunde inte hämta handläggare: " + e.getMessage());
         }
     }
-    
+
     private void loadHandlaggareIProjekt() {
         DefaultListModel<String> model = new DefaultListModel<>();
 
         try {
-            String sql =
-                    "SELECT a.aid, a.fornamn, a.efternamn, a.epost " +
-                    "FROM anstalld a " +
-                    "JOIN ans_proj ap ON a.aid = ap.aid " +
-                    "WHERE ap.pid = " + pid + " " +
-                    "ORDER BY a.fornamn, a.efternamn";
+            String sql
+                    = "SELECT a.aid, a.fornamn, a.efternamn, a.epost "
+                    + "FROM anstalld a "
+                    + "JOIN ans_proj ap ON a.aid = ap.aid "
+                    + "WHERE ap.pid = " + pid + " "
+                    + "ORDER BY a.fornamn, a.efternamn";
 
             ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
 
@@ -122,7 +125,7 @@ public class HanteraHandläggare extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Kunde inte ladda projektets handläggare: " + e.getMessage());
         }
     }
-    
+
     private void laggTillHandlaggare() {
         String vald = (String) cmbAllaHandlaggare.getSelectedItem();
 
@@ -178,10 +181,10 @@ public class HanteraHandläggare extends javax.swing.JFrame {
      * Klick: Tillbaka
      */
     private void gaTillbaka() {
-       this.dispose();
-    new Meny(idb, epost, isAdmin).setVisible(true);
+        this.dispose();
+        new Meny(idb, epost, isAdmin).setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,15 +276,15 @@ public class HanteraHandläggare extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLaggTillHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillHandlaggareActionPerformed
-      laggTillHandlaggare();
+        laggTillHandlaggare();
     }//GEN-LAST:event_btnLaggTillHandlaggareActionPerformed
 
     private void btnTaBortHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortHandlaggareActionPerformed
-     taBortHandlaggare();
+        taBortHandlaggare();
     }//GEN-LAST:event_btnTaBortHandlaggareActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-    gaTillbaka();
+        gaTillbaka();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void cmbAllaHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAllaHandlaggareActionPerformed

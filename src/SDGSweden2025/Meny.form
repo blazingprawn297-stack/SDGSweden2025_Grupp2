@@ -49,7 +49,7 @@
                           <Component id="KnappAndraProjektUppgifter" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappHanteraProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappHanteraHandläggare" alignment="0" max="32767" attributes="0"/>
-                          <Component id="KnappHållbarhetsmål" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHallbarhetsmal" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappAndraUppgifter" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappMinaProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappSePersonal" alignment="0" max="32767" attributes="0"/>
@@ -97,7 +97,7 @@
                   <Component id="KnappSePersonal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappHållbarhetsmål" min="-2" max="-2" attributes="0"/>
+              <Component id="KnappHallbarhetsmal" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="KnappHanteraHandläggare" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -183,7 +183,7 @@
         <Property name="text" type="java.lang.String" value="Personal och Handl&#xe4;ggare"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="KnappH&#xe5;llbarhetsm&#xe5;l">
+    <Component class="javax.swing.JButton" name="KnappHallbarhetsmal">
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
       </Properties>

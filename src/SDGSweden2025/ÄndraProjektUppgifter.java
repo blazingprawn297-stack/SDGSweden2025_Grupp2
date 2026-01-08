@@ -4,7 +4,6 @@ package SDGSweden2025;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -17,15 +16,15 @@ import java.util.HashMap;
  * @author chris
  */
 public class ÄndraProjektUppgifter extends javax.swing.JFrame {
-    
+
     private InfDB idb;
-    private String epost;       
-    private boolean isAdmin;    
+    private String epost;
+    private boolean isAdmin;
 
     // för att kunna slå upp id när man väljer i comboboxar
     private HashMap<String, String> projektMap = new HashMap<>(); // "pid - namn" -> pid
     private HashMap<String, String> landMap = new HashMap<>();
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ÄndraProjektUppgifter.class.getName());
 
     /**
@@ -34,7 +33,7 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
     public ÄndraProjektUppgifter() {
         initComponents();
     }
-    
+
     public ÄndraProjektUppgifter(InfDB idb, String epost, boolean isAdmin) {
         this.idb = idb;
         this.epost = epost;
@@ -51,7 +50,7 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
         // Rensa fält tills projekt är valt
         clearFields();
     }
-    
+
     private void initStatusPrioritet() {
         jComboBox2.removeAllItems(); // status
         jComboBox2.addItem("Planerat");
@@ -71,8 +70,8 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
 
         try {
             // Antagande (vanligt i SDG-projekt): land(lid, namn)
-            ArrayList<HashMap<String, String>> rows =
-                    idb.fetchRows("SELECT lid, namn FROM land ORDER BY namn");
+            ArrayList<HashMap<String, String>> rows
+                    = idb.fetchRows("SELECT lid, namn FROM land ORDER BY namn");
 
             if (rows != null) {
                 for (HashMap<String, String> r : rows) {
@@ -129,13 +128,18 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
         jTextField5.setText("");
 
         // sätt gärna default-val
-        if (jComboBox2.getItemCount() > 0) jComboBox2.setSelectedIndex(0);
-        if (jComboBox3.getItemCount() > 0) jComboBox3.setSelectedIndex(0);
-        if (jComboBox4.getItemCount() > 0) jComboBox4.setSelectedIndex(0);
+        if (jComboBox2.getItemCount() > 0) {
+            jComboBox2.setSelectedIndex(0);
+        }
+        if (jComboBox3.getItemCount() > 0) {
+            jComboBox3.setSelectedIndex(0);
+        }
+        if (jComboBox4.getItemCount() > 0) {
+            jComboBox4.setSelectedIndex(0);
+        }
     }
 
     // ====== HÄMTA + VISA VALT PROJEKT ======
-
     private void loadSelectedProjectToFields() {
         String vald = (String) jComboBox1.getSelectedItem();
         if (vald == null || vald.equals("Välj projekt")) {
@@ -151,8 +155,8 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
 
         try {
             HashMap<String, String> row = idb.fetchRow(
-                    "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land " +
-                    "FROM projekt WHERE pid = " + pid
+                    "SELECT projektnamn, beskrivning, startdatum, slutdatum, kostnad, status, prioritet, land "
+                    + "FROM projekt WHERE pid = " + pid
             );
 
             if (row == null) {
@@ -180,7 +184,9 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
     }
 
     private void setComboToValue(javax.swing.JComboBox<String> combo, String value) {
-        if (value == null) return;
+        if (value == null) {
+            return;
+        }
         for (int i = 0; i < combo.getItemCount(); i++) {
             if (value.equalsIgnoreCase(combo.getItemAt(i))) {
                 combo.setSelectedIndex(i);
@@ -210,7 +216,6 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
     }
 
     // ====== SPARA ======
-
     private void sparaProjekt() {
         String vald = (String) jComboBox1.getSelectedItem();
         if (vald == null || vald.equals("Välj projekt")) {
@@ -275,17 +280,17 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
                 return;
             }
 
-            String sql =
-                "UPDATE projekt SET " +
-                "projektnamn = '" + esc(projektnamn) + "', " +
-                "beskrivning = '" + esc(beskrivning) + "', " +
-                "startdatum = " + (startdatum.isEmpty() ? "NULL" : ("'" + esc(startdatum) + "'")) + ", " +
-                "slutdatum = " + (slutdatum.isEmpty() ? "NULL" : ("'" + esc(slutdatum) + "'")) + ", " +
-                "kostnad = " + (kostnad.isEmpty() ? "NULL" : kostnad) + ", " +
-                "status = '" + esc(status) + "', " +
-                "prioritet = '" + esc(prioritet) + "', " +
-                "land = " + landId + " " +
-                "WHERE pid = " + pid;
+            String sql
+                    = "UPDATE projekt SET "
+                    + "projektnamn = '" + esc(projektnamn) + "', "
+                    + "beskrivning = '" + esc(beskrivning) + "', "
+                    + "startdatum = " + (startdatum.isEmpty() ? "NULL" : ("'" + esc(startdatum) + "'")) + ", "
+                    + "slutdatum = " + (slutdatum.isEmpty() ? "NULL" : ("'" + esc(slutdatum) + "'")) + ", "
+                    + "kostnad = " + (kostnad.isEmpty() ? "NULL" : kostnad) + ", "
+                    + "status = '" + esc(status) + "', "
+                    + "prioritet = '" + esc(prioritet) + "', "
+                    + "land = " + landId + " "
+                    + "WHERE pid = " + pid;
 
             idb.update(sql);
 
@@ -317,12 +322,11 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
     }
 
     // ====== NAVIGATION ======
-
     private void gaTillbaka() {
         this.dispose();
         new Meny(idb, epost, isAdmin).setVisible(true);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -4,7 +4,6 @@ package SDGSweden2025;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -19,11 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author chris
  */
 public class StatistikProjektchef extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String epost;
     private boolean isAdmin;
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(StatistikProjektchef.class.getName());
 
     /**
@@ -62,7 +61,6 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     // -------------------------
     // TABELLER (KOLUMNER)
     // -------------------------
-
     private void initTableMinaProjekt() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Pid");
@@ -97,7 +95,6 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     // -------------------------
     // 1) STATISTIK: MINA PROJEKT (projektchef)
     // -------------------------
-
     private void loadMinaProjektStatistik() {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -111,11 +108,11 @@ public class StatistikProjektchef extends javax.swing.JFrame {
             }
 
             // Hämta alla projekt där jag är projektchef
-            String sql =
-                    "SELECT pid, projektnamn, kostnad, status, startdatum, slutdatum, land " +
-                    "FROM projekt " +
-                    "WHERE projektchef = " + aid + " " +
-                    "ORDER BY pid";
+            String sql
+                    = "SELECT pid, projektnamn, kostnad, status, startdatum, slutdatum, land "
+                    + "FROM projekt "
+                    + "WHERE projektchef = " + aid + " "
+                    + "ORDER BY pid";
 
             ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
 
@@ -131,13 +128,13 @@ public class StatistikProjektchef extends javax.swing.JFrame {
                     total += kostnad;
 
                     model.addRow(new Object[]{
-                            r.get("pid"),
-                            r.get("projektnamn"),
-                            kostnadStr,
-                            r.get("status"),
-                            r.get("startdatum"),
-                            r.get("slutdatum"),
-                            r.get("land")
+                        r.get("pid"),
+                        r.get("projektnamn"),
+                        kostnadStr,
+                        r.get("status"),
+                        r.get("startdatum"),
+                        r.get("slutdatum"),
+                        r.get("land")
                     });
                 }
             }
@@ -159,15 +156,14 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     // -------------------------
     // 2) STATISTIK: KOSTNADER PER LAND
     // -------------------------
-
     private void loadLanderTillCombo() {
         try {
             jComboBox1.removeAllItems();
             jComboBox1.addItem("Välj land");
 
             // Försök: tabellen land(lid, namn)
-            ArrayList<HashMap<String, String>> rows =
-                    idb.fetchRows("SELECT lid, namn FROM land ORDER BY namn");
+            ArrayList<HashMap<String, String>> rows
+                    = idb.fetchRows("SELECT lid, namn FROM land ORDER BY namn");
 
             if (rows != null) {
                 for (HashMap<String, String> r : rows) {
@@ -181,8 +177,8 @@ public class StatistikProjektchef extends javax.swing.JFrame {
                 jComboBox1.removeAllItems();
                 jComboBox1.addItem("Välj land");
 
-                ArrayList<HashMap<String, String>> rows2 =
-                        idb.fetchRows("SELECT DISTINCT land FROM projekt ORDER BY land");
+                ArrayList<HashMap<String, String>> rows2
+                        = idb.fetchRows("SELECT DISTINCT land FROM projekt ORDER BY land");
 
                 if (rows2 != null) {
                     for (HashMap<String, String> r : rows2) {
@@ -218,11 +214,11 @@ public class StatistikProjektchef extends javax.swing.JFrame {
         model.setRowCount(0);
 
         try {
-            String sql =
-                    "SELECT pid, projektnamn, kostnad, status, startdatum, slutdatum, projektchef " +
-                    "FROM projekt " +
-                    "WHERE land = " + landId + " " +
-                    "ORDER BY pid";
+            String sql
+                    = "SELECT pid, projektnamn, kostnad, status, startdatum, slutdatum, projektchef "
+                    + "FROM projekt "
+                    + "WHERE land = " + landId + " "
+                    + "ORDER BY pid";
 
             ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
 
@@ -238,13 +234,13 @@ public class StatistikProjektchef extends javax.swing.JFrame {
                     total += kostnad;
 
                     model.addRow(new Object[]{
-                            r.get("pid"),
-                            r.get("projektnamn"),
-                            kostnadStr,
-                            r.get("status"),
-                            r.get("startdatum"),
-                            r.get("slutdatum"),
-                            r.get("projektchef")
+                        r.get("pid"),
+                        r.get("projektnamn"),
+                        kostnadStr,
+                        r.get("status"),
+                        r.get("startdatum"),
+                        r.get("slutdatum"),
+                        r.get("projektchef")
                     });
                 }
             }
@@ -252,13 +248,13 @@ public class StatistikProjektchef extends javax.swing.JFrame {
             // En enkel "summeringsrad" längst ner (valfritt men tydligt)
             if (antal > 0) {
                 model.addRow(new Object[]{
-                        "",
-                        "SUMMA (" + antal + " projekt)",
-                        formatMoney(total) + " kr",
-                        "",
-                        "",
-                        "",
-                        ""
+                    "",
+                    "SUMMA (" + antal + " projekt)",
+                    formatMoney(total) + " kr",
+                    "",
+                    "",
+                    "",
+                    ""
                 });
             }
 
@@ -272,7 +268,6 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     // -------------------------
     // NAVIGATION
     // -------------------------
-
     private void gaTillbaka() {
         this.dispose();
         new Meny(idb, epost, isAdmin).setVisible(true);
@@ -281,9 +276,10 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     // -------------------------
     // HJÄLPMETODER
     // -------------------------
-
     private double parseDoubleSafe(String s) {
-        if (s == null) return 0.0;
+        if (s == null) {
+            return 0.0;
+        }
         try {
             return Double.parseDouble(s.replace(",", ".").trim());
         } catch (Exception e) {
@@ -297,7 +293,6 @@ public class StatistikProjektchef extends javax.swing.JFrame {
         return String.format(java.util.Locale.US, "%.2f", value);
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -471,11 +466,11 @@ public class StatistikProjektchef extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    visaStatistikLand();
+        visaStatistikLand();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    gaTillbaka();
+        gaTillbaka();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

@@ -4,13 +4,10 @@ package SDGSweden2025;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 /**
  *
  * @author chris
  */
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class HanteraProjektPartner extends javax.swing.JFrame {
+
     private InfDB idb;
     private String epost;
     private boolean isAdmin;
@@ -31,9 +29,9 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
      */
     public HanteraProjektPartner() {
         initComponents();
-       
+
     }
-    
+
     public HanteraProjektPartner(InfDB idb, String epost, boolean isAdmin, int pid) {
         this.idb = idb;
         this.epost = epost;
@@ -43,7 +41,6 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
 
-        
         loadAllaPartners();
         loadPartnersIProjekt();
     }
@@ -150,13 +147,13 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbAllaPartnersActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-  this.dispose();
-    new Meny(idb, epost, isAdmin).setVisible(true);
-    
+        this.dispose();
+        new Meny(idb, epost, isAdmin).setVisible(true);
+
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
     private void btnLaggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaggTillActionPerformed
-  String vald = (String) cmbAllaPartners.getSelectedItem();
+        String vald = (String) cmbAllaPartners.getSelectedItem();
 
         if (vald == null || vald.equals("Välj partner")) {
             JOptionPane.showMessageDialog(this, "Välj en partner först");
@@ -168,8 +165,8 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
         try {
             // skydd mot dubletter
             String finns = idb.fetchSingle(
-                "SELECT partner_pid FROM projekt_partner " +
-                "WHERE pid = " + pid + " AND partner_pid = " + partnerPid
+                    "SELECT partner_pid FROM projekt_partner "
+                    + "WHERE pid = " + pid + " AND partner_pid = " + partnerPid
             );
 
             if (finns != null) {
@@ -178,8 +175,8 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
             }
 
             idb.insert(
-                "INSERT INTO projekt_partner (pid, partner_pid) VALUES (" +
-                pid + ", " + partnerPid + ")"
+                    "INSERT INTO projekt_partner (pid, partner_pid) VALUES ("
+                    + pid + ", " + partnerPid + ")"
             );
 
             loadPartnersIProjekt();
@@ -190,7 +187,7 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLaggTillActionPerformed
 
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
-    String vald = listPartnersIProjekt.getSelectedValue();
+        String vald = listPartnersIProjekt.getSelectedValue();
 
         if (vald == null) {
             JOptionPane.showMessageDialog(this, "Välj en partner att ta bort");
@@ -201,8 +198,8 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
 
         try {
             idb.delete(
-                "DELETE FROM projekt_partner " +
-                "WHERE pid = " + pid + " AND partner_pid = " + partnerPid
+                    "DELETE FROM projekt_partner "
+                    + "WHERE pid = " + pid + " AND partner_pid = " + partnerPid
             );
 
             loadPartnersIProjekt();
@@ -236,13 +233,14 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new HanteraProjektPartner().setVisible(true));
     }
-private void loadAllaPartners() {
+
+    private void loadAllaPartners() {
         try {
             cmbAllaPartners.removeAllItems();
             cmbAllaPartners.addItem("Välj partner");
 
-            ArrayList<HashMap<String, String>> rows =
-                idb.fetchRows("SELECT pid, namn FROM partner ORDER BY namn");
+            ArrayList<HashMap<String, String>> rows
+                    = idb.fetchRows("SELECT pid, namn FROM partner ORDER BY namn");
 
             if (rows != null) {
                 for (HashMap<String, String> r : rows) {
@@ -260,11 +258,11 @@ private void loadAllaPartners() {
 
         try {
             ArrayList<HashMap<String, String>> rows = idb.fetchRows(
-                "SELECT p.pid, p.namn " +
-                "FROM partner p " +
-                "JOIN projekt_partner pp ON p.pid = pp.partner_pid " +
-                "WHERE pp.pid = " + pid + " " +
-                "ORDER BY p.namn"
+                    "SELECT p.pid, p.namn "
+                    + "FROM partner p "
+                    + "JOIN projekt_partner pp ON p.pid = pp.partner_pid "
+                    + "WHERE pp.pid = " + pid + " "
+                    + "ORDER BY p.namn"
             );
 
             if (rows != null) {
@@ -292,4 +290,3 @@ private void loadAllaPartners() {
     private javax.swing.JList<String> listPartnersIProjekt;
     // End of variables declaration//GEN-END:variables
 }
-

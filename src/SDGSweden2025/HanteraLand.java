@@ -15,11 +15,11 @@ import java.util.ArrayList;
  * @author chris
  */
 public class HanteraLand extends javax.swing.JPanel {
-    
-  private String inloggadAnvandare;
-  private boolean isAdmin; 
-  private InfDB idb;
-  private boolean laggTillLage = false;
+
+    private String inloggadAnvandare;
+    private boolean isAdmin;
+    private InfDB idb;
+    private boolean laggTillLage = false;
 
     /**
      * Creates new form HanteraLand
@@ -226,224 +226,226 @@ public class HanteraLand extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-  try {
-        String vald = (String) jComboBox1.getSelectedItem();
-        if (vald == null) return;
-        if (!vald.contains(" - ")) return;
+        try {
+            String vald = (String) jComboBox1.getSelectedItem();
+            if (vald == null) {
+                return;
+            }
+            if (!vald.contains(" - ")) {
+                return;
+            }
 
-        String lid = vald.split(" - ")[0].trim();
+            String lid = vald.split(" - ")[0].trim();
 
-        HashMap<String, String> data = idb.fetchRow(
-            "SELECT * FROM land WHERE lid = " + lid
-        );
+            HashMap<String, String> data = idb.fetchRow(
+                    "SELECT * FROM land WHERE lid = " + lid
+            );
 
-        if (data == null) return;
+            if (data == null) {
+                return;
+            }
 
-        jTextField1.setText(data.get("lid"));
-        jTextField2.setText(data.get("namn"));
-        jTextField3.setText(data.get("sprak"));
-        jTextField4.setText(data.get("valuta"));
-        jTextField5.setText(data.get("tidszon"));
-        jTextField6.setText(data.get("politisk_struktur"));
-        jTextField7.setText(data.get("ekonomi"));
-        
-        setLandIdEditable(false);
-        laggTillLage = false;
-        jButton3.setText("Lägg till Land");
-        
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid hämtning av land");
-        e.printStackTrace();
-    }
+            jTextField1.setText(data.get("lid"));
+            jTextField2.setText(data.get("namn"));
+            jTextField3.setText(data.get("sprak"));
+            jTextField4.setText(data.get("valuta"));
+            jTextField5.setText(data.get("tidszon"));
+            jTextField6.setText(data.get("politisk_struktur"));
+            jTextField7.setText(data.get("ekonomi"));
+
+            setLandIdEditable(false);
+            laggTillLage = false;
+            jButton3.setText("Lägg till Land");
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid hämtning av land");
+            e.printStackTrace();
+        }
 
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-   java.awt.Window w = javax.swing.SwingUtilities.getWindowAncestor(this);
-    if (w != null) {
-        w.dispose();
-    }
+        java.awt.Window w = javax.swing.SwingUtilities.getWindowAncestor(this);
+        if (w != null) {
+            w.dispose();
+        }
 
-   
-    new Meny(idb, inloggadAnvandare, isAdmin).setVisible(true);
+        new Meny(idb, inloggadAnvandare, isAdmin).setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       try {
-        String lid = jTextField1.getText().trim();
-        String namn = jTextField2.getText().trim();
-        String sprak = jTextField3.getText().trim();
-        String valuta = jTextField4.getText().trim();
-        String tidszon = jTextField5.getText().trim();
-        String politisk = jTextField6.getText().trim();
-        String ekonomi = jTextField7.getText().trim();
+        try {
+            String lid = jTextField1.getText().trim();
+            String namn = jTextField2.getText().trim();
+            String sprak = jTextField3.getText().trim();
+            String valuta = jTextField4.getText().trim();
+            String tidszon = jTextField5.getText().trim();
+            String politisk = jTextField6.getText().trim();
+            String ekonomi = jTextField7.getText().trim();
 
-       
-        if (lid.isEmpty() || namn.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
-            return;
+            if (lid.isEmpty() || namn.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
+                return;
+            }
+
+            String sql
+                    = "UPDATE land SET "
+                    + "namn = '" + namn + "', "
+                    + "sprak = '" + sprak + "', "
+                    + "valuta = '" + valuta + "', "
+                    + "tidszon = '" + tidszon + "', "
+                    + "politisk_struktur = '" + politisk + "', "
+                    + "ekonomi = '" + ekonomi + "' "
+                    + "WHERE lid = " + lid;
+
+            idb.update(sql);
+            JOptionPane.showMessageDialog(this, "Land uppdaterat!");
+
+            fyllLandCombo();
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid sparande: " + e.getMessage());
+            e.printStackTrace();
         }
-
-      
-        String sql =
-            "UPDATE land SET " +
-            "namn = '" + namn + "', " +
-            "sprak = '" + sprak + "', " +
-            "valuta = '" + valuta + "', " +
-            "tidszon = '" + tidszon + "', " +
-            "politisk_struktur = '" + politisk + "', " +
-            "ekonomi = '" + ekonomi + "' " +
-            "WHERE lid = " + lid;
-
-        idb.update(sql);
-        JOptionPane.showMessageDialog(this, "Land uppdaterat!");
-
-        fyllLandCombo();
-
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid sparande: " + e.getMessage());
-        e.printStackTrace();
-    }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-      if (!isAdmin) {
-        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-        return;
-    }
-
-    // STEG 1: gå in i "nytt land"-läge
-    if (!laggTillLage) {
-        nyttLandLage();
-        laggTillLage = true;
-        jButton3.setText("Spara nytt land"); // tydligt för användaren
-        return;
-    }
-
-    // STEG 2: spara (INSERT)
-    try {
-        String lid = jTextField1.getText().trim();
-        String namn = jTextField2.getText().trim();
-        String sprak = jTextField3.getText().trim();
-        String valuta = jTextField4.getText().trim();
-        String tidszon = jTextField5.getText().trim();
-        String politisk = jTextField6.getText().trim();
-        String ekonomi = jTextField7.getText().trim();
-
-        if (lid.isEmpty() || namn.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
+        if (!isAdmin) {
+            JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
             return;
         }
 
-        Integer.parseInt(lid);
-
-        String finns = idb.fetchSingle("SELECT lid FROM land WHERE lid = " + lid);
-        if (finns != null) {
-            JOptionPane.showMessageDialog(this, "LandID finns redan.");
+        // STEG 1: gå in i "nytt land"-läge
+        if (!laggTillLage) {
+            nyttLandLage();
+            laggTillLage = true;
+            jButton3.setText("Spara nytt land"); // tydligt för användaren
             return;
         }
 
-        String sql =
-            "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi) VALUES (" +
-            lid + ", '" + namn + "', '" + sprak + "', '" + valuta + "', '" +
-            tidszon + "', '" + politisk + "', '" + ekonomi + "')";
+        // STEG 2: spara (INSERT)
+        try {
+            String lid = jTextField1.getText().trim();
+            String namn = jTextField2.getText().trim();
+            String sprak = jTextField3.getText().trim();
+            String valuta = jTextField4.getText().trim();
+            String tidszon = jTextField5.getText().trim();
+            String politisk = jTextField6.getText().trim();
+            String ekonomi = jTextField7.getText().trim();
 
-        idb.insert(sql);
+            if (lid.isEmpty() || namn.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
+                return;
+            }
 
-        JOptionPane.showMessageDialog(this, "Land har lagts till!");
+            Integer.parseInt(lid);
 
-        // tillbaka till normalt läge
-        laggTillLage = false;
-        jButton3.setText("Lägg till Land");
-        fyllLandCombo();
+            String finns = idb.fetchSingle("SELECT lid FROM land WHERE lid = " + lid);
+            if (finns != null) {
+                JOptionPane.showMessageDialog(this, "LandID finns redan.");
+                return;
+            }
 
-        // välj det nya landet automatiskt (valfritt men nice)
-        jComboBox1.setSelectedItem(lid + " - " + namn);
+            String sql
+                    = "INSERT INTO land (lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi) VALUES ("
+                    + lid + ", '" + namn + "', '" + sprak + "', '" + valuta + "', '"
+                    + tidszon + "', '" + politisk + "', '" + ekonomi + "')";
 
-        // lås landID igen
-        setLandIdEditable(false);
+            idb.insert(sql);
 
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "LandID måste vara ett heltal.");
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Fel vid tillägg av land:\n" + e.getMessage());
-        e.printStackTrace();
-    }
- 
+            JOptionPane.showMessageDialog(this, "Land har lagts till!");
+
+            // tillbaka till normalt läge
+            laggTillLage = false;
+            jButton3.setText("Lägg till Land");
+            fyllLandCombo();
+
+            // välj det nya landet automatiskt (valfritt men nice)
+            jComboBox1.setSelectedItem(lid + " - " + namn);
+
+            // lås landID igen
+            setLandIdEditable(false);
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "LandID måste vara ett heltal.");
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Fel vid tillägg av land:\n" + e.getMessage());
+            e.printStackTrace();
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
-private void loadLandById(String landId) {
-    try {
-        String sql = "SELECT lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi " +
-                     "FROM land WHERE lid = " + landId;
+    private void loadLandById(String landId) {
+        try {
+            String sql = "SELECT lid, namn, sprak, valuta, tidszon, politisk_struktur, ekonomi "
+                    + "FROM land WHERE lid = " + landId;
 
-        HashMap<String, String> rad = idb.fetchRow(sql);
+            HashMap<String, String> rad = idb.fetchRow(sql);
 
-        if (rad == null) {
-            JOptionPane.showMessageDialog(this, "Ingen rad hittades för lid=" + landId);
-            return;
+            if (rad == null) {
+                JOptionPane.showMessageDialog(this, "Ingen rad hittades för lid=" + landId);
+                return;
+            }
+
+            jTextField1.setText(rad.get("lid"));
+            jTextField2.setText(rad.get("namn"));
+            jTextField3.setText(rad.get("sprak"));
+            jTextField4.setText(rad.get("valuta"));
+            jTextField5.setText(rad.get("tidszon"));
+            jTextField6.setText(rad.get("politisk_struktur"));
+            jTextField7.setText(rad.get("ekonomi"));
+
+        } catch (InfException e) {
+            JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
+            e.printStackTrace();
         }
 
-        jTextField1.setText(rad.get("lid"));
-        jTextField2.setText(rad.get("namn"));
-        jTextField3.setText(rad.get("sprak"));
-        jTextField4.setText(rad.get("valuta"));
-        jTextField5.setText(rad.get("tidszon"));
-        jTextField6.setText(rad.get("politisk_struktur"));
-        jTextField7.setText(rad.get("ekonomi"));
-
-    } catch (InfException e) {
-        JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
-        e.printStackTrace();
     }
-    
-}
 
-private void fyllLandCombo() {
-    try {
-        jComboBox1.removeAllItems();
+    private void fyllLandCombo() {
+        try {
+            jComboBox1.removeAllItems();
 
-        java.util.ArrayList<java.util.HashMap<String, String>> rows =
-                idb.fetchRows("SELECT lid, namn FROM land ORDER BY lid");
+            java.util.ArrayList<java.util.HashMap<String, String>> rows
+                    = idb.fetchRows("SELECT lid, namn FROM land ORDER BY lid");
 
-        if (rows == null || rows.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Inga länder hittades i tabellen land.");
-            return;
+            if (rows == null || rows.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Inga länder hittades i tabellen land.");
+                return;
+            }
+
+            for (java.util.HashMap<String, String> r : rows) {
+                jComboBox1.addItem(r.get("lid") + " - " + r.get("namn"));
+            }
+
+        } catch (oru.inf.InfException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Fel vid laddning av länder: " + e.getMessage());
+            e.printStackTrace();
         }
-
-        for (java.util.HashMap<String, String> r : rows) {
-            jComboBox1.addItem(r.get("lid") + " - " + r.get("namn"));
-        }
-
-    } catch (oru.inf.InfException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Fel vid laddning av länder: " + e.getMessage());
-        e.printStackTrace();
     }
-}
 
-private void setLandIdEditable(boolean editable) {
-    jTextField1.setEditable(editable);
-    jTextField1.setEnabled(editable); // valfritt (gör det “grått” när låst)
-}
+    private void setLandIdEditable(boolean editable) {
+        jTextField1.setEditable(editable);
+        jTextField1.setEnabled(editable); // valfritt (gör det “grått” när låst)
+    }
 
-private void nyttLandLage() {
-    // töm alla fält
-    jTextField1.setText("");
-    jTextField2.setText("");
-    jTextField3.setText("");
-    jTextField4.setText("");
-    jTextField5.setText("");
-    jTextField6.setText("");
-    jTextField7.setText("");
+    private void nyttLandLage() {
+        // töm alla fält
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
+        jTextField7.setText("");
 
-    // nu ska LandID kunna skrivas
-    setLandIdEditable(true);
+        // nu ska LandID kunna skrivas
+        setLandIdEditable(true);
 
-    // sätt fokus i LandID
-    jTextField1.requestFocus();
-}
-
+        // sätt fokus i LandID
+        jTextField1.requestFocus();
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -41,42 +41,44 @@ public class Meny extends javax.swing.JFrame {
         KnappHanteraAvdelning.setVisible(isAdmin);
         KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
         KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
+        KnappHallbarhetsmal.addActionListener(this::KnappHallbarhetActionPerformed);
+
     }
-    
+
     private void kontrolleraProjektchef() {
-    try {
-        // Admin och Handläggare ska inte kunna se projektchef-knapparna
-        if (isAdmin) {
+        try {
+            // Admin och Handläggare ska inte kunna se projektchef-knapparna
+            if (isAdmin) {
+                KnappHanteraProjekt.setVisible(false);
+                KnappHanteraHandläggare.setVisible(false);
+                KnappAndraProjektUppgifter.setVisible(false);
+                KnappSeStatistik.setVisible(false);
+                return;
+            }
+
+            String aid = idb.fetchSingle(
+                    "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'"
+            );
+
+            String finnsProjekt = idb.fetchSingle(
+                    "SELECT pid FROM projekt WHERE projektchef = " + aid
+            );
+
+            boolean arChef = (finnsProjekt != null);
+
+            KnappHanteraProjekt.setVisible(arChef);
+            KnappHanteraHandläggare.setVisible(arChef);
+            KnappAndraProjektUppgifter.setVisible(arChef);
+            KnappSeStatistik.setVisible(arChef);
+
+        } catch (Exception e) {
             KnappHanteraProjekt.setVisible(false);
             KnappHanteraHandläggare.setVisible(false);
             KnappAndraProjektUppgifter.setVisible(false);
             KnappSeStatistik.setVisible(false);
-            return;
         }
-
-        String aid = idb.fetchSingle(
-            "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'"
-        );
-
-        String finnsProjekt = idb.fetchSingle(
-            "SELECT pid FROM projekt WHERE projektchef = " + aid
-        );
-
-        boolean arChef = (finnsProjekt != null);
-
-        KnappHanteraProjekt.setVisible(arChef);
-        KnappHanteraHandläggare.setVisible(arChef);
-        KnappAndraProjektUppgifter.setVisible(arChef);
-        KnappSeStatistik.setVisible(arChef);
-
-    } catch (Exception e) {
-        KnappHanteraProjekt.setVisible(false);
-        KnappHanteraHandläggare.setVisible(false);
-        KnappAndraProjektUppgifter.setVisible(false);
-        KnappSeStatistik.setVisible(false);
     }
-}
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +98,7 @@ public class Meny extends javax.swing.JFrame {
         KnappHanteraLand = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         KnappSePersonal = new javax.swing.JButton();
-        KnappHållbarhetsmål = new javax.swing.JButton();
+        KnappHallbarhetsmal = new javax.swing.JButton();
         KnappHanteraHandläggare = new javax.swing.JButton();
         KnappHanteraProjekt = new javax.swing.JButton();
         KnappAndraProjektUppgifter = new javax.swing.JButton();
@@ -131,7 +133,7 @@ public class Meny extends javax.swing.JFrame {
 
         KnappSePersonal.setText("Personal och Handläggare");
 
-        KnappHållbarhetsmål.setText("Hållbarhetsmål");
+        KnappHallbarhetsmal.setText("Hållbarhetsmål");
 
         KnappHanteraHandläggare.setText("Hantera Handläggare");
         KnappHanteraHandläggare.addActionListener(this::KnappHanteraHandläggareActionPerformed);
@@ -171,7 +173,7 @@ public class Meny extends javax.swing.JFrame {
                             .addComponent(KnappAndraProjektUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraHandläggare, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(KnappHållbarhetsmål, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(KnappHallbarhetsmal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappMinaProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappSePersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,7 +210,7 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(KnappHanteraAvdelning)
                     .addComponent(KnappSePersonal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(KnappHållbarhetsmål)
+                .addComponent(KnappHallbarhetsmal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(KnappHanteraHandläggare)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,88 +291,97 @@ public class Meny extends javax.swing.JFrame {
     }//GEN-LAST:event_KnappMinaProjektActionPerformed
 
     private void KnappHanteraHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraHandläggareActionPerformed
-    String pidStr = javax.swing.JOptionPane.showInputDialog(
-        this,
-        "Skriv in PID för projektet du ansvarar för:",
-        "Välj projekt",
-        javax.swing.JOptionPane.QUESTION_MESSAGE
-    );
-
-    if (pidStr == null) return;
-
-    pidStr = pidStr.trim();
-    if (!pidStr.matches("\\d+")) {
-        javax.swing.JOptionPane.showMessageDialog(this, "PID måste vara ett heltal.");
-        return;
-    }
-
-    int pid = Integer.parseInt(pidStr);
-
-    try {
-        String aid = idb.fetchSingle(
-            "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'"
+        String pidStr = javax.swing.JOptionPane.showInputDialog(
+                this,
+                "Skriv in PID för projektet du ansvarar för:",
+                "Välj projekt",
+                javax.swing.JOptionPane.QUESTION_MESSAGE
         );
 
-        String ok = idb.fetchSingle(
-            "SELECT pid FROM projekt WHERE pid = " + pid + " AND projektchef = " + aid
-        );
-
-        if (ok == null) {
-            javax.swing.JOptionPane.showMessageDialog(this,
-                "Du är inte projektchef för detta projekt.");
+        if (pidStr == null) {
             return;
         }
 
-        this.dispose();
-        new HanteraHandläggare(idb, inloggadAnvandare, isAdmin, pid).setVisible(true);
+        pidStr = pidStr.trim();
+        if (!pidStr.matches("\\d+")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "PID måste vara ett heltal.");
+            return;
+        }
 
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
-    }
+        int pid = Integer.parseInt(pidStr);
+
+        try {
+            String aid = idb.fetchSingle(
+                    "SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'"
+            );
+
+            String ok = idb.fetchSingle(
+                    "SELECT pid FROM projekt WHERE pid = " + pid + " AND projektchef = " + aid
+            );
+
+            if (ok == null) {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Du är inte projektchef för detta projekt.");
+                return;
+            }
+
+            this.dispose();
+            new HanteraHandläggare(idb, inloggadAnvandare, isAdmin, pid).setVisible(true);
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
+        }
     }//GEN-LAST:event_KnappHanteraHandläggareActionPerformed
 
     private void KnappAndraProjektUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappAndraProjektUppgifterActionPerformed
-    this.dispose();
-    new ÄndraProjektUppgifter(idb, inloggadAnvandare, isAdmin).setVisible(true);
+        this.dispose();
+        new ÄndraProjektUppgifter(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_KnappAndraProjektUppgifterActionPerformed
 
     private void KnappSeStatistikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSeStatistikActionPerformed
-    this.dispose();
-    new StatistikProjektchef(idb, inloggadAnvandare, isAdmin).setVisible(true);
+        this.dispose();
+        new StatistikProjektchef(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_KnappSeStatistikActionPerformed
 
     private void KnappHanteraProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraProjektActionPerformed
-    String pidStr = JOptionPane.showInputDialog(this, "Skriv in PID för projektet du ansvarar för:");
-    if (pidStr == null) return;
-
-    pidStr = pidStr.trim();
-    if (!pidStr.matches("\\d+")) {
-        JOptionPane.showMessageDialog(this, "PID måste vara ett heltal.");
-        return;
-    }
-
-    int pid = Integer.parseInt(pidStr);
-
-    try {
-        String aid = idb.fetchSingle("SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'");
-        String ok = idb.fetchSingle("SELECT pid FROM projekt WHERE pid = " + pid + " AND projektchef = " + aid);
-
-        if (ok == null) {
-            JOptionPane.showMessageDialog(this, "Du är inte projektchef för detta projekt.");
+        String pidStr = JOptionPane.showInputDialog(this, "Skriv in PID för projektet du ansvarar för:");
+        if (pidStr == null) {
             return;
         }
 
-        this.dispose();
-        new HanteraProjektPartner(idb, inloggadAnvandare, isAdmin, pid).setVisible(true);
+        pidStr = pidStr.trim();
+        if (!pidStr.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "PID måste vara ett heltal.");
+            return;
+        }
 
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
-    }
+        int pid = Integer.parseInt(pidStr);
+
+        try {
+            String aid = idb.fetchSingle("SELECT aid FROM anstalld WHERE epost = '" + inloggadAnvandare + "'");
+            String ok = idb.fetchSingle("SELECT pid FROM projekt WHERE pid = " + pid + " AND projektchef = " + aid);
+
+            if (ok == null) {
+                JOptionPane.showMessageDialog(this, "Du är inte projektchef för detta projekt.");
+                return;
+            }
+
+            this.dispose();
+            new HanteraProjektPartner(idb, inloggadAnvandare, isAdmin, pid).setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Databasfel: " + e.getMessage());
+        }
     }//GEN-LAST:event_KnappHanteraProjektActionPerformed
 
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         new MinaProjekt01(idb, inloggadAnvandare, isAdmin).setVisible(true);
+    }
+
+    private void KnappHallbarhetActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        new Hållbarhetsmål(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }
 
     /**
@@ -406,12 +417,12 @@ public class Meny extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraProjektUppgifter;
     private javax.swing.JButton KnappAndraUppgifter;
+    private javax.swing.JButton KnappHallbarhetsmal;
     private javax.swing.JButton KnappHanteraAvdelning;
     private javax.swing.JButton KnappHanteraHandläggare;
     private javax.swing.JButton KnappHanteraLand;
     private javax.swing.JButton KnappHanteraPartner;
     private javax.swing.JButton KnappHanteraProjekt;
-    private javax.swing.JButton KnappHållbarhetsmål;
     private javax.swing.JButton KnappMinaProjekt;
     private javax.swing.JButton KnappSePersonal;
     private javax.swing.JButton KnappSeStatistik;
