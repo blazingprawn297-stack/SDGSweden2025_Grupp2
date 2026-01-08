@@ -33,9 +33,6 @@
       </Layout>
     </Container>
   </NonVisualComponents>
-  <Properties>
-    <Property name="defaultCloseOperation" type="int" value="2"/>
-  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
@@ -154,12 +151,12 @@
                           <Component id="lblID" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="RadPersonalID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="RadFornamn" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="lblFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="RadEfternamn" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEfternamn" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -169,14 +166,13 @@
                           <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="RadAnstDatum" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblAnstDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAnstDatum" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="RadAdress" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfAdress" alignment="3" min="-2" max="-2" attributes="0"/>

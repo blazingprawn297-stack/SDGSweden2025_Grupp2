@@ -72,8 +72,6 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPartnersUppgifter = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         lbltitlle.setText("Mina Projekt");
 
         KnappGåTillbaka.setText("");

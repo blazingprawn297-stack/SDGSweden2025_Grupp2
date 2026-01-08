@@ -45,7 +45,6 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="KnappHallbarhetsmal" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappAndraUppgifter" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappMinaProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappSePersonal" alignment="0" max="32767" attributes="0"/>
@@ -92,9 +91,7 @@
                   <Component id="KnappHanteraAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="KnappSePersonal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappHallbarhetsmal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="137" max="32767" attributes="0"/>
+              <EmptySpace pref="166" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -170,14 +167,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Personal och Handl&#xe4;ggare"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="KnappHallbarhetsmal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHallbarhetsmalActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

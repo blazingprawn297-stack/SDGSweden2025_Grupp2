@@ -4,7 +4,6 @@
  */
 package SDGSweden2025;
 
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.ArrayList;
@@ -12,11 +11,13 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Bilda
  */
 public class SePersonal extends javax.swing.JFrame {
+
     private InfDB idb;
     private String epost;
     private String avdelningId;
@@ -28,9 +29,8 @@ public class SePersonal extends javax.swing.JFrame {
         this.isAdmin = isAdmin;
         initComponents();
         fyllListaPersonal();
-        fyllHandlaggareTabell(""); 
-    } 
-    
+        fyllHandlaggareTabell("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,8 +50,6 @@ public class SePersonal extends javax.swing.JFrame {
         KnappSokHandlaggare = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         KnappGåTillbaka.setText("");
         KnappGåTillbaka.addActionListener(this::KnappGåTillbakaActionPerformed);
@@ -100,28 +98,30 @@ public class SePersonal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(KnappSokHandlaggare)))
-                        .addGap(0, 106, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(232, 232, 232)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(KnappSokHandlaggare)))
+                        .addGap(0, 116, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,12 +134,12 @@ public class SePersonal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(KnappSokHandlaggare))
+                    .addComponent(KnappSokHandlaggare)
+                    .addComponent(tfSokHandlaggare, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -157,76 +157,76 @@ public class SePersonal extends javax.swing.JFrame {
     }//GEN-LAST:event_tfSokHandlaggareActionPerformed
 
     private void KnappSokHandlaggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSokHandlaggareActionPerformed
-    String sokText = tfSokHandlaggare.getText().trim();
-    fyllHandlaggareTabell(sokText);
+        String sokText = tfSokHandlaggare.getText().trim();
+        fyllHandlaggareTabell(sokText);
     }//GEN-LAST:event_KnappSokHandlaggareActionPerformed
 
     private void fyllListaPersonal() {
-    try {
-        String sqlAvdelning =
-            "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
-        avdelningId = idb.fetchSingle(sqlAvdelning);
-           String sqlPersonal =
-        "SELECT fornamn, efternamn, epost " +
-        "FROM anstalld WHERE avdelning = " + avdelningId;
+        try {
+            String sqlAvdelning
+                    = "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
+            avdelningId = idb.fetchSingle(sqlAvdelning);
+            String sqlPersonal
+                    = "SELECT fornamn, efternamn, epost "
+                    + "FROM anstalld WHERE avdelning = " + avdelningId;
 
-        ArrayList<HashMap<String, String>> personal = idb.fetchRows(sqlPersonal);
+            ArrayList<HashMap<String, String>> personal = idb.fetchRows(sqlPersonal);
 
-DefaultListModel<String> modell = new DefaultListModel<>();
+            DefaultListModel<String> modell = new DefaultListModel<>();
 
-if (personal != null) {                 // <-- check for null
-    for (HashMap<String, String> rad : personal) {
-        String radText =
-            rad.get("fornamn") + " " +
-            rad.get("efternamn") + " (" +
-            rad.get("epost") + ")";
-        modell.addElement(radText);
-    }
-}
-
-ListaPersonal.setModel(modell);
-    } catch (InfException ex) {
-        javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
-    }
-}
-    private void fyllHandlaggareTabell(String sokText) {
-    try {
-        String sql =
-            "SELECT h.aid as aid, a1.epost, h.ansvarighetsomrade, " +
-            "CONCAT(a2.fornamn, ' ', a2.efternamn) AS mentor_namn, " +
-            "CONCAT(a1.fornamn, ' ', a1.efternamn) AS handlaggare_namn " +
-            "FROM handlaggare h " +
-            "JOIN anstalld a1 ON h.aid = a1.aid " +
-            "LEFT JOIN handlaggare m ON h.mentor = m.aid " +
-            "LEFT JOIN anstalld a2 ON m.aid = a2.aid";  
-       
-       if (!sokText.isEmpty()) {
-         sql += " WHERE a1.fornamn LIKE '%" + sokText + "%' " +
-           "OR a1.efternamn LIKE '%" + sokText + "%' " +
-           "OR a1.epost LIKE '%" + sokText + "%'";
-}
-
-
-        ArrayList<HashMap<String, String>> rader = idb.fetchRows(sql);
-        DefaultTableModel model = (DefaultTableModel) ListaHandlaggare.getModel();
-        model.setRowCount(0);
-
-if (rader != null) {
-            for (HashMap<String, String> rad : rader) {
-                model.addRow(new Object[]{
-                    rad.get("handlaggare_namn"),
-                    rad.get("epost"),
-                    rad.get("aid"),
-                    rad.get("ansvarighetsomrade"),
-                    rad.get("mentor_namn")
-                });
+            if (personal != null) {                 // <-- check for null
+                for (HashMap<String, String> rad : personal) {
+                    String radText
+                            = rad.get("fornamn") + " "
+                            + rad.get("efternamn") + " ("
+                            + rad.get("epost") + ")";
+                    modell.addElement(radText);
+                }
             }
-        }
 
-    } catch (InfException ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage());
+            ListaPersonal.setModel(modell);
+        } catch (InfException ex) {
+            javax.swing.JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
-}
+
+    private void fyllHandlaggareTabell(String sokText) {
+        try {
+            String sql
+                    = "SELECT h.aid as aid, a1.epost, h.ansvarighetsomrade, "
+                    + "CONCAT(a2.fornamn, ' ', a2.efternamn) AS mentor_namn, "
+                    + "CONCAT(a1.fornamn, ' ', a1.efternamn) AS handlaggare_namn "
+                    + "FROM handlaggare h "
+                    + "JOIN anstalld a1 ON h.aid = a1.aid "
+                    + "LEFT JOIN handlaggare m ON h.mentor = m.aid "
+                    + "LEFT JOIN anstalld a2 ON m.aid = a2.aid";
+
+            if (!sokText.isEmpty()) {
+                sql += " WHERE a1.fornamn LIKE '%" + sokText + "%' "
+                        + "OR a1.efternamn LIKE '%" + sokText + "%' "
+                        + "OR a1.epost LIKE '%" + sokText + "%'";
+            }
+
+            ArrayList<HashMap<String, String>> rader = idb.fetchRows(sql);
+            DefaultTableModel model = (DefaultTableModel) ListaHandlaggare.getModel();
+            model.setRowCount(0);
+
+            if (rader != null) {
+                for (HashMap<String, String> rad : rader) {
+                    model.addRow(new Object[]{
+                        rad.get("handlaggare_namn"),
+                        rad.get("epost"),
+                        rad.get("aid"),
+                        rad.get("ansvarighetsomrade"),
+                        rad.get("mentor_namn")
+                    });
+                }
+            }
+
+        } catch (InfException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -252,7 +252,7 @@ if (rader != null) {
 
         /* Create and display the form */
         //java.awt.EventQueue.invokeLater(()
-                //new SePersonal().setVisible(true));
+        //new SePersonal().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

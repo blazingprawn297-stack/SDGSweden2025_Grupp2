@@ -74,8 +74,6 @@ public class hanteraAvdelning extends javax.swing.JFrame {
         taBeskrivning = new javax.swing.JTextArea();
         jToggleButton1 = new javax.swing.JToggleButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         jLabel1.setText("Avdelningsnamn");
 
         jLabel2.setText("Beskrivning");

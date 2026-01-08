@@ -14,7 +14,7 @@ import javax.swing.WindowConstants;
  * @author Bilda
  */
 public class Meny extends javax.swing.JFrame {
-    
+
     private InfDB idb;
     private String inloggadAnvandare;
     private boolean isAdmin;
@@ -24,21 +24,18 @@ public class Meny extends javax.swing.JFrame {
      * Creates new form Meny
      */
     public Meny(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
-       this.idb = idb;
-    this.inloggadAnvandare = inloggadAnvandare;
-    this.isAdmin = isAdmin;
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.isAdmin = isAdmin;
 
-    initComponents();
-    lblInloggadAnvandare.setText(inloggadAnvandare);
-    KnappHanteraLand.setVisible(isAdmin);
-    KnappHanteraPartner.setVisible(isAdmin);
-    KnappHanteraAvdelning.setVisible(isAdmin);
-    KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
-
-    
-    KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
-
-}
+        initComponents();
+        lblInloggadAnvandare.setText(inloggadAnvandare);
+        KnappHanteraLand.setVisible(isAdmin);
+        KnappHanteraPartner.setVisible(isAdmin);
+        KnappHanteraAvdelning.setVisible(isAdmin);
+        KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
+        KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,7 +56,6 @@ public class Meny extends javax.swing.JFrame {
         KnappHanteraLand = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         KnappSePersonal = new javax.swing.JButton();
-        KnappHallbarhetsmal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,9 +86,6 @@ public class Meny extends javax.swing.JFrame {
 
         KnappSePersonal.setText("Personal och Handläggare");
 
-        KnappHallbarhetsmal.setText("Hållbarhetsmål");
-        KnappHallbarhetsmal.addActionListener(this::KnappHallbarhetsmalActionPerformed);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +108,6 @@ public class Meny extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(KnappHallbarhetsmal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappAndraUppgifter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappMinaProjekt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappSePersonal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -151,80 +143,70 @@ public class Meny extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(KnappHanteraAvdelning)
                     .addComponent(KnappSePersonal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(KnappHallbarhetsmal)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void KnappAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappAndraUppgifterActionPerformed
-     this.setVisible(false);
-     new SeOchÄndraUppgifter(idb, inloggadAnvandare, isAdmin).setVisible(true);
+        this.setVisible(false);
+        new SeOchÄndraUppgifter(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_KnappAndraUppgifterActionPerformed
 
     private void lblLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblLoggaUtActionPerformed
-       this.setVisible(false);
-       this.dispose();
-       new Inloggningsfönster(idb).setVisible(true);
+        this.setVisible(false);
+        this.dispose();
+        new Inloggningsfönster(idb).setVisible(true);
     }//GEN-LAST:event_lblLoggaUtActionPerformed
 
     private void KnappHanteraAvdelningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraAvdelningActionPerformed
-     if (!isAdmin) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-    return;
-     }
-    
-        this.dispose();
-     new hanteraAvdelning(idb, inloggadAnvandare, isAdmin).setVisible(true);
-    
-     
- 
+        if (!isAdmin) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+            return;
+        }
 
-     
+        this.dispose();
+        new hanteraAvdelning(idb, inloggadAnvandare, isAdmin).setVisible(true);
+
+
     }//GEN-LAST:event_KnappHanteraAvdelningActionPerformed
 
-    
-     private void KnappSePersonalActionPerformed(java.awt.event.ActionEvent evt) {
-    this.setVisible(false);
-    new SePersonal(idb, inloggadAnvandare, isAdmin).setVisible(true);
-     }
-     
-     
-    private void KnappHanteraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraPartnerActionPerformed
-    
-            // TODO add your handling code here:
-            
-             if (!isAdmin) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-            "Du saknar behörighet att hantera partners.");
-        return;
+    private void KnappSePersonalActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setVisible(false);
+        new SePersonal(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }
-             
-             this.dispose();
-          new hanteraPartner(idb,inloggadAnvandare,isAdmin).setVisible(true);
-          
-       
-           
-            
-            
+
+
+    private void KnappHanteraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraPartnerActionPerformed
+
+        // TODO add your handling code here:
+        if (!isAdmin) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Du saknar behörighet att hantera partners.");
+            return;
+        }
+
+        this.dispose();
+        new hanteraPartner(idb, inloggadAnvandare, isAdmin).setVisible(true);
+
+
     }//GEN-LAST:event_KnappHanteraPartnerActionPerformed
 
     private void KnappHanteraLandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraLandActionPerformed
-if (!isAdmin) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
-        return;
-    }
+        if (!isAdmin) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+            return;
+        }
 
-    this.dispose();
+        this.dispose();
 
-    javax.swing.JFrame f = new javax.swing.JFrame("Se land");
-    f.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    f.setContentPane(new HanteraLand(inloggadAnvandare, isAdmin, idb)); // RÄTT ORDNING
-    f.pack();
-    f.setLocationRelativeTo(null);
-    f.setVisible(true);
+        javax.swing.JFrame f = new javax.swing.JFrame("Se land");
+        f.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        f.setContentPane(new HanteraLand(inloggadAnvandare, isAdmin, idb)); // RÄTT ORDNING
+        f.pack();
+        f.setLocationRelativeTo(null);
+        f.setVisible(true);
 
     }//GEN-LAST:event_KnappHanteraLandActionPerformed
 
@@ -232,14 +214,11 @@ if (!isAdmin) {
         // TODO add your handling code here:
     }//GEN-LAST:event_KnappMinaProjektActionPerformed
 
-    private void KnappHallbarhetsmalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHallbarhetsmalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KnappHallbarhetsmalActionPerformed
-   
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
-    this.setVisible(false);
-    new MinaProjekt01(idb, inloggadAnvandare, isAdmin).setVisible(true);
-}
+        this.setVisible(false);
+        new MinaProjekt01(idb, inloggadAnvandare, isAdmin).setVisible(true);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -262,17 +241,16 @@ if (!isAdmin) {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            public void run(){
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 //new Meny().setVisible(true));
             }
         });
-                
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappAndraUppgifter;
-    private javax.swing.JButton KnappHallbarhetsmal;
     private javax.swing.JButton KnappHanteraAvdelning;
     private javax.swing.JButton KnappHanteraLand;
     private javax.swing.JButton KnappHanteraPartner;
