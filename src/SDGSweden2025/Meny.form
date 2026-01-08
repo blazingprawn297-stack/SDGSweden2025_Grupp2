@@ -45,6 +45,11 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="KnappSeStatistik" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappAndraProjektUppgifter" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHanteraProjekt" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHanteraHandläggare" alignment="0" max="32767" attributes="0"/>
+                          <Component id="KnappHållbarhetsmål" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappAndraUppgifter" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappMinaProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappSePersonal" alignment="0" max="32767" attributes="0"/>
@@ -91,7 +96,17 @@
                   <Component id="KnappHanteraAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="KnappSePersonal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="166" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappHållbarhetsmål" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappHanteraHandläggare" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappHanteraProjekt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappAndraProjektUppgifter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappSeStatistik" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -167,6 +182,43 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Personal och Handl&#xe4;ggare"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappH&#xe5;llbarhetsm&#xe5;l">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="H&#xe5;llbarhetsm&#xe5;l"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappHanteraHandl&#xe4;ggare">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hantera Handl&#xe4;ggare"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHanteraHandl&#xe4;ggareActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappHanteraProjekt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hantera Projekt"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappHanteraProjektActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappAndraProjektUppgifter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Projekt"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappAndraProjektUppgifterActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappSeStatistik">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Se Statistik"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappSeStatistikActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
