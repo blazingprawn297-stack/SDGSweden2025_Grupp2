@@ -24,7 +24,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="202" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -35,13 +35,12 @@
               <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblInloggadAnvandare" min="-2" pref="191" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -54,11 +53,12 @@
                           <Component id="KnappMinaProjekt" alignment="0" max="32767" attributes="0"/>
                           <Component id="KnappSePersonal" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="KnappHanteraPartner" alignment="1" pref="169" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="KnappHanteraPartner" alignment="1" max="32767" attributes="0"/>
                           <Component id="KnappHanteraLand" alignment="1" max="32767" attributes="0"/>
-                          <Component id="KnappHanteraAvdelning" alignment="1" max="32767" attributes="0"/>
+                          <Component id="KnappHanteraAvdelning" alignment="0" pref="169" max="32767" attributes="0"/>
+                          <Component id="btnSkapaAnstalld" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -74,38 +74,40 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblLoggaUt" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblInloggadAnvandare" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="KnappAndraUppgifter" linkSize="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappMinaProjekt" linkSize="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="KnappSePersonal" linkSize="2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblInloggadAnvandare" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="KnappAndraUppgifter" min="-2" max="-2" attributes="0"/>
+                      <Component id="KnappHallbarhetsmal" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="KnappMinaProjekt" min="-2" max="-2" attributes="0"/>
+                      <Component id="KnappHanteraHandläggare" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="KnappHanteraProjekt" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="KnappHanteraPartner" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="KnappHanteraLand" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="KnappHanteraAvdelning" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="KnappHanteraAvdelning" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="KnappSePersonal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="KnappAndraProjektUppgifter" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSkapaAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappHallbarhetsmal" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappHanteraHandläggare" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappHanteraProjekt" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappAndraProjektUppgifter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappSeStatistik" min="-2" max="-2" attributes="0"/>
+              <Component id="KnappSeStatistik" linkSize="2" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -218,6 +220,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappSeStatistikActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSkapaAnstalld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Skapa Anst&#xe4;lld"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkapaAnstalldActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
