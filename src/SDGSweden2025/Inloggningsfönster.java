@@ -24,6 +24,9 @@ public class Inloggningsfönster extends javax.swing.JFrame {
     public Inloggningsfönster(InfDB idb) {
         this.idb = idb;
         initComponents();
+        
+        tfEpost.setText("");
+        tfLosenord.setText("");
         lblFelmeddelande.setVisible(false);
     }
 
@@ -53,7 +56,6 @@ public class Inloggningsfönster extends javax.swing.JFrame {
 
         lblLosenord.setText("Lösenord");
 
-        tfEpost.setText("sofia.a@example.com");
         tfEpost.addActionListener(this::tfEpostActionPerformed);
 
         tfLosenord.setText("passwordabc");

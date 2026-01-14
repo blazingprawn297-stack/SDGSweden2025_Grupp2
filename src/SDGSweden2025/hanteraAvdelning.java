@@ -27,6 +27,8 @@ public class hanteraAvdelning extends javax.swing.JFrame {
     public hanteraAvdelning() {
 
         initComponents();
+        oppnaFalt(false);
+         
     }
 
     public hanteraAvdelning(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
@@ -37,6 +39,7 @@ public class hanteraAvdelning extends javax.swing.JFrame {
 
         initComponents();
         loadAvdelningData();
+         oppnaFalt(false);
 
     }
 
@@ -64,10 +67,11 @@ public class hanteraAvdelning extends javax.swing.JFrame {
         tfChef = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         tfAvdelningsID = new javax.swing.JTextField();
-        ÄndraUppgifter = new javax.swing.JButton();
+        btnSpara = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taBeskrivning = new javax.swing.JTextArea();
         jToggleButton1 = new javax.swing.JToggleButton();
+        btnAndraUppgifter = new javax.swing.JButton();
 
         jLabel1.setText("Avdelningsnamn");
 
@@ -102,8 +106,8 @@ public class hanteraAvdelning extends javax.swing.JFrame {
         tfAvdelningsID.setText("jTextField8");
         tfAvdelningsID.addActionListener(this::tfAvdelningsIDActionPerformed);
 
-        ÄndraUppgifter.setText("Spara");
-        ÄndraUppgifter.addActionListener(this::ÄndraUppgifterActionPerformed);
+        btnSpara.setText("Spara");
+        btnSpara.addActionListener(this::btnSparaActionPerformed);
 
         taBeskrivning.setColumns(20);
         taBeskrivning.setLineWrap(true);
@@ -113,6 +117,9 @@ public class hanteraAvdelning extends javax.swing.JFrame {
 
         jToggleButton1.setText("");
         jToggleButton1.addActionListener(this::jToggleButton1ActionPerformed);
+
+        btnAndraUppgifter.setText("Ändra uppgifter");
+        btnAndraUppgifter.addActionListener(this::btnAndraUppgifterActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +134,7 @@ public class hanteraAvdelning extends javax.swing.JFrame {
                     .addComponent(tfChef, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfStad, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ÄndraUppgifter)
+                .addComponent(btnSpara)
                 .addGap(15, 15, 15))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,18 +156,21 @@ public class hanteraAvdelning extends javax.swing.JFrame {
                         .addGap(371, 371, 371))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfAvdelningsID)
-                                .addComponent(tfEpost))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tfAvdelningsNamn, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1)
+                                .addComponent(tfAdress))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnAndraUppgifter))
+                                .addComponent(tfAvdelningsID, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(tfEpost, javax.swing.GroupLayout.Alignment.LEADING))
                             .addGap(17, 17, 17)
                             .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap())
-                        .addComponent(tfAdress)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tfAvdelningsNamn, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(0, 0, Short.MAX_VALUE)))))
+                            .addContainerGap()))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane1, tfAvdelningsNamn});
@@ -209,14 +219,16 @@ public class hanteraAvdelning extends javax.swing.JFrame {
                         .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ÄndraUppgifter)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSpara)
+                            .addComponent(btnAndraUppgifter))
                         .addContainerGap())))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ÄndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ÄndraUppgifterActionPerformed
+    private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         // TODO add your handling code here:
         if (!isAdmin) {
             javax.swing.JOptionPane.showMessageDialog(this,
@@ -290,7 +302,9 @@ String chefEsc = esc(chef);
             idb.update(sql);
 
             javax.swing.JOptionPane.showMessageDialog(this,
-                    "Avdelningen har sparats!");
+                    "Ändringarna har sparats!");
+            
+            oppnaFalt(false);
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
@@ -298,7 +312,7 @@ String chefEsc = esc(chef);
         }
 
 
-    }//GEN-LAST:event_ÄndraUppgifterActionPerformed
+    }//GEN-LAST:event_btnSparaActionPerformed
 
     private void tfAvdelningsIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAvdelningsIDActionPerformed
         // TODO add your handling code here:
@@ -320,6 +334,19 @@ String chefEsc = esc(chef);
 
         new Meny(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void btnAndraUppgifterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAndraUppgifterActionPerformed
+        //  En knapp som gör det möjligt att ändra uppgifter
+        
+        if (!isAdmin) {
+        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+        return;
+    }
+ 
+        oppnaFalt(true);
+        
+        
+    }//GEN-LAST:event_btnAndraUppgifterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,7 +420,33 @@ String chefEsc = esc(chef);
         
 
     }
+    
+      
+    
+        
+    private void oppnaFalt(boolean aktiv) {
+        
+        //
+       tfAvdelningsID.setEditable(false);
+        
+          tfAvdelningsNamn.setEditable(aktiv);   
+          taBeskrivning.setEditable(aktiv);
+          tfAdress.setEditable(aktiv);
+          tfEpost.setEditable(aktiv);
+          tfTelefon.setEditable(aktiv);
+          tfStad.setEditable(aktiv);
+          tfChef.setEditable(aktiv);
+     
+     btnSpara.setEnabled(aktiv);
+    
+    
+    }
+    
+   
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAndraUppgifter;
+    private javax.swing.JButton btnSpara;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -412,7 +465,6 @@ String chefEsc = esc(chef);
     private javax.swing.JTextField tfEpost;
     private javax.swing.JTextField tfStad;
     private javax.swing.JTextField tfTelefon;
-    private javax.swing.JButton ÄndraUppgifter;
     // End of variables declaration//GEN-END:variables
 private String esc(String s) {
     if (s == null) {
