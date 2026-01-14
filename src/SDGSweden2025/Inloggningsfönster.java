@@ -117,6 +117,23 @@ public class Inloggningsfönster extends javax.swing.JFrame {
 
         String ePost = tfEpost.getText();
         String losen = tfLosenord.getText();
+        if (Validator.isEmpty(ePost) || Validator.isEmpty(losen)) {
+    lblFelmeddelande.setText("Fyll i e-post och lösenord.");
+    lblFelmeddelande.setVisible(true);
+    return;
+}
+
+if (!Validator.isValidEmail(ePost)) {
+    lblFelmeddelande.setText("Ogiltig e-post.");
+    lblFelmeddelande.setVisible(true);
+    return;
+}
+if (losen.length() < 6) {
+    lblFelmeddelande.setText("Lösenordet måste vara minst 6 tecken.");
+    lblFelmeddelande.setVisible(true);
+    return;
+}
+
 
         try {
             // hämta lösenord och aid

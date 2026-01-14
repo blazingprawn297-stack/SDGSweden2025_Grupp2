@@ -240,6 +240,7 @@ public class hanteraPartner extends javax.swing.JFrame {
         }
 
         setFieldsEditable(false);
+        
 
         try {
             String vald = (String) Partners.getSelectedItem();
@@ -283,6 +284,30 @@ public class hanteraPartner extends javax.swing.JFrame {
 
     private void btnSparaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSparaActionPerformed
         // TODO add your handling code here:
+       String namn = jTextField2.getText();
+String kontaktEpost = jTextField4.getText();
+String telefon = jTextField5.getText();
+if (Validator.isEmpty(namn)) {
+    JOptionPane.showMessageDialog(this, "Partnernamn måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidName(namn)) {
+    JOptionPane.showMessageDialog(this, "Partnernamn är ogiltigt.");
+    return;
+}
+
+if (Validator.isNotEmpty(kontaktEpost) && !Validator.isValidEmail(kontaktEpost)) {
+    JOptionPane.showMessageDialog(this, "Ogiltig kontakt-e-post.");
+    return;
+}
+
+if (!Validator.isValidOptionalPhone(telefon)) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt telefonnummer.");
+    return;
+}
+
+
 
         if (!isAdmin) {
             JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
@@ -297,10 +322,12 @@ public class hanteraPartner extends javax.swing.JFrame {
                 return;
             }
 
-            String namn = esc(jTextField2.getText());
+            String namnEsc = esc(namn);
             String kontaktperson = esc(jTextField3.getText());
-            String kontaktepost = esc(jTextField4.getText());
-            String telefon = esc(jTextField5.getText());
+            String kontaktepostEsc = esc(kontaktEpost);
+
+            String telefonEsc = esc(telefon);
+
             String adress = esc(jTextField6.getText());
             String branch = esc(jTextField7.getText());
 
@@ -312,7 +339,8 @@ public class hanteraPartner extends javax.swing.JFrame {
             if (addingNewPartner) {
                 String sql
                         = "INSERT INTO partner (pid, namn, kontaktperson, kontaktepost, telefon, adress, branch) VALUES ("
-                        + pid + ", '" + namn + "', '" + kontaktperson + "', '" + kontaktepost + "', '" + telefon + "', '" + adress + "', '" + branch + "')";
+                        + pid + ", '" + namnEsc + "', '" + kontaktperson + "', '" + kontaktepostEsc + "', '" + telefonEsc + "', '" + adress + "', '" + branch + "')";
+
 
                 JOptionPane.showMessageDialog(this, sql); // debug
 
@@ -322,22 +350,24 @@ public class hanteraPartner extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ny partner tillagd!");
                 addingNewPartner = false;
 
-            } else {
-                String sql
-                        = "UPDATE partner SET "
-                        + "namn = '" + namn + "', "
-                        + "kontaktperson = '" + kontaktperson + "', "
-                        + "kontaktepost = '" + kontaktepost + "', "
-                        + "telefon = '" + telefon + "', "
-                        + "adress = '" + adress + "', "
-                        + "branch = '" + branch + "' "
-                        + "WHERE pid = " + pid;
+           } else {
 
-                JOptionPane.showMessageDialog(this, sql); // debug
-                idb.update(sql);
+    String sql =
+        "UPDATE partner SET " +
+        "namn = '" + namnEsc + "', " +
+        "kontaktperson = '" + kontaktperson + "', " +
+        "kontaktepost = '" + kontaktepostEsc + "', " +
+        "telefon = '" + telefonEsc + "', " +
+        "adress = '" + adress + "', " +
+        "branch = '" + branch + "' " +
+        "WHERE pid = " + pid;
 
-                JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
-            }
+    JOptionPane.showMessageDialog(this, sql); // debug
+    idb.update(sql);
+
+    JOptionPane.showMessageDialog(this, "Partner uppdaterad!");
+}
+
 
             setFieldsEditable(false);
             loadPartnerData();

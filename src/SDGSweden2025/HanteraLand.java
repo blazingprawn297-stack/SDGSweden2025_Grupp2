@@ -285,10 +285,46 @@ public class HanteraLand extends javax.swing.JPanel {
             String politisk = jTextField6.getText().trim();
             String ekonomi = jTextField7.getText().trim();
 
-            if (lid.isEmpty() || namn.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
-                return;
-            }
+            if (!Validator.isPositiveInteger(lid)) {
+    JOptionPane.showMessageDialog(this, "LandID måste vara ett positivt heltal.");
+    return;
+}
+
+if (Validator.isEmpty(namn)) {
+    JOptionPane.showMessageDialog(this, "Landnamn måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidName(namn)) {
+    JOptionPane.showMessageDialog(this, "Landnamn är ogiltigt.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(sprak, 100)) {
+    JOptionPane.showMessageDialog(this, "Språk får max vara 100 tecken.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(valuta, 50)) {
+    JOptionPane.showMessageDialog(this, "Valuta får max vara 50 tecken.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(tidszon, 50)) {
+    JOptionPane.showMessageDialog(this, "Tidszon får max vara 50 tecken.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(politisk, 200)) {
+    JOptionPane.showMessageDialog(this, "Politisk struktur får max vara 200 tecken.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(ekonomi, 200)) {
+    JOptionPane.showMessageDialog(this, "Ekonomi får max vara 200 tecken.");
+    return;
+}
+
 
             String sql
                     = "UPDATE land SET "
@@ -324,6 +360,7 @@ public class HanteraLand extends javax.swing.JPanel {
             jButton3.setText("Spara nytt land"); // tydligt för användaren
             return;
         }
+        
 
         // STEG 2: spara (INSERT)
         try {
@@ -335,10 +372,31 @@ public class HanteraLand extends javax.swing.JPanel {
             String politisk = jTextField6.getText().trim();
             String ekonomi = jTextField7.getText().trim();
 
-            if (lid.isEmpty() || namn.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "LandID och Namn måste vara ifyllda.");
-                return;
-            }
+            if (!Validator.isPositiveInteger(lid)) {
+    JOptionPane.showMessageDialog(this, "LandID måste vara ett positivt heltal.");
+    return;
+}
+
+if (Validator.isEmpty(namn)) {
+    JOptionPane.showMessageDialog(this, "Landnamn måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidName(namn)) {
+    JOptionPane.showMessageDialog(this, "Landnamn är ogiltigt.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(sprak, 100)
+        || !Validator.isValidOptionalText(valuta, 50)
+        || !Validator.isValidOptionalText(tidszon, 50)
+        || !Validator.isValidOptionalText(politisk, 200)
+        || !Validator.isValidOptionalText(ekonomi, 200)) {
+
+    JOptionPane.showMessageDialog(this, "Ett eller flera textfält är för långa.");
+    return;
+}
+
 
             Integer.parseInt(lid);
 

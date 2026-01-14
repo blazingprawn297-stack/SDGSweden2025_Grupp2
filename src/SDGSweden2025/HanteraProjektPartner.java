@@ -1,5 +1,6 @@
 package SDGSweden2025;
 
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -161,6 +162,16 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
         }
 
         String partnerPid = vald.split(" - ")[0].trim();
+        if (!Validator.isPositiveInteger(partnerPid)) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt partner-ID.");
+    return;
+    
+}
+
+if (pid <= 0) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt projekt-ID.");
+    return;
+}
 
         try {
             // skydd mot dubletter
@@ -195,6 +206,15 @@ public class HanteraProjektPartner extends javax.swing.JFrame {
         }
 
         String partnerPid = vald.split(" - ")[0].trim();
+        if (!Validator.isPositiveInteger(partnerPid)) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt partner-ID.");
+    return;
+}
+if (pid <= 0) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt projekt-ID.");
+    return;
+}
+
 
         try {
             idb.delete(

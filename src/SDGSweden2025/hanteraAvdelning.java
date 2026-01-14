@@ -5,6 +5,8 @@
 package SDGSweden2025;
 
 import oru.inf.InfDB;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -228,26 +230,62 @@ public class hanteraAvdelning extends javax.swing.JFrame {
                     "Ingen avdelning är laddad.");
             return;
         }
-
-        try {
-            String namn = tfAvdelningsNamn.getText();
+String namn = tfAvdelningsNamn.getText();
             String beskrivning = taBeskrivning.getText();
             String adress = tfAdress.getText();
             String epost = tfEpost.getText();
             String telefon = tfTelefon.getText();
             String stad = tfStad.getText();
             String chef = tfChef.getText();
+            
+            
+            if (Validator.isEmpty(namn)) {
+    JOptionPane.showMessageDialog(this, "Avdelningsnamn måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidName(namn)) {
+    JOptionPane.showMessageDialog(this, "Avdelningsnamn är ogiltigt.");
+    return;
+}
+
+if (Validator.isNotEmpty(epost) && !Validator.isValidEmail(epost)) {
+    JOptionPane.showMessageDialog(this, "Ogiltig e-postadress.");
+    return;
+}
+
+if (!Validator.isValidOptionalPhone(telefon)) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt telefonnummer.");
+    return;
+}
+
+if (!Validator.isValidOptionalText(beskrivning, 500)) {
+    JOptionPane.showMessageDialog(this, "Beskrivning får max vara 500 tecken.");
+    return;
+}
+
+        try {
+            String namnEsc = esc(namn);
+String beskrivningEsc = esc(beskrivning);
+String adressEsc = esc(adress);
+String epostEsc = esc(epost);
+String telefonEsc = esc(telefon);
+String stadEsc = esc(stad);
+String chefEsc = esc(chef);
+
+            
 
             String sql
-                    = "UPDATE avdelning SET "
-                    + "namn = '" + namn + "', "
-                    + "beskrivning = '" + beskrivning + "', "
-                    + "adress = '" + adress + "', "
-                    + "epost = '" + epost + "', "
-                    + "telefon = '" + telefon + "', "
-                    + "stad = '" + stad + "', "
-                    + "chef = '" + chef + "' "
-                    + "WHERE avdid = " + avdid;
+        = "UPDATE avdelning SET "
+        + "namn = '" + namnEsc + "', "
+        + "beskrivning = '" + beskrivningEsc + "', "
+        + "adress = '" + adressEsc + "', "
+        + "epost = '" + epostEsc + "', "
+        + "telefon = '" + telefonEsc + "', "
+        + "stad = '" + stadEsc + "', "
+        + "chef = '" + chefEsc + "' "
+        + "WHERE avdid = " + avdid;
+
 
             idb.update(sql);
 
@@ -350,7 +388,9 @@ public class hanteraAvdelning extends javax.swing.JFrame {
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Fel vid laddning av avdelning: " + e.getMessage());
+            
         }
+        
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -374,4 +414,14 @@ public class hanteraAvdelning extends javax.swing.JFrame {
     private javax.swing.JTextField tfTelefon;
     private javax.swing.JButton ÄndraUppgifter;
     // End of variables declaration//GEN-END:variables
+private String esc(String s) {
+    if (s == null) {
+        return "";
+    }
+    return s.replace("'", "''").trim();
 }
+
+
+
+}
+

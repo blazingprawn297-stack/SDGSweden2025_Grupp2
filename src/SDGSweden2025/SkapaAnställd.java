@@ -168,15 +168,36 @@ public class SkapaAnställd extends javax.swing.JFrame {
     String efternamn = jTextField3.getText().trim();
     String epost = jTextField2.getText().trim();
 
-    if (fornamn.isEmpty() || efternamn.isEmpty() || epost.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Fyll i förnamn, efternamn och e-post.");
-        return;
-    }
+    if (Validator.isEmpty(fornamn)) {
+    JOptionPane.showMessageDialog(this, "Förnamn måste fyllas i.");
+    return;
+}
 
-    if (!epost.contains("@") || !epost.contains(".")) {
-        JOptionPane.showMessageDialog(this, "Ogiltig e-postadress.");
-        return;
-    }
+if (!Validator.isValidName(fornamn)) {
+    JOptionPane.showMessageDialog(this, "Förnamn får endast innehålla bokstäver.");
+    return;
+}
+
+if (Validator.isEmpty(efternamn)) {
+    JOptionPane.showMessageDialog(this, "Efternamn måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidName(efternamn)) {
+    JOptionPane.showMessageDialog(this, "Efternamn får endast innehålla bokstäver.");
+    return;
+}
+
+if (Validator.isEmpty(epost)) {
+    JOptionPane.showMessageDialog(this, "E-post måste fyllas i.");
+    return;
+}
+
+if (!Validator.isValidEmail(epost)) {
+    JOptionPane.showMessageDialog(this, "Ogiltig e-postadress.");
+    return;
+}
+
 
     String losenord = genereraLosenord();
 
@@ -292,4 +313,8 @@ private void tillbakaTillMeny() {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+
+
+
 }
