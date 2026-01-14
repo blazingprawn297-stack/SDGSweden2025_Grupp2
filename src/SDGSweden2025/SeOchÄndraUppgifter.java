@@ -338,7 +338,7 @@ public class SeOchÄndraUppgifter extends javax.swing.JFrame {
             System.out.println("E-post som skickas: " + epost);
             System.out.println("Data från DB: " + data);
             if (data != null) {
-               
+
                 //Hämta data och kolla om något är null
                 lblID.setText(data.get("aid") != null ? String.valueOf(data.get("aid")) : "");
                 tfFornamn.setText(data.get("fornamn") != null ? data.get("fornamn") : "");

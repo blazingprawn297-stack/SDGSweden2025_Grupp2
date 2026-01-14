@@ -55,7 +55,7 @@ public class StatistikProjektchef extends javax.swing.JFrame {
 
         // Koppla knappar (om du redan kopplat i Design gör det inget)
         jButton1.addActionListener(evt -> visaStatistikLand());
-        jButton2.addActionListener(evt -> gaTillbaka());
+
     }
 
     // -------------------------
