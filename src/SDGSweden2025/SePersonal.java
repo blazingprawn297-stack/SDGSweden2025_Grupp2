@@ -164,7 +164,7 @@ public class SePersonal extends javax.swing.JFrame {
     private void fyllListaPersonal() {
         try {
             String sqlAvdelning
-                    = "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
+                    = "SELECT avdelning FROM anstalld WHERE epost = '" + epost.replace("'", "''") + "'";
             avdelningId = idb.fetchSingle(sqlAvdelning);
             String sqlPersonal
                     = "SELECT fornamn, efternamn, epost "
@@ -192,6 +192,7 @@ public class SePersonal extends javax.swing.JFrame {
 
     private void fyllHandlaggareTabell(String sokText) {
         try {
+
             String sql
                     = "SELECT h.aid as aid, a1.epost, h.ansvarighetsomrade, "
                     + "CONCAT(a2.fornamn, ' ', a2.efternamn) AS mentor_namn, "
@@ -199,12 +200,14 @@ public class SePersonal extends javax.swing.JFrame {
                     + "FROM handlaggare h "
                     + "JOIN anstalld a1 ON h.aid = a1.aid "
                     + "LEFT JOIN handlaggare m ON h.mentor = m.aid "
-                    + "LEFT JOIN anstalld a2 ON m.aid = a2.aid";
+                    + "LEFT JOIN anstalld a2 ON m.aid = a2.aid "
+                    + "WHERE a1.avdelning = " + avdelningId;
 
             if (!sokText.isEmpty()) {
-                sql += " WHERE a1.fornamn LIKE '%" + sokText + "%' "
+
+                sql += " AND (a1.fornamn LIKE '%" + sokText + "%' "
                         + "OR a1.efternamn LIKE '%" + sokText + "%' "
-                        + "OR a1.epost LIKE '%" + sokText + "%'";
+                        + "OR a1.epost LIKE '%" + sokText + "%')";
             }
 
             ArrayList<HashMap<String, String>> rader = idb.fetchRows(sql);
