@@ -58,21 +58,17 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <Component id="RadEfternamn" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="RadFornamn" min="-2" max="-2" attributes="0"/>
-                                  <Component id="RadEfternamn" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="19" pref="299" max="32767" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lblEfternamn" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="tfEpost" pref="194" max="32767" attributes="0"/>
+                                          <Component id="tfEfternamn" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
@@ -85,39 +81,47 @@
                                       <Component id="lblSeMinaUppgifter" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="RadEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="RadFornamn" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="tfFornamn" min="-2" pref="195" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                              <Component id="KnappGåTillbaka" min="-2" pref="76" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="RadTelefon" min="-2" pref="63" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="tfTelefon" min="-2" pref="189" max="-2" attributes="0"/>
+                              <Component id="tfTelefon" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="RadAdress" min="-2" pref="57" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="tfAdress" min="-2" pref="188" max="-2" attributes="0"/>
+                              <Component id="tfAdress" min="-2" pref="219" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="99" pref="105" max="32767" attributes="0"/>
+                      <EmptySpace min="99" pref="75" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="KnappAndraUppgifter" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="KnappSparaAndring" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <Component id="RadPersonalID" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblID" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="KnappGåTillbaka" min="-2" pref="76" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -137,9 +141,9 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="KnappGåTillbaka" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -151,19 +155,19 @@
                           <Component id="lblID" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="RadPersonalID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RadFornamn" alignment="1" min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="lblFornamn" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RadFornamn" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="tfFornamn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="RadEfternamn" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEfternamn" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="RadEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfEfternamn" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="RadEpost" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -183,7 +187,10 @@
                   <Component id="RadTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="KnappSparaAndring" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="KnappSparaAndring" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="KnappAndraUppgifter" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -209,9 +216,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfAdress">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAdressActionPerformed"/>
       </Events>
@@ -232,9 +236,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tfTelefon">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfTelefonActionPerformed"/>
       </Events>
@@ -245,21 +246,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblFornamn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel7"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEpost">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEfternamn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblID">
       <Properties>
@@ -288,6 +274,29 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfFornamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfEfternamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tfEpost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="KnappAndraUppgifter">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#xc4;ndra Uppgifter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="KnappAndraUppgifterActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

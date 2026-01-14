@@ -53,9 +53,10 @@ public class Inloggningsfönster extends javax.swing.JFrame {
 
         lblLosenord.setText("Lösenord");
 
-        tfEpost.setText("maria.g@example.com");
+        tfEpost.setText("sofia.a@example.com");
+        tfEpost.addActionListener(this::tfEpostActionPerformed);
 
-        tfLosenord.setText("password123");
+        tfLosenord.setText("passwordabc");
         tfLosenord.addActionListener(this::tfLosenordActionPerformed);
 
         KnappLoggaIn.setText("Logga in");
@@ -85,9 +86,8 @@ public class Inloggningsfönster extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lblFelmeddelande, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tfEpost, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                        .addComponent(tfLosenord)))))))
+                                    .addComponent(tfEpost, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(tfLosenord))))))
                 .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
@@ -176,6 +176,10 @@ if (losen.length() < 6) {
     private void tfLosenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLosenordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfLosenordActionPerformed
+
+    private void tfEpostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEpostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEpostActionPerformed
 
     /**
      * @param args the command line arguments

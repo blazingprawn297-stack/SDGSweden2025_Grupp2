@@ -22,9 +22,6 @@ public class Hållbarhetsmål extends javax.swing.JFrame {
     private boolean isAdmin;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Hållbarhetsmål.class.getName());
 
-    /**
-     * Creates new form Hållbarhetsmål
-     */
     public Hållbarhetsmål(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
         this.idb = idb;
         this.inloggadAnvandare = inloggadAnvandare;
@@ -35,6 +32,7 @@ public class Hållbarhetsmål extends javax.swing.JFrame {
 
     }
 
+    //Tabellen med all data från Hållbarhetsmålstabellen
     private void fyllTabell() {
         try {
             String sql = "SELECT hid, malnummer, namn, beskrivning, prioritet "
@@ -46,11 +44,12 @@ public class Hållbarhetsmål extends javax.swing.JFrame {
                     new Object[]{"HID", "Målnr", "Namn", "Beskrivning", "Prioritet"}, 0
             ) {
                 @Override
+                //Inte kunna ändra på cellerna
                 public boolean isCellEditable(int row, int col) {
                     return false;
                 }
             };
-
+            // Lägga in rader från tabellen utifrån HashMapen
             if (rader != null) {
                 for (HashMap<String, String> rad : rader) {
                     model.addRow(new Object[]{

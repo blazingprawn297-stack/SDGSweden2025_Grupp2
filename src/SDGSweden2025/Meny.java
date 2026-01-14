@@ -21,67 +21,62 @@ public class Meny extends javax.swing.JFrame {
     private boolean isAdmin;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Meny.class.getName());
 
-    /**
-     * Creates new form Meny
-     */
     public Meny(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
-    this.idb = idb;
-    this.inloggadAnvandare = inloggadAnvandare;
-    this.isAdmin = isAdmin;
+        this.idb = idb;
+        this.inloggadAnvandare = inloggadAnvandare;
+        this.isAdmin = isAdmin;
 
-    initComponents();
-    
-    java.awt.LayoutManager lm = getContentPane().getLayout();
-    if (lm instanceof javax.swing.GroupLayout) {
-    ((javax.swing.GroupLayout) lm).setHonorsVisibility(true);
+        initComponents();
 
-    lblInloggadAnvandare.setText(inloggadAnvandare);
-    btnSkapaAnstalld.setVisible(isAdmin);
-    // Göm projektchef-knappar som standard
-    KnappHanteraProjekt.setVisible(false);
-    KnappAndraProjektUppgifter.setVisible(false);
-    KnappSeStatistik.setVisible(false);
-    KnappHanteraHandläggare.setVisible(false);
+        java.awt.LayoutManager lm = getContentPane().getLayout();
+        if (lm instanceof javax.swing.GroupLayout) {
+            ((javax.swing.GroupLayout) lm).setHonorsVisibility(true);
 
-    if (isAdmin) {
-    // ADMIN: ska se dessa
-    KnappHanteraLand.setVisible(true);
-    KnappHanteraPartner.setVisible(true);
-    KnappHanteraAvdelning.setVisible(true); // (hos er heter den "Se avdelning")
+            lblInloggadAnvandare.setText(inloggadAnvandare);
+            btnSkapaAnstalld.setVisible(isAdmin);
+            // Göm projektchef-knappar som standard
+            KnappHanteraProjekt.setVisible(false);
+            KnappAndraProjektUppgifter.setVisible(false);
+            KnappSeStatistik.setVisible(false);
+            KnappHanteraHandläggare.setVisible(false);
 
-    // Allt annat ska döljas
-    KnappSePersonal.setVisible(false);
-    KnappHanteraHandläggare.setVisible(false);
-    KnappHanteraProjekt.setVisible(false);
-    KnappAndraProjektUppgifter.setVisible(false);
-    KnappSeStatistik.setVisible(false);
-    KnappMinaProjekt.setVisible(false);
-    KnappAndraUppgifter.setVisible(false);
-    KnappHallbarhetsmal.setVisible(false);
-    
-    revalidate();
-    repaint();
-    pack();
-    
-    return;
-}
+            if (isAdmin) {
+                // ADMIN: ska se dessa
+                KnappHanteraLand.setVisible(true);
+                KnappHanteraPartner.setVisible(true);
+                KnappHanteraAvdelning.setVisible(true); // (hos er heter den "Se avdelning")
 
-    // ICKE-ADMIN: admin-knappar ska inte synas
-    KnappHanteraLand.setVisible(false);
-    KnappHanteraPartner.setVisible(false);
-    KnappHanteraAvdelning.setVisible(false);
+                // Allt annat ska döljas
+                KnappSePersonal.setVisible(false);
+                KnappHanteraHandläggare.setVisible(false);
+                KnappHanteraProjekt.setVisible(false);
+                KnappAndraProjektUppgifter.setVisible(false);
+                KnappSeStatistik.setVisible(false);
+                KnappMinaProjekt.setVisible(false);
+                KnappAndraUppgifter.setVisible(false);
+                KnappHallbarhetsmal.setVisible(false);
 
-    // Kolla om användaren är projektchef och visa rätt knappar
-    kontrolleraProjektchef();
+                revalidate();
+                repaint();
+                pack();
 
-    // Lyssnare (ok att sätta här)
-    KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
-    KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
-    KnappHallbarhetsmal.addActionListener(this::KnappHallbarhetActionPerformed);
-}
+                return;
+            }
+
+            // ICKE-ADMIN: admin-knappar ska inte synas
+            KnappHanteraLand.setVisible(false);
+            KnappHanteraPartner.setVisible(false);
+            KnappHanteraAvdelning.setVisible(false);
+
+            // Kolla om användaren är projektchef och visa rätt knappar
+            kontrolleraProjektchef();
+
+            // Lyssnare (ok att sätta här)
+            KnappSePersonal.addActionListener(this::KnappSePersonalActionPerformed);
+            KnappMinaProjekt.addActionListener(this::knappMinaProjektActionPerformed);
+            KnappHallbarhetsmal.addActionListener(this::KnappHallbarhetActionPerformed);
+        }
     }
-    
-    
 
     private void kontrolleraProjektchef() {
         try {
@@ -301,8 +296,6 @@ public class Meny extends javax.swing.JFrame {
 
 
     private void KnappHanteraPartnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraPartnerActionPerformed
-
-        // TODO add your handling code here:
         if (!isAdmin) {
             javax.swing.JOptionPane.showMessageDialog(this,
                     "Du saknar behörighet att hantera partners.");
@@ -333,7 +326,7 @@ public class Meny extends javax.swing.JFrame {
     }//GEN-LAST:event_KnappHanteraLandActionPerformed
 
     private void KnappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappMinaProjektActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_KnappMinaProjektActionPerformed
 
     private void KnappHanteraHandläggareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappHanteraHandläggareActionPerformed
@@ -421,15 +414,15 @@ public class Meny extends javax.swing.JFrame {
     }//GEN-LAST:event_KnappHanteraProjektActionPerformed
 
     private void btnSkapaAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaAnstalldActionPerformed
-    if (!isAdmin) {
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Du har inte behörighet att skapa anställda.");
-        return;
-    }
+        if (!isAdmin) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Du har inte behörighet att skapa anställda.");
+            return;
+        }
 
-    // Stäng menyn och öppna SkapaAnställd
-    this.dispose();
-    new SkapaAnställd(idb, inloggadAnvandare, isAdmin).setVisible(true);
+        // Stäng menyn och öppna SkapaAnställd
+        this.dispose();
+        new SkapaAnställd(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_btnSkapaAnstalldActionPerformed
 
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
