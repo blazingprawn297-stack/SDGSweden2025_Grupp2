@@ -59,6 +59,7 @@
                           <Component id="KnappHanteraLand" alignment="1" max="32767" attributes="0"/>
                           <Component id="KnappHanteraAvdelning" alignment="0" pref="169" max="32767" attributes="0"/>
                           <Component id="btnSkapaAnstalld" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnTaBortAnstalld" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -107,7 +108,10 @@
                   <Component id="btnSkapaAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="KnappSeStatistik" linkSize="2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="KnappSeStatistik" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTaBortAnstalld" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -228,6 +232,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSkapaAnstalldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTaBortAnstalld">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ta bort anst&#xe4;lld"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBortAnstalldActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

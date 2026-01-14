@@ -24,11 +24,9 @@ public class SkapaAnställd extends javax.swing.JFrame {
      */
     public SkapaAnställd() {
         initComponents();
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
        
-        jButton2.setText("Tillbaka");
+        
+      
     }
     
         public SkapaAnställd(InfDB idb, String inloggadAnvandare, boolean isAdmin) {
@@ -44,7 +42,41 @@ public class SkapaAnställd extends javax.swing.JFrame {
         jTextField2.setText("");
         jTextField3.setText("");
         
-        jButton2.setText("Tillbaka");
+        jb2.setText("Skapa anställd");
+        
+        
+        // Rensar CbRoll och lägger till giltiga roller
+        
+        
+        cbRoll.removeAllItems();
+        cbRoll.addItem("Administratör");
+        cbRoll.addItem("Handläggare");
+        
+        // Tillåtna behörighetsnivå, antingen har man 1 eller 2
+        
+        
+        cbBehorighetsniva.removeAllItems();
+        cbBehorighetsniva.addItem("1");
+        cbBehorighetsniva.addItem("2");
+        
+        cbBehorighetsniva.setEnabled(false);
+        
+       //Rensar och fyller cbAvdelning från databasen
+       
+       cbAvdelning.removeAllItems();
+       
+       try {
+                java.util.ArrayList<java.util.HashMap<String, String>> rows =
+            idb.fetchRows("SELECT namn FROM avdelning ORDER BY namn");
+
+    for (java.util.HashMap<String, String> row : rows) {
+        cbAvdelning.addItem(row.get("namn"));
+    }
+    }   catch (InfException e) {
+        JOptionPane.showMessageDialog(this, "Kunde inte hämta avdelningar.");
+    }   
+       
+       
 
         // Säkerhet, bara admin får använda detta fönster
         if (!isAdmin) {
@@ -68,10 +100,16 @@ public class SkapaAnställd extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jb2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        lblRoll = new javax.swing.JLabel();
+        cbRoll = new javax.swing.JComboBox<>();
+        lblAvdelning = new javax.swing.JLabel();
+        cbAvdelning = new javax.swing.JComboBox<>();
+        lblBehorighetniva = new javax.swing.JLabel();
+        cbBehorighetsniva = new javax.swing.JComboBox<>();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,16 +126,29 @@ public class SkapaAnställd extends javax.swing.JFrame {
         jTextField2.setText("jTextField2");
         jTextField2.addActionListener(this::jTextField2ActionPerformed);
 
-        jButton1.setText("Skapa anställd");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-
-        jButton2.setText("Tillbaka");
-        jButton2.addActionListener(this::jButton2ActionPerformed);
+        jb2.setText("Skapa anställd");
+        jb2.addActionListener(this::jb2ActionPerformed);
 
         jLabel4.setText("Efternamn:");
 
         jTextField3.setText("jTextField3");
         jTextField3.addActionListener(this::jTextField3ActionPerformed);
+
+        lblRoll.setText("Roll");
+
+        cbRoll.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRoll.addActionListener(this::cbRollActionPerformed);
+
+        lblAvdelning.setText("Avdelning");
+
+        cbAvdelning.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblBehorighetniva.setText("Behörighetsnivå");
+
+        cbBehorighetsniva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jToggleButton1.setText("");
+        jToggleButton1.addActionListener(this::jToggleButton1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,40 +158,45 @@ public class SkapaAnställd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField2)
-                                    .addComponent(jTextField3)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jButton1)
-                                .addGap(19, 19, 19)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(25, 25, 25)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(119, 119, 119))
+                            .addComponent(lblRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblBehorighetniva, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 63, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbRoll, 0, 137, Short.MAX_VALUE)
+                    .addComponent(cbAvdelning, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbBehorighetsniva, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1)
+                    .addComponent(jTextField3)
+                    .addComponent(jTextField2))
+                .addGap(18, 18, 18)
+                .addComponent(jb2)
+                .addGap(13, 13, 13))
         );
-
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2});
-
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToggleButton1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -149,55 +205,117 @@ public class SkapaAnställd extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(lblRoll)
+                    .addComponent(cbRoll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBehorighetniva)
+                    .addComponent(cbBehorighetsniva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAvdelning)
+                            .addComponent(cbAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(68, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb2)
+                        .addGap(54, 54, 54))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb2ActionPerformed
     String fornamn = jTextField1.getText().trim();
     String efternamn = jTextField3.getText().trim();
     String epost = jTextField2.getText().trim();
+    
+    
+    // hämtar den valda avdelningen
+    
+    String valdAvdelning= (String) cbAvdelning.getSelectedItem();
+            
+    if(valdAvdelning== null){
+    
+       JOptionPane.showMessageDialog(this, "Välj en avdelning. ");
+        
+        return;
+    }
+    
+    
+    int avdelningsId;
 
-    if (Validator.isEmpty(fornamn)) {
-    JOptionPane.showMessageDialog(this, "Förnamn måste fyllas i.");
+try {
+    String sqlAvd = "SELECT avdid FROM avdelning WHERE namn = '" + esc(valdAvdelning) + "'";
+    String avdStr = idb.fetchSingle(sqlAvd);
+
+    if (avdStr == null) {
+        JOptionPane.showMessageDialog(this, "Valda avdelningen finns inte i databasen.");
+        return;
+    }
+
+    avdelningsId = Integer.parseInt(avdStr);
+
+} catch (InfException e) {
+    JOptionPane.showMessageDialog(this, "Fel vid hämtning av avdelning: " + e.getMessage());
+    return;
+} catch (NumberFormatException e) {
+    JOptionPane.showMessageDialog(this, "Ogiltigt avdelningsID");
     return;
 }
+   
+  
+    
+     // hämtar vald roll
+     
+     String roll=(String) cbRoll.getSelectedItem();
+     
+     if(roll== null){
+         
+          JOptionPane.showMessageDialog(this, "Välj en roll");
+          
+          return;
+     }
+     
+     // hämtar behörighetsnivå endast om den är admin
+     
+     int behorighetsniva=1;
+     
+     if("Administratör".equals(roll)){
+         
+         String beh=(String) cbBehorighetsniva.getSelectedItem();
+         
+         if(beh==null){
+             
+             JOptionPane.showMessageDialog(this, "Välj behörighetsnivå");
+             
+             return;
+         }
+         
+         behorighetsniva= Integer.parseInt(beh);
+         
+         
+     }
+    
+    
 
-if (!Validator.isValidName(fornamn)) {
-    JOptionPane.showMessageDialog(this, "Förnamn får endast innehålla bokstäver.");
-    return;
-}
+    if (fornamn.isEmpty() || efternamn.isEmpty() || epost.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Fyll i förnamn, efternamn och e-post.");
+        return;
+    }
 
-if (Validator.isEmpty(efternamn)) {
-    JOptionPane.showMessageDialog(this, "Efternamn måste fyllas i.");
-    return;
-}
-
-if (!Validator.isValidName(efternamn)) {
-    JOptionPane.showMessageDialog(this, "Efternamn får endast innehålla bokstäver.");
-    return;
-}
-
-if (Validator.isEmpty(epost)) {
-    JOptionPane.showMessageDialog(this, "E-post måste fyllas i.");
-    return;
-}
-
-if (!Validator.isValidEmail(epost)) {
-    JOptionPane.showMessageDialog(this, "Ogiltig e-postadress.");
-    return;
-}
-
+    if (!epost.contains("@") || !epost.contains(".")) {
+        JOptionPane.showMessageDialog(this, "Ogiltig e-postadress.");
+        return;
+    }
 
     String losenord = genereraLosenord();
 
@@ -217,9 +335,25 @@ if (!Validator.isValidEmail(epost)) {
                 "'" + esc(efternamn) + "', " +
                 "'" + esc(epost) + "', " +
                 "'" + esc(losenord) + "', " +
-                "1)";
+                avdelningsId + ")";
 
         idb.insert(sql);
+        
+    if ("Administratör".equals(roll)) {
+            
+            idb.insert(
+              "INSERT INTO admin (aid, behorighetsniva) VALUES (" + nyttAid + ", " + behorighetsniva + ")");
+}     else if ("Handläggare".equals(roll)) {
+   
+            idb.insert("INSERT INTO handlaggare (aid, ansvarighetsomrade, mentor) VALUES (" +
+            nyttAid + ", 'Standard', NULL)");
+}
+        
+        
+        
+        
+        
+        
 
         JOptionPane.showMessageDialog(this,
                 "Anställd skapad!\n\nAID: " + nyttAid + "\nLösenord: " + losenord,
@@ -232,11 +366,7 @@ if (!Validator.isValidEmail(epost)) {
         JOptionPane.showMessageDialog(this,
                 "Kunde inte skapa anställd.\n" + e.getMessage());
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-     tillbakaTillMeny();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jb2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -249,6 +379,35 @@ if (!Validator.isValidEmail(epost)) {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void cbRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRollActionPerformed
+        // Hämtar den angivna rollen i combox- Roll
+        
+        String roll= (String) cbRoll.getSelectedItem();
+        
+        // Ifall den valda rollen är "Administratör" visas comboxen för behörighetsnivå
+        // så att admin kan välja behörighetsnivå (1 eller 2)
+        
+        if("Administratör".equals(roll)){
+            
+            cbBehorighetsniva.setEnabled(true);
+            
+        } else {
+            
+            // Ifall rollen inte är adminstratör, kan behörighetsnivå inte ändras
+            
+            cbBehorighetsniva.setEnabled(false);
+        }
+        
+        
+        
+    }//GEN-LAST:event_cbRollActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // En knapp som tar tillbaka användaren till meny
+        
+        tillbakaTillMeny();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 private void tillbakaTillMeny() {
         // Om vi vet vem som är inloggad: gå tillbaka till Meny
         if (idb != null && inloggadAnvandare != null) {
@@ -302,8 +461,9 @@ private void tillbakaTillMeny() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> cbAvdelning;
+    private javax.swing.JComboBox<String> cbBehorighetsniva;
+    private javax.swing.JComboBox<String> cbRoll;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -312,9 +472,10 @@ private void tillbakaTillMeny() {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton jb2;
+    private javax.swing.JLabel lblAvdelning;
+    private javax.swing.JLabel lblBehorighetniva;
+    private javax.swing.JLabel lblRoll;
     // End of variables declaration//GEN-END:variables
-
-
-
-
 }

@@ -34,6 +34,7 @@ public class Meny extends javax.swing.JFrame {
 
             lblInloggadAnvandare.setText(inloggadAnvandare);
             btnSkapaAnstalld.setVisible(isAdmin);
+            btnTaBortAnstalld.setVisible(isAdmin);
             // Göm projektchef-knappar som standard
             KnappHanteraProjekt.setVisible(false);
             KnappAndraProjektUppgifter.setVisible(false);
@@ -137,6 +138,7 @@ public class Meny extends javax.swing.JFrame {
         KnappAndraProjektUppgifter = new javax.swing.JButton();
         KnappSeStatistik = new javax.swing.JButton();
         btnSkapaAnstalld = new javax.swing.JButton();
+        btnTaBortAnstalld = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,6 +186,9 @@ public class Meny extends javax.swing.JFrame {
         btnSkapaAnstalld.setText("Skapa Anställd");
         btnSkapaAnstalld.addActionListener(this::btnSkapaAnstalldActionPerformed);
 
+        btnTaBortAnstalld.setText("Ta bort anställd");
+        btnTaBortAnstalld.addActionListener(this::btnTaBortAnstalldActionPerformed);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,7 +223,8 @@ public class Meny extends javax.swing.JFrame {
                             .addComponent(KnappHanteraPartner, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraLand, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(KnappHanteraAvdelning, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                            .addComponent(btnSkapaAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnSkapaAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTaBortAnstalld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -257,7 +263,9 @@ public class Meny extends javax.swing.JFrame {
                     .addComponent(KnappAndraProjektUppgifter)
                     .addComponent(btnSkapaAnstalld))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(KnappSeStatistik)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(KnappSeStatistik)
+                    .addComponent(btnTaBortAnstalld))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -425,6 +433,21 @@ public class Meny extends javax.swing.JFrame {
         new SkapaAnställd(idb, inloggadAnvandare, isAdmin).setVisible(true);
     }//GEN-LAST:event_btnSkapaAnstalldActionPerformed
 
+    private void btnTaBortAnstalldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAnstalldActionPerformed
+        
+    // Knapp som endast administratörer kan använda för att ta bort en anställd
+        
+         if (!isAdmin) {
+        JOptionPane.showMessageDialog(this, "Du saknar behörighet.");
+        return;
+    }
+
+    this.setVisible(false); 
+     new TaBortAnstalld(idb, inloggadAnvandare, isAdmin).setVisible(true); 
+        
+        
+    }//GEN-LAST:event_btnTaBortAnstalldActionPerformed
+
     private void knappMinaProjektActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
         new MinaProjekt01(idb, inloggadAnvandare, isAdmin).setVisible(true);
@@ -478,6 +501,7 @@ public class Meny extends javax.swing.JFrame {
     private javax.swing.JButton KnappSePersonal;
     private javax.swing.JButton KnappSeStatistik;
     private javax.swing.JButton btnSkapaAnstalld;
+    private javax.swing.JButton btnTaBortAnstalld;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblInloggadAnvandare;

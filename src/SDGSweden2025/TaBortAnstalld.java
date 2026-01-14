@@ -136,13 +136,12 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                                 .addComponent(tfSok, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(49, 49, 49)
                                 .addComponent(btnSok)
-                                .addContainerGap(92, Short.MAX_VALUE))))))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,12 +155,16 @@ public class TaBortAnstalld extends javax.swing.JFrame {
                     .addComponent(lblSok)
                     .addComponent(tfSok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSok))
-                .addGap(31, 31, 31)
-                .addComponent(lblInfoTitel)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(btnTaBort))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(lblInfoTitel)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTaBort)))
+                .addContainerGap())
         );
 
         pack();
@@ -183,19 +186,27 @@ public class TaBortAnstalld extends javax.swing.JFrame {
         
         String aidText=tfSok.getText().trim();
         
-       if (Validator.isEmpty(aidText)) {
-    JOptionPane.showMessageDialog(this, "Vänligen skriv in ett anställningsID (AID).");
-    return;
-}
-
-if (!Validator.isPositiveInteger(aidText)) {
-    JOptionPane.showMessageDialog(this, "AID måste vara ett positivt heltal.");
-    return;
-}
-
-int aid = Integer.parseInt(aidText);
-
-
+        if(aidText.isEmpty()){
+            
+             JOptionPane.showMessageDialog(this, "Vänligen skriv in ett anställningsID (AID)");
+             
+             return;
+        }
+        
+        int aid;
+        
+        try {
+            
+          aid= Integer.parseInt(aidText);
+        }
+        
+        catch (NumberFormatException e){
+            
+          JOptionPane.showMessageDialog(this, "AID måste vara en siffra!") ;
+          
+          return;
+      
+        }
         
         try{
             
