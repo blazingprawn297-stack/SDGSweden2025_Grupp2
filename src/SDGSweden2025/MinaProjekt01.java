@@ -35,7 +35,7 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         // Sätter val för status-filter
         cmbStatusAvdelning.setModel(new javax.swing.DefaultComboBoxModel<>(
                 new String[]{"Alla", "Planerat", "Pågående", "Avslutat"}));
-
+        
         // Initiera tabeller med kolumnnamn
         initTable();
         initAvdelningsTable();
@@ -69,6 +69,12 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         lblPartnersUppgifter = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPartnersUppgifter = new javax.swing.JTable();
+        txtFranDatum = new javax.swing.JTextField();
+        txtTillDatum = new javax.swing.JTextField();
+        lblProjektsdatumFrån = new javax.swing.JLabel();
+        lblProjektsdatumTill = new javax.swing.JLabel();
+        KnappSök = new javax.swing.JButton();
+        lblDatumSok = new javax.swing.JLabel();
 
         lbltitlle.setText("Mina Projekt");
 
@@ -125,6 +131,17 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblPartnersUppgifter);
 
+        txtTillDatum.addActionListener(this::txtTillDatumActionPerformed);
+
+        lblProjektsdatumFrån.setText("Från");
+
+        lblProjektsdatumTill.setText("Till");
+
+        KnappSök.setText("Sök");
+        KnappSök.addActionListener(this::KnappSökActionPerformed);
+
+        lblDatumSok.setText("Sök på projektperiod (pågående projekt)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,12 +150,11 @@ public class MinaProjekt01 extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbltitlle2)
-                        .addGap(193, 193, 193)
-                        .addComponent(lblProjektsStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmbStatusAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(scrollMinaProjekt)
@@ -149,14 +165,31 @@ public class MinaProjekt01 extends javax.swing.JFrame {
                                 .addComponent(KnappGåTillbaka, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblPartnersUppgifter)
-                                .addGap(0, 570, Short.MAX_VALUE)))
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3)
-                        .addContainerGap())))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbltitlle2)
+                                    .addComponent(lblDatumSok))
+                                .addGap(118, 118, 118)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(lblProjektsdatumFrån)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtFranDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblProjektsdatumTill)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtTillDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(68, 68, 68)
+                                        .addComponent(KnappSök)
+                                        .addGap(73, 73, 73))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblProjektsStatus)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmbStatusAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,13 +205,21 @@ public class MinaProjekt01 extends javax.swing.JFrame {
                     .addComponent(lbltitlle2)
                     .addComponent(cmbStatusAvdelning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblProjektsStatus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProjektsdatumFrån)
+                    .addComponent(txtFranDatum, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProjektsdatumTill)
+                    .addComponent(txtTillDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(KnappSök)
+                    .addComponent(lblDatumSok))
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72)
+                .addGap(39, 39, 39)
                 .addComponent(lblPartnersUppgifter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         pack();
@@ -194,6 +235,30 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadAvdelningsProjekt();
     }//GEN-LAST:event_cmbStatusAvdelningActionPerformed
+
+    private void txtTillDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTillDatumActionPerformed
+        // TODO add your handling code here:
+        String franDatum = txtFranDatum.getText();
+        String tillDatum = txtTillDatum.getText();
+
+        loadAvdelningsProjektDatum(franDatum, tillDatum);
+    }//GEN-LAST:event_txtTillDatumActionPerformed
+
+    private void KnappSökActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KnappSökActionPerformed
+        // TODO add your handling code here:
+        String franDatum = txtFranDatum.getText().trim();
+        String tillDatum = txtTillDatum.getText().trim();
+
+        if (franDatum.isEmpty() || tillDatum.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(
+                this,
+                "Ange både Från- och Till-datum (YYYY-MM-DD)"
+            );
+            return;
+        }
+
+        loadAvdelningsProjektDatum(franDatum, tillDatum);
+    }//GEN-LAST:event_KnappSökActionPerformed
 
     private void initTable() {
         // Initierar tabell för mina projekt med kolumner
@@ -295,8 +360,8 @@ public class MinaProjekt01 extends javax.swing.JFrame {
             );
         }
     }
+    
 //Hämtar projekt för användarens avdelning
-
     private void loadAvdelningsProjekt() {
         DefaultTableModel model
                 = (DefaultTableModel) tblAvdelningsProjekt.getModel();
@@ -355,6 +420,64 @@ public class MinaProjekt01 extends javax.swing.JFrame {
         }
     }
 
+/**
+ * Söker fram alla PÅGÅENDE projekt på användarens avdelning
+ * inom ett valt datumspann
+ */
+    private void loadAvdelningsProjektDatum(String franDatum, String tillDatum) {
+
+    DefaultTableModel model =
+        (DefaultTableModel) tblAvdelningsProjekt.getModel();
+    model.setRowCount(0); // Rensa tabellen
+
+    try {
+        // Hämta användarens avdelning
+        String avdelningSql =
+            "SELECT avdelning FROM anstalld WHERE epost = '" + epost + "'";
+        String avdelning = idb.fetchSingle(avdelningSql);
+
+        // SQL för datum sökning
+        String sql =
+            "SELECT DISTINCT " +
+            "p.pid, p.projektnamn, p.beskrivning, p.startdatum, p.slutdatum, " +
+            "p.kostnad, p.status, p.prioritet, p.projektchef, p.land " +
+            "FROM projekt p " +
+            "JOIN ans_proj ap ON p.pid = ap.pid " +
+            "JOIN anstalld a ON ap.aid = a.aid " +
+            "WHERE a.avdelning = " + avdelning + " " +
+            "AND p.status = 'Pågående' " +
+            "AND p.startdatum <= '" + tillDatum + "' " +
+            "AND p.slutdatum >= '" + franDatum + "'";
+
+        System.out.println("Datum-sök SQL:\n" + sql);
+
+        ArrayList<HashMap<String, String>> rows = idb.fetchRows(sql);
+
+        if (rows != null) {
+            for (HashMap<String, String> row : rows) {
+                model.addRow(new Object[]{
+                    row.get("pid"),
+                    row.get("projektnamn"),
+                    row.get("beskrivning"),
+                    row.get("startdatum"),
+                    row.get("slutdatum"),
+                    row.get("kostnad"),
+                    row.get("status"),
+                    row.get("prioritet"),
+                    row.get("projektchef"),
+                    row.get("land")
+                });
+            }
+        }
+
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Fel vid datum-sökning: " + e.getMessage()
+        );
+    }
+}
+    
 //Hämtar partners för alla projekt som användaren är ansvarig för
     private void loadPartnersUppgifter() {
 
@@ -461,17 +584,23 @@ public class MinaProjekt01 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton KnappGåTillbaka;
+    private javax.swing.JButton KnappSök;
     private javax.swing.JComboBox<String> cmbStatusAvdelning;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblDatumSok;
     private javax.swing.JLabel lblPartnersUppgifter;
     private javax.swing.JLabel lblProjektsStatus;
+    private javax.swing.JLabel lblProjektsdatumFrån;
+    private javax.swing.JLabel lblProjektsdatumTill;
     private javax.swing.JLabel lbltitlle;
     private javax.swing.JLabel lbltitlle2;
     private javax.swing.JScrollPane scrollMinaProjekt;
     private javax.swing.JTable tblAvdelningsProjekt;
     private javax.swing.JTable tblMinaProjekt;
     private javax.swing.JTable tblPartnersUppgifter;
+    private javax.swing.JTextField txtFranDatum;
+    private javax.swing.JTextField txtTillDatum;
     // End of variables declaration//GEN-END:variables
 }
