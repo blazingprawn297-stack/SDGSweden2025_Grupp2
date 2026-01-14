@@ -49,6 +49,8 @@ public class ÄndraProjektUppgifter extends javax.swing.JFrame {
 
         // Rensa fält tills projekt är valt
         clearFields();
+        
+        btnSpara.addActionListener(evt -> sparaProjekt());
     }
 
     private void initStatusPrioritet() {
